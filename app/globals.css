@@ -471,9 +471,9 @@ body {
 
 /* Nav glass — explicit so it can be tuned independently */
 .nav-glass {
-  background: rgba(255, 255, 255, 0.7);
-  -webkit-backdrop-filter: saturate(180%) blur(22px);
-  backdrop-filter: saturate(180%) blur(22px);
+  background: rgba(255, 255, 255, 0.55);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 1px solid var(--color-hairline-soft);
 }
 
@@ -487,12 +487,13 @@ body {
 .nav-link {
   position: relative;
   padding: 8px 12px;
-  font-size: 13px;
-  color: var(--color-body-muted);
+  font-size: 14px;
+  color: var(--color-body);
   border-radius: 8px;
   transition: color var(--dur-fast) var(--ease-out);
 }
 .nav-link:hover { color: var(--color-ink); }
+.nav-link-active { color: var(--color-accent); font-weight: 500; }
 .nav-link::after {
   content: "";
   position: absolute;
@@ -507,6 +508,8 @@ body {
   transition: transform var(--dur-base) var(--ease-spring);
 }
 .nav-link:hover::after { transform: scaleX(1); }
+/* Active page keeps its underline shown */
+.nav-link-active::after { transform: scaleX(1); }
 
 /* Scroll progress — thin accent bar under the nav */
 .scroll-progress {
@@ -514,10 +517,10 @@ body {
   left: 0;
   bottom: -1px;
   height: 2px;
-  width: var(--progress, 0%);
+  width: 0;
   background: linear-gradient(90deg, var(--color-accent), var(--color-accent-sky));
   box-shadow: 0 0 8px rgb(var(--accent-bright-rgb) / 0.5);
-  transition: width 100ms linear;
+  will-change: width;
 }
 
 /* Partner logo — monochrome at rest, true color + lift on hover */
@@ -642,7 +645,7 @@ body {
 .blob {
   border-radius: 50%;
   filter: blur(60px);
-  opacity: 0.55;
+  opacity: 0.62;
   will-change: transform;
   /* parallax target set by Backdrop via --px/--py */
   transform: translate3d(var(--px, 0px), var(--py, 0px), 0);

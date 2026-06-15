@@ -56,6 +56,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-theme="indigo"
+      data-scroll-behavior="smooth"
       className={`${inter.variable} ${geistMono.variable}`}
     >
       <body className="min-h-screen flex flex-col antialiased">

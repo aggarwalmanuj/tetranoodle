@@ -64,11 +64,11 @@ export default function Backdrop({
         <>
           <span
             className="blob blob-a"
-            style={{ width: "46vw", height: "46vw", top: "-12vw", left: "-6vw" }}
+            style={{ width: "46vw", height: "46vw", top: "-16vw", left: "-4vw" }}
           />
           <span
             className="blob blob-b"
-            style={{ width: "40vw", height: "40vw", top: "8vw", right: "-10vw", opacity: 0.42 }}
+            style={{ width: "44vw", height: "44vw", top: "-14vw", right: "2vw", opacity: 0.42 }}
           />
           <span
             className="blob blob-c"

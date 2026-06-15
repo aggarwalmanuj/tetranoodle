@@ -5,34 +5,14 @@ import Footer from "../components/Footer";
 import Reveal from "../components/Reveal";
 import Backdrop from "../components/Backdrop";
 import GlassCard from "../components/GlassCard";
+import CountUp from "../components/CountUp";
 
 export const metadata = { title: "About" };
 
 const STATS = [
-  { value: "10M+", label: "Lives impacted" },
-  { value: "30+", label: "Years of expertise" },
-  { value: "$500M+", label: "Value produced for clients" },
-];
-
-const TEAM = [
-  {
-    name: "Manuj Aggarwal",
-    role: "Founder & CIO",
-    line: "Four US patents, three decades at the root of hard AI problems.",
-    photo: "/people/manuj-portrait.jpg",
-  },
-  {
-    name: "Ashwin Kartic",
-    role: "Marketing Strategist",
-    line: "Turns deep technical work into stories leaders act on.",
-    monogram: "AK",
-  },
-  {
-    name: "Sonam Suri Sharma",
-    role: "Director, Client Experience",
-    line: "Keeps every engagement precise, personal, and accountable.",
-    monogram: "SS",
-  },
+  { value: 10, prefix: "", suffix: "M+", label: "Lives impacted" },
+  { value: 30, prefix: "", suffix: "+", label: "Years of expertise" },
+  { value: 500, prefix: "$", suffix: "M+", label: "Value produced for clients" },
 ];
 
 const PARTNERS = [
@@ -121,17 +101,32 @@ export default function AboutPage() {
         {/* ──────────────── STATS ──────────────── */}
         <section className="surface-canvas section relative overflow-hidden">
           <Backdrop tone="light" />
+          {/* Accent glow so the proof numbers feel like a highlight band */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(70vw 50vw at 50% 50%, rgb(var(--accent-rgb) / 0.07), transparent 70%)",
+            }}
+          />
           <div className="field-content container-wide">
-            <div className="grid sm:grid-cols-3 gap-4 lg:gap-5">
+            <div className="grid sm:grid-cols-3 gap-8 lg:gap-12 divide-y sm:divide-y-0 sm:divide-x divide-[color:var(--color-hairline)]">
               {STATS.map((s, i) => (
                 <Reveal
                   as="div"
                   key={s.label}
                   delay={i * 80}
-                  className="panel p-7 lg:p-8 text-center"
+                  className="text-center pt-8 sm:pt-0 first:pt-0 sm:px-6"
                 >
-                  <p className="t-display-sm accent-text mb-3">{s.value}</p>
-                  <p className="font-mono text-[11px] tracking-[0.16em] uppercase text-[color:var(--color-body-muted)]">
+                  <p className="t-display accent-text mb-3 tabular-nums">
+                    <CountUp
+                      value={s.value}
+                      prefix={s.prefix}
+                      suffix={s.suffix}
+                    />
+                  </p>
+                  <p className="font-mono text-[12px] tracking-[0.16em] uppercase text-[color:var(--color-body-muted)]">
                     {s.label}
                   </p>
                 </Reveal>
@@ -166,8 +161,11 @@ export default function AboutPage() {
                   published in the Mensa Research Journal.
                 </span>
               </p>
-              <a href="mailto:info@tetranoodle.com" className="btn btn-secondary">
-                Read the research
+              <a
+                href="mailto:info@tetranoodle.com?subject=AI%20Merge%20research%20paper"
+                className="btn btn-secondary"
+              >
+                Request the research
               </a>
             </Reveal>
 
@@ -187,59 +185,6 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* ──────────────── TEAM ──────────────── */}
-        <section className="surface-canvas section relative overflow-hidden">
-          <Backdrop tone="light" />
-          <div className="field-content container-wide">
-            <div className="max-w-[760px] mx-auto text-center mb-12 lg:mb-16">
-              <Reveal as="p" className="t-eyebrow mb-5">
-                The team
-              </Reveal>
-              <Reveal as="h2" delay={80} className="t-display-md balance">
-                Small team.{" "}
-                <span className="accent-text italic font-normal">
-                  Outsized impact.
-                </span>
-              </Reveal>
-            </div>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
-              {TEAM.map((m, i) => (
-                <Reveal
-                  as="article"
-                  key={m.name}
-                  delay={i * 80}
-                  className="panel p-7 lg:p-8"
-                >
-                  {m.photo ? (
-                    <div className="relative w-14 h-14 rounded-[16px] overflow-hidden mb-5">
-                      <Image
-                        src={m.photo}
-                        alt={m.name}
-                        fill
-                        sizes="56px"
-                        className="object-cover object-center"
-                      />
-                    </div>
-                  ) : (
-                    <span className="grid place-items-center w-14 h-14 rounded-full bg-[color:var(--color-accent)] text-white font-semibold text-[18px] mb-5">
-                      {m.monogram}
-                    </span>
-                  )}
-                  <h3 className="text-[20px] lg:text-[22px] font-semibold tracking-[-0.018em] leading-[1.18] mb-2">
-                    {m.name}
-                  </h3>
-                  <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-[color:var(--color-accent)] mb-4">
-                    {m.role}
-                  </p>
-                  <p className="text-[14px] leading-[1.55] text-[color:var(--color-body-muted)]">
-                    {m.line}
-                  </p>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* ──────────────── TRUSTED BY ──────────────── */}
         <section className="surface-parchment section relative overflow-hidden">
@@ -268,9 +213,12 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* ──────────────── CTA ──────────────── */}
-        <section className="surface-canvas section relative overflow-hidden">
-          <Backdrop tone="light" parallax />
+        {/* ──────────────── CTA (dark) ──────────────── */}
+        <section
+          data-on-dark
+          className="surface-ink section relative overflow-hidden"
+        >
+          <Backdrop tone="dark" parallax />
           <div className="field-content container-tight">
             <GlassCard
               className="text-center px-6 sm:px-12 py-14 lg:py-20"
@@ -300,7 +248,7 @@ export default function AboutPage() {
                 >
                   Let&rsquo;s talk
                 </a>
-                <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-[color:var(--color-body-faint)]">
+                <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-[color:var(--color-on-dark-faint)]">
                   Vancouver, Canada · Replies within one business day
                 </p>
               </Reveal>

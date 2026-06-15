@@ -146,12 +146,16 @@ export default function ServicesPage() {
         <section className="surface-canvas relative pt-[104px] lg:pt-[132px] pb-20 lg:pb-28 overflow-hidden">
           <Backdrop tone="light" parallax />
 
-          <div className="field-content container-full px-6 lg:px-12 grid lg:grid-cols-[1.15fr_1fr] gap-12 lg:gap-20 items-center">
+          <div className="field-content container-wide px-6 lg:px-12 grid lg:grid-cols-[1.15fr_1fr] gap-12 lg:gap-20 items-center">
             <div className="max-w-[720px]">
               <Reveal as="p" className="t-eyebrow mb-5">
                 What we build
               </Reveal>
-              <Reveal as="h1" delay={80} className="t-display balance mb-7">
+              <Reveal
+                as="h1"
+                delay={80}
+                className="t-display balance mb-7 text-[clamp(32px,4.4vw,60px)]"
+              >
                 Automation that frees your time. A{" "}
                 <span className="accent-text italic font-normal">
                   private AI vault
@@ -205,9 +209,12 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        {/* ──────────────── OFFERINGS ──────────────── */}
-        <section className="surface-parchment section relative overflow-hidden">
-          <Backdrop tone="light" />
+        {/* ──────────────── OFFERINGS (dark) ──────────────── */}
+        <section
+          data-on-dark
+          className="surface-ink section relative overflow-hidden"
+        >
+          <Backdrop tone="dark" />
           <div className="field-content container-wide flex flex-col gap-16 lg:gap-24">
             {offerings.map((o, i) => (
               <Reveal
@@ -248,7 +255,7 @@ export default function ServicesPage() {
                     {o.items.map((item) => (
                       <li key={item} className="flex gap-3.5">
                         {accentDash}
-                        <span className="text-[16px] leading-[1.55] tracking-[-0.01em] text-[color:var(--color-ink)]">
+                        <span className="text-[16px] leading-[1.55] tracking-[-0.01em] text-[color:var(--color-on-dark)]">
                           {item}
                         </span>
                       </li>

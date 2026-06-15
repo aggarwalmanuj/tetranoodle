@@ -137,8 +137,17 @@ export default function ProcessPage() {
         </section>
 
         {/* ──────────────── STEPS ──────────────── */}
-        <section className="surface-canvas section relative overflow-hidden">
+        <section className="surface-parchment section relative overflow-hidden">
           <Backdrop tone="light" />
+          {/* Soft accent glows so the long section doesn't read as flat white */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(60vw 40vw at 85% 18%, rgb(var(--accent-rgb) / 0.06), transparent 70%), radial-gradient(55vw 38vw at 10% 72%, rgb(var(--accent-bright-rgb) / 0.05), transparent 70%)",
+            }}
+          />
           <div className="field-content container-wide">
             <div className="max-w-[760px] mb-12 lg:mb-16">
               <Reveal as="p" className="t-eyebrow mb-5">

@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 
 const links = [
   { href: "/services", label: "Services" },
@@ -20,7 +21,8 @@ const links = [
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const progressRef = useRef<HTMLSpanElement | null>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     let raf = 0;
@@ -30,8 +32,12 @@ export default function Nav() {
         raf = 0;
         const y = window.scrollY;
         const max = document.documentElement.scrollHeight - window.innerHeight;
+        const ratio = max > 0 ? Math.min(Math.max(y / max, 0), 1) : 0;
+        // Write the bar directly to the DOM — no React re-render per frame.
+        if (progressRef.current) {
+          progressRef.current.style.width = `${ratio * 100}%`;
+        }
         setScrolled(y > 12);
-        setProgress(max > 0 ? (y / max) * 100 : 0);
       });
     };
     onScroll();
@@ -58,7 +64,7 @@ export default function Nav() {
     >
       <nav
         aria-label="Primary"
-        className="container-full flex items-center justify-between px-6 lg:px-12 h-16"
+        className="container-wide flex items-center justify-between px-6 lg:px-12 h-16"
       >
         <Link
           href="/"
@@ -92,18 +98,27 @@ export default function Nav() {
         </Link>
 
         <ul className="hidden lg:flex items-center gap-1">
-          {links.map((l) => (
-            <li key={l.href}>
-              <Link href={l.href} className="nav-link block">
-                {l.label}
-              </Link>
-            </li>
-          ))}
+          {links.map((l) => {
+            const active = pathname === l.href;
+            return (
+              <li key={l.href}>
+                <Link
+                  href={l.href}
+                  aria-current={active ? "page" : undefined}
+                  className={`nav-link block ${active ? "nav-link-active" : ""}`}
+                >
+                  {l.label}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
 
         <div className="flex items-center gap-2.5">
           <a
-            href="/#score"
+            href="https://aimerge.live"
+            target="_blank"
+            rel="noopener"
             className="btn btn-primary !py-2 !px-4 !text-[13px] !min-h-0"
           >
             Get Your Score
@@ -128,7 +143,7 @@ export default function Nav() {
         </div>
       </nav>
 
-      <span aria-hidden className="scroll-progress" style={{ ["--progress" as string]: `${progress}%` }} />
+      <span ref={progressRef} aria-hidden className="scroll-progress" />
 
       {/* Mobile tray — glass panel sliding in beneath the bar */}
       <div
@@ -137,20 +152,30 @@ export default function Nav() {
         className="lg:hidden glass glass-strong border-x-0 border-b-0 rounded-b-[var(--radius-xl)]"
       >
         <ul className="px-6 py-4 flex flex-col gap-1">
-          {links.map((l) => (
-            <li key={l.href}>
-              <Link
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="block px-3 py-3.5 text-[16px] text-[color:var(--color-ink)] border-b border-[color:var(--color-hairline-soft)] hover:text-[color:var(--color-accent)] transition-colors"
-              >
-                {l.label}
-              </Link>
-            </li>
-          ))}
+          {links.map((l) => {
+            const active = pathname === l.href;
+            return (
+              <li key={l.href}>
+                <Link
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  aria-current={active ? "page" : undefined}
+                  className={`block px-3 py-3.5 text-[16px] border-b border-[color:var(--color-hairline-soft)] transition-colors ${
+                    active
+                      ? "text-[color:var(--color-accent)] font-medium"
+                      : "text-[color:var(--color-ink)] hover:text-[color:var(--color-accent)]"
+                  }`}
+                >
+                  {l.label}
+                </Link>
+              </li>
+            );
+          })}
           <li className="pt-4">
             <a
-              href="/#score"
+              href="https://aimerge.live"
+              target="_blank"
+              rel="noopener"
               onClick={() => setOpen(false)}
               className="btn btn-primary w-full"
             >

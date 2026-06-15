@@ -63,6 +63,8 @@ type Testimonial = {
   quote: string;
   name: string;
   role: string;
+  photo?: string;
+  monogram?: string;
 };
 
 const TESTIMONIALS: Testimonial[] = [
@@ -71,35 +73,41 @@ const TESTIMONIALS: Testimonial[] = [
       "TetraNoodle equipped us not just with knowledge but with powerful AI tools.",
     name: "Edwige Robinson",
     role: "SVP, T-Mobile",
+    photo: "/people/edwige.jpeg",
   },
   {
     quote: "Leaders like Manuj make companies go from good to great.",
     name: "Khwaja Shaik",
     role: "CTO, IBM",
+    photo: "/people/khwaja.jpeg",
   },
   {
     quote:
       "An hour with TetraNoodle gave me a deeper understanding and a fresh perspective on AI’s potential for our business.",
     name: "Neil Moore",
     role: "Founder, Simply Music",
+    photo: "/people/neil.jpeg",
   },
   {
     quote:
       "Every now and then you meet someone who really cares. That person is Manuj.",
     name: "Steve Sims",
     role: "CEO, Sims Media",
+    photo: "/people/steve.jpeg",
   },
   {
     quote:
       "Manuj is somebody who really is genuine and cares about what he’s putting out there.",
     name: "Terence Lewis",
     role: "Choreographer",
+    photo: "/people/terence.jpeg",
   },
   {
     quote:
       "If only my clients had consulted with Manuj before they spent all that wasted time, energy, and money.",
     name: "Amir Nasr",
     role: "Founder, Assertive & Co.",
+    photo: "/people/amir.jpeg",
   },
 ];
 
@@ -216,8 +224,11 @@ function Stories() {
 /* ──────────────── TESTIMONIALS ──────────────── */
 function Testimonials() {
   return (
-    <section className="surface-canvas section relative overflow-hidden">
-      <Backdrop tone="light" />
+    <section
+      data-on-dark
+      className="surface-ink section relative overflow-hidden"
+    >
+      <Backdrop tone="dark" />
       <div className="field-content container-wide">
         <div className="text-center max-w-[760px] mx-auto mb-12 lg:mb-16">
           <Reveal as="p" className="t-eyebrow mb-5">
@@ -239,7 +250,7 @@ function Testimonials() {
               delay={i * 60}
               className="panel p-7 lg:p-8 flex flex-col"
             >
-              <blockquote className="text-[18px] leading-[1.5] tracking-[-0.012em] text-[color:var(--color-ink)] mb-7 flex-1">
+              <blockquote className="text-[18px] leading-[1.5] tracking-[-0.012em] text-[color:var(--color-on-dark)] mb-7 flex-1">
                 <span aria-hidden className="text-[color:var(--color-accent)] mr-1">
                   &ldquo;
                 </span>
@@ -248,13 +259,30 @@ function Testimonials() {
                   &rdquo;
                 </span>
               </blockquote>
-              <figcaption className="pt-5 border-t border-[color:var(--color-hairline-soft)]">
-                <p className="text-[14px] font-semibold tracking-[-0.01em]">
-                  {t.name}
-                </p>
-                <p className="text-[11px] font-mono tracking-[0.1em] uppercase text-[color:var(--color-body-faint)] mt-1">
-                  {t.role}
-                </p>
+              <figcaption className="pt-5 border-t border-[color:var(--color-hairline-dark)] flex items-center gap-3.5">
+                {t.photo ? (
+                  <span className="relative w-11 h-11 rounded-full overflow-hidden shrink-0">
+                    <Image
+                      src={t.photo}
+                      alt={t.name}
+                      fill
+                      sizes="44px"
+                      className="object-cover object-center"
+                    />
+                  </span>
+                ) : (
+                  <span className="grid place-items-center w-11 h-11 rounded-full bg-[color:var(--color-accent)] text-white font-semibold text-[15px] shrink-0">
+                    {t.monogram}
+                  </span>
+                )}
+                <span className="min-w-0">
+                  <p className="text-[14px] font-semibold tracking-[-0.01em] text-[color:var(--color-on-dark)]">
+                    {t.name}
+                  </p>
+                  <p className="text-[11px] font-mono tracking-[0.1em] uppercase text-[color:var(--color-on-dark-faint)] mt-1">
+                    {t.role}
+                  </p>
+                </span>
               </figcaption>
             </Reveal>
           ))}
