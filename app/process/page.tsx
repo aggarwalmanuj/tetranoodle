@@ -112,8 +112,17 @@ export default function ProcessPage() {
           data-on-dark
           className="surface-ink section relative overflow-hidden"
         >
-          <Backdrop tone="dark" />
-          <div className="field-content container-tight text-center">
+          <div className="absolute inset-0 opacity-[0.4]" aria-hidden>
+            <Image
+              src="/process/discovery.jpg"
+              alt=""
+              fill
+              sizes="100vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-[color:var(--color-ink)] via-[color:var(--color-ink)]/40 to-[color:var(--color-ink)]" />
+          </div>
+          <div className="field-content relative container-tight text-center">
             <Reveal as="p" className="t-eyebrow mb-6">
               Our promise
             </Reveal>
