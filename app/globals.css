@@ -16,7 +16,7 @@
 
   /* Surfaces — warm-neutral, Framer/Vercel restraint */
   --color-canvas: #ffffff;
-  --color-parchment: #f4f6f4;
+  --color-parchment: #eff2ef;
   --color-pearl: #fafbfa;
   --color-ink: #14181a;
   --color-ink-2: #1b2123;
@@ -278,7 +278,6 @@ body {
     0 10px 26px -6px rgb(var(--accent-rgb) / 0.6);
   transform: translateY(-1px);
 }
-.btn-primary:active { transform: scale(0.97); }
 /* Specular sheen that swipes across on hover */
 .btn-primary::after {
   content: "";
@@ -462,9 +461,9 @@ body {
     transform var(--dur-base) var(--ease-spring),
     box-shadow var(--dur-base) var(--ease-out),
     backdrop-filter var(--dur-base) var(--ease-out);
-  will-change: transform;
 }
 .glass-card:hover {
+  will-change: transform;
   transform: translateY(-3px);
 }
 .glass-card:hover.glass--specular::after,
@@ -475,7 +474,7 @@ body {
   background: rgba(255, 255, 255, 0.7);
   -webkit-backdrop-filter: saturate(180%) blur(22px);
   backdrop-filter: saturate(180%) blur(22px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid var(--color-hairline-soft);
 }
 
 /* Theme-aware logo swap — both marks render; CSS shows the active one.
@@ -561,9 +560,9 @@ body {
     transform var(--dur-base) var(--ease-spring),
     box-shadow var(--dur-base) var(--ease-out),
     border-color var(--dur-base) var(--ease-out);
-  will-change: transform;
 }
 .panel:hover {
+  will-change: transform;
   transform: translateY(-3px);
   border-color: rgb(var(--accent-rgb) / 0.4);
   box-shadow:
@@ -596,9 +595,9 @@ body {
     transform var(--dur-base) var(--ease-out),
     box-shadow var(--dur-base) var(--ease-out),
     border-color var(--dur-base) var(--ease-out);
-  will-change: transform;
 }
 .lift:hover {
+  will-change: transform;
   transform: translateY(-2px);
   border-color: var(--color-hairline);
 }
@@ -616,6 +615,14 @@ body {
 /* ════════════════════════ Surface tints ════════════════════════ */
 .surface-canvas    { background: var(--color-canvas); color: var(--color-ink); }
 .surface-parchment { background: var(--color-parchment); color: var(--color-ink); }
+
+/* Section boundaries: a quiet top hairline on light sections so the eye
+   registers a new section even where the surface tint repeats. Dark sections
+   separate by their tone jump and opt out. */
+.section.surface-canvas,
+.section.surface-parchment {
+  border-top: 1px solid var(--color-hairline);
+}
 .surface-ink       { background: var(--color-ink); color: var(--color-on-dark); }
 .surface-ink-2     { background: var(--color-ink-2); color: var(--color-on-dark); }
 
@@ -690,6 +697,7 @@ body {
   width: max-content;
   animation: marquee 42s linear infinite;
 }
+.marquee-track:hover { animation-play-state: paused; }
 
 /* ════════════════════════ Product image elevation ════════════════════════ */
 .elevation-product { box-shadow: var(--shadow-product); }
