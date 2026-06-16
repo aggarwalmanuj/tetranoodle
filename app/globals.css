@@ -511,6 +511,23 @@ body {
 /* Active page keeps its underline shown */
 .nav-link-active::after { transform: scaleX(1); }
 
+/* Mobile nav tray — slides open on a height spring (0fr → 1fr grid trick)
+   with a fade, instead of an instant show/hide. Closed state is inert so
+   keyboard/AT users can't tab into the clipped links. */
+.mobile-tray {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 380ms var(--ease-out),
+    opacity 260ms var(--ease-out);
+}
+.mobile-tray[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.mobile-tray > .mobile-tray-clip { overflow: hidden; min-height: 0; }
+
 /* Scroll progress — thin accent bar under the nav */
 .scroll-progress {
   position: absolute;
@@ -545,6 +562,38 @@ body {
 }
 .panel-in { animation: panel-in 440ms var(--ease-out) both; }
 
+/* Sliding tab indicator — a single accent underline that glides between
+   tabs on a spring. Position is written imperatively (width/transform/top)
+   so it tracks wrap + font-load reflow. */
+.tab-indicator {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 2px;
+  width: 0;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-sky));
+  box-shadow: 0 0 10px rgb(var(--accent-bright-rgb) / 0.45);
+  transform: translateX(0);
+  transition:
+    transform 480ms var(--ease-spring),
+    width 420ms var(--ease-out),
+    top 420ms var(--ease-out);
+  will-change: transform, width;
+  pointer-events: none;
+}
+
+/* Ken Burns — the audience photo breathes a slow zoom while on screen, so a
+   static portrait reads as alive. Restarts on tab change (panel remounts). */
+@keyframes ken-burns {
+  from { transform: scale(1.001); }
+  to   { transform: scale(1.07); }
+}
+.audience-photo {
+  animation: ken-burns 14s var(--ease-inout) both;
+  transform-origin: 50% 38%;
+}
+
 /* ════════════════════════ Panel — opaque "glass" ════════════════════════
    For grid cards where real backdrop-filter would mean too many blur
    surfaces on screen at once (perf budget: ≤3–4 large glass layers).
@@ -574,6 +623,9 @@ body {
     0 18px 44px -18px rgba(8, 40, 24, 0.18),
     0 0 0 1px rgb(var(--accent-rgb) / 0.18);
 }
+/* Tactile press — interactive panels dip slightly when tapped/clicked,
+   confirming the touch on mobile where there's no hover state. */
+.panel:active { transform: translateY(-1px) scale(0.992); }
 .panel-pearl { background: var(--color-pearl); }
 [data-on-dark] .panel,
 .on-dark .panel {
@@ -611,6 +663,9 @@ body {
   padding-block: clamp(80px, 11vw, 140px);
   padding-inline: clamp(24px, 5vw, 64px);
 }
+/* Keep in-page anchor targets clear of the fixed nav on smooth-scroll. */
+section[id],
+[id="main"] { scroll-margin-top: 88px; }
 .container-tight { max-width: 920px; margin-inline: auto; }
 .container-wide  { max-width: 1200px; margin-inline: auto; }
 .container-full  { max-width: 1440px; margin-inline: auto; }
@@ -683,11 +738,17 @@ body {
 .reveal {
   opacity: 0;
   transform: translateY(22px) scale(0.985);
+  filter: blur(6px);
   transition:
     opacity 760ms var(--ease-out),
-    transform 760ms var(--ease-out);
+    transform 760ms var(--ease-out),
+    filter 560ms var(--ease-out);
 }
-.reveal.is-visible { opacity: 1; transform: none; }
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+}
 
 /* ════════════════════════════ Marquee ════════════════════════════ */
 @keyframes marquee {
@@ -701,6 +762,25 @@ body {
   animation: marquee 42s linear infinite;
 }
 .marquee-track:hover { animation-play-state: paused; }
+
+/* Soft edges so the credibility band dissolves at both sides instead of
+   hard-clipping — a small thing that reads as expensive. */
+.marquee-fade {
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+}
 
 /* ════════════════════════ Product image elevation ════════════════════════ */
 .elevation-product { box-shadow: var(--shadow-product); }
@@ -767,7 +847,8 @@ body {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
-  .reveal { opacity: 1; transform: none; }
+  .reveal { opacity: 1; transform: none; filter: none; }
+  .audience-photo { animation: none; }
   .marquee-track { animation: none; }
   .blob { animation: none; transform: none; }
   .glass-card:hover { transform: none; }

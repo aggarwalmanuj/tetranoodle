@@ -145,44 +145,47 @@ export default function Nav() {
 
       <span ref={progressRef} aria-hidden className="scroll-progress" />
 
-      {/* Mobile tray — glass panel sliding in beneath the bar */}
+      {/* Mobile tray — glass panel that slides open on a height spring. */}
       <div
         id="mobile-nav"
-        hidden={!open}
-        className="lg:hidden glass glass-strong border-x-0 border-b-0 rounded-b-[var(--radius-xl)]"
+        data-open={open}
+        inert={!open}
+        className="mobile-tray lg:hidden"
       >
-        <ul className="px-6 py-4 flex flex-col gap-1">
-          {links.map((l) => {
-            const active = pathname === l.href;
-            return (
-              <li key={l.href}>
-                <Link
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  aria-current={active ? "page" : undefined}
-                  className={`block px-3 py-3.5 text-[16px] border-b border-[color:var(--color-hairline-soft)] transition-colors ${
-                    active
-                      ? "text-[color:var(--color-accent)] font-medium"
-                      : "text-[color:var(--color-ink)] hover:text-[color:var(--color-accent)]"
-                  }`}
-                >
-                  {l.label}
-                </Link>
-              </li>
-            );
-          })}
-          <li className="pt-4">
-            <a
-              href="https://aimerge.live"
-              target="_blank"
-              rel="noopener"
-              onClick={() => setOpen(false)}
-              className="btn btn-primary w-full"
-            >
-              Get Your Unfair Advantage Score
-            </a>
-          </li>
-        </ul>
+        <div className="mobile-tray-clip">
+          <ul className="glass glass-strong border-x-0 border-b-0 rounded-b-[var(--radius-xl)] px-6 py-4 flex flex-col gap-1">
+            {links.map((l) => {
+              const active = pathname === l.href;
+              return (
+                <li key={l.href}>
+                  <Link
+                    href={l.href}
+                    onClick={() => setOpen(false)}
+                    aria-current={active ? "page" : undefined}
+                    className={`block px-3 py-3.5 text-[16px] border-b border-[color:var(--color-hairline-soft)] transition-colors ${
+                      active
+                        ? "text-[color:var(--color-accent)] font-medium"
+                        : "text-[color:var(--color-ink)] hover:text-[color:var(--color-accent)]"
+                    }`}
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              );
+            })}
+            <li className="pt-4">
+              <a
+                href="https://aimerge.live"
+                target="_blank"
+                rel="noopener"
+                onClick={() => setOpen(false)}
+                className="btn btn-primary w-full"
+              >
+                Get Your Unfair Advantage Score
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </header>
   );

@@ -152,7 +152,7 @@ function CredibilityStrip() {
             aria-label="Credibility"
             className="surface-parchment border-y border-[color:var(--color-hairline-soft)]"
         >
-            <div className="container-full px-6 lg:px-12 py-6 overflow-hidden">
+            <div className="marquee-fade container-full px-6 lg:px-12 py-6 overflow-hidden">
                 <div className="marquee-track">
                     {[...items, ...items].map((t, i) => (
                         <span

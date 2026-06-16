@@ -20,9 +20,9 @@ type Audience = {
 const AUDIENCES: Audience[] = [
     {
         id: "leaders",
-        image: "/people/one.jpg",
+        image: "/testimonials/mark-nazemi.png",
         imageAlt:
-            "A business leader working at a laptop in a bright office, looking at the camera.",
+            "Mark Nazemi, PhD, co-founder of Sensorium, in a suit, smiling at the camera.",
         tab: "Business Leaders",
         eyebrow: "For Business Leaders",
         title: (
@@ -163,25 +163,57 @@ export default function Audiences() {
     const [active, setActive] = useState(0);
     const tablistId = useId();
     const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+    const tablistRef = useRef<HTMLDivElement | null>(null);
+    const indicatorRef = useRef<HTMLSpanElement | null>(null);
+    // Only move focus on a *user-initiated* tab change, never on mount —
+    // auto-focusing on load would yank the viewport and trap screen readers.
+    const userMoved = useRef(false);
 
-    // Set tabindex per W3C tablist pattern
+    // Roving focus per the W3C tablist pattern (skip the initial mount).
     useEffect(() => {
+        if (!userMoved.current) return;
         tabRefs.current[active]?.focus({ preventScroll: true });
     }, [active]);
+
+    // Slide the active-tab indicator to the selected tab. Re-measured on
+    // resize so it stays glued through reflow / font-load / wrap changes.
+    useEffect(() => {
+        const move = () => {
+            const btn = tabRefs.current[active];
+            const bar = indicatorRef.current;
+            if (!btn || !bar) return;
+            bar.style.width = `${btn.offsetWidth}px`;
+            bar.style.transform = `translateX(${btn.offsetLeft}px)`;
+            bar.style.top = `${btn.offsetTop + btn.offsetHeight - 2}px`;
+        };
+        move();
+        window.addEventListener("resize", move, { passive: true });
+        // Re-run after web fonts settle (tab widths shift on font swap).
+        const t = setTimeout(move, 250);
+        return () => {
+            window.removeEventListener("resize", move);
+            clearTimeout(t);
+        };
+    }, [active]);
+
+    const select = (i: number) => {
+        userMoved.current = true;
+        setActive(i);
+    };
 
     const onKey = (e: KeyboardEvent<HTMLButtonElement>) => {
         if (e.key === "ArrowRight" || e.key === "ArrowDown") {
             e.preventDefault();
-            setActive((i) => (i + 1) % AUDIENCES.length);
+            select((active + 1) % AUDIENCES.length);
         } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
             e.preventDefault();
-            setActive((i) => (i - 1 + AUDIENCES.length) % AUDIENCES.length);
+            select((active - 1 + AUDIENCES.length) % AUDIENCES.length);
         } else if (e.key === "Home") {
             e.preventDefault();
-            setActive(0);
+            select(0);
         } else if (e.key === "End") {
             e.preventDefault();
-            setActive(AUDIENCES.length - 1);
+            select(AUDIENCES.length - 1);
         }
     };
 
@@ -190,14 +222,19 @@ export default function Audiences() {
     return (
         <div>
             <div
+                ref={tablistRef}
+                className="relative mb-12 lg:mb-16 border-b border-(--color-hairline-soft)"
+            >
+            <div
                 role="tablist"
                 aria-label="Choose your role"
                 id={tablistId}
-                className="flex flex-wrap gap-2 mb-12 lg:mb-16 border-b border-[color:var(--color-hairline-soft)]"
+                className="flex flex-wrap gap-1 sm:gap-2"
             >
                 {AUDIENCES.map((a, i) => (
                     <button
                         key={a.id}
+                        type="button"
                         ref={(el) => {
                             tabRefs.current[i] = el;
                         }}
@@ -206,17 +243,20 @@ export default function Audiences() {
                         aria-controls={`${tablistId}-panel-${i}`}
                         aria-selected={active === i}
                         tabIndex={active === i ? 0 : -1}
-                        onClick={() => setActive(i)}
+                        onClick={() => select(i)}
                         onKeyDown={onKey}
-                        className={`relative px-4 sm:px-5 py-3 text-[13px] sm:text-[14px] tracking-[-0.01em] transition-colors -mb-px border-b-2 ${
+                        className={`relative px-3.5 sm:px-5 py-3 text-[13px] sm:text-[14px] tracking-[-0.01em] transition-colors duration-300 rounded-t-md ${
                             active === i
-                                ? "text-[color:var(--color-ink)] border-[color:var(--color-accent)]"
-                                : "text-[color:var(--color-body-muted)] border-transparent hover:text-[color:var(--color-ink)]"
+                                ? "text-(--color-ink)"
+                                : "text-(--color-body-muted) hover:text-(--color-ink)"
                         }`}
                     >
                         {a.tab}
                     </button>
                 ))}
+            </div>
+                {/* Single sliding underline — glides between tabs on a spring. */}
+                <span ref={indicatorRef} aria-hidden className="tab-indicator" />
             </div>
 
             <div
@@ -270,7 +310,7 @@ export default function Audiences() {
                         alt={current.imageAlt}
                         fill
                         sizes="(min-width: 1024px) 50vw, 100vw"
-                        className="object-cover object-center"
+                        className="audience-photo object-cover object-center"
                     />
                     <div
                         aria-hidden
