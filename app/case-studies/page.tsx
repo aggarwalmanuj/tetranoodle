@@ -6,7 +6,10 @@ import Reveal from "../components/Reveal";
 import Backdrop from "../components/Backdrop";
 import GlassCard from "../components/GlassCard";
 
-export const metadata = { title: "Case Studies" };
+export const metadata = {
+  title: "Case Studies",
+  alternates: { canonical: "/case-studies" },
+};
 
 /* ────────────────────────────────────────────────────────────────
    Data

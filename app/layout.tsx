@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Geist_Mono } from "next/font/google";
+import { SITE_URL } from "@/app/lib/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -15,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://tetranoodle.com"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "TetraNoodle · Root-cause intelligence for the age of AI",
     template: "%s · TetraNoodle",
@@ -25,11 +26,14 @@ export const metadata: Metadata = {
   applicationName: "TetraNoodle",
   authors: [{ name: "Manuj Aggarwal" }],
   creator: "TetraNoodle Technologies",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "TetraNoodle · Root-cause intelligence for the age of AI",
     description:
       "AI Merge finds the pattern beneath the problem, then builds the human capacity to change it for good.",
-    url: "https://tetranoodle.com",
+    url: SITE_URL,
     siteName: "TetraNoodle",
     locale: "en_US",
     type: "website",
@@ -40,7 +44,17 @@ export const metadata: Metadata = {
     description:
       "AI Merge finds the pattern beneath the problem, then builds the human capacity to change it for good.",
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
+  },
 };
 
 export const viewport: Viewport = {
