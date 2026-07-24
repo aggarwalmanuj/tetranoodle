@@ -6,7 +6,10 @@ import Reveal from "../components/Reveal";
 import Backdrop from "../components/Backdrop";
 import GlassCard from "../components/GlassCard";
 
-export const metadata = { title: "Process" };
+export const metadata = {
+  title: "Process",
+  alternates: { canonical: "/process" },
+};
 
 const STEPS = [
   {
