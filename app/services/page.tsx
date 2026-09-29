@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import Reveal from "../components/Reveal";
 import Backdrop from "../components/Backdrop";
 import GlassCard from "../components/GlassCard";
+import { SCORE_CTA, SCORE_URL } from "../lib/site";
 
 export const metadata = {
   title: "Services",
@@ -179,12 +180,12 @@ export default function ServicesPage() {
                 className="flex flex-wrap items-center gap-3"
               >
                 <a
-                  href="https://aimerge.live"
+                  href={SCORE_URL}
                   target="_blank"
                   rel="noopener"
                   className="btn btn-primary"
                 >
-                  Get your score
+                  {SCORE_CTA}
                 </a>
                 <a
                   href="mailto:info@tetranoodle.com"
@@ -196,7 +197,7 @@ export default function ServicesPage() {
             </div>
 
             <Reveal as="div" delay={200} className="relative">
-              <GlassCard className="relative aspect-[4/5] w-full max-w-[460px] mx-auto p-2 sm:p-2.5">
+              <GlassCard className="media-frame media-arch relative aspect-[4/5] w-full max-w-[460px] mx-auto p-2 sm:p-2.5">
                 <div className="relative w-full h-full rounded-[20px] overflow-hidden">
                   <Image
                     src="/newpics/handshake.jpg"
@@ -439,7 +440,7 @@ export default function ServicesPage() {
           <Backdrop tone="light" parallax />
           <div className="field-content container-wide">
             <GlassCard
-              className="overflow-hidden grid lg:grid-cols-2 items-stretch"
+              className="cta-card cta-split overflow-hidden grid lg:grid-cols-2 items-stretch"
               interactive={false}
             >
               {/* Image */}
@@ -468,12 +469,12 @@ export default function ServicesPage() {
                   className="flex flex-col items-start gap-4"
                 >
                   <a
-                    href="https://aimerge.live"
+                    href={SCORE_URL}
                     target="_blank"
                     rel="noopener"
-                    className="btn btn-primary !px-7 !py-4 !text-[16px]"
+                    className="btn btn-primary btn-lg"
                   >
-                    Get your Unfair Advantage Score
+                    {SCORE_CTA}
                   </a>
                   <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-[color:var(--color-body-faint)]">
                     Free · Instant personalized report · No credit card

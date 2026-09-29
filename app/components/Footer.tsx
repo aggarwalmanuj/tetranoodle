@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { SCORE_CTA } from "../lib/site";
 
 const COLS: { title: string; links: { label: string; href: string }[] }[] = [
   {
@@ -7,8 +8,8 @@ const COLS: { title: string; links: { label: string; href: string }[] }[] = [
     links: [
       { label: "What we build", href: "/services" },
       { label: "How it works", href: "/process" },
-      { label: "Case studies", href: "/case-studies" },
-      { label: "Get your score", href: "/#score" },
+      { label: "Results", href: "/results" },
+      { label: SCORE_CTA, href: "/#score" },
     ],
   },
   {

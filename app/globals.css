@@ -264,6 +264,8 @@ body {
   min-height: 44px;
 }
 .btn:active { transform: scale(0.97); }
+.btn-sm { padding: 8px 16px; font-size: 13px; min-height: 0; }
+.btn-lg { padding: 16px 28px; font-size: 16px; }
 
 .btn-primary {
   background: linear-gradient(180deg, var(--color-accent-focus), var(--color-accent));
@@ -361,6 +363,38 @@ body {
 .link-cta:hover::after { transform: translateX(3px); }
 [data-on-dark] .link-cta,
 .on-dark .link-cta { color: var(--color-accent-sky); }
+
+/* "← All results" breadcrumb — the link-cta mirrored */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  color: var(--color-body-muted);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.back-link::before {
+  content: "←";
+  display: inline-block;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.back-link:hover { color: var(--color-accent); }
+.back-link:hover::before { transform: translateX(-3px); }
+
+/* Case-study pieces: stat bar, belief callout */
+.stat-bar {
+  border: 1px solid var(--color-hairline-soft);
+  box-shadow: 0 14px 34px -18px rgba(8, 40, 24, 0.14);
+}
+.stat-bar-brands { background: var(--color-pearl); }
+.belief-callout {
+  border-left: 3px solid var(--color-accent);
+  padding: 4px 0 4px 24px;
+  color: var(--color-ink);
+}
 
 /* ════════════════════════ LIQUID GLASS ════════════════════════
    Structural surfaces only: nav, cards, panels, floating chrome.

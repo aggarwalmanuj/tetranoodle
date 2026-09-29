@@ -223,7 +223,7 @@ export default function Audiences() {
         <div>
             <div
                 ref={tablistRef}
-                className="relative mb-12 lg:mb-16 border-b border-(--color-hairline-soft)"
+                className="tabs-rail relative mb-12 lg:mb-16 border-b border-(--color-hairline-soft)"
             >
             <div
                 role="tablist"

@@ -4,11 +4,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { SCORE_CTA, SCORE_URL } from "../lib/site";
 
 const links = [
   { href: "/services", label: "Services" },
   { href: "/process", label: "Process" },
-  { href: "/case-studies", label: "Case Studies" },
+  { href: "/results", label: "Results" },
   { href: "/about", label: "About" },
 ];
 
@@ -61,6 +62,7 @@ export default function Nav() {
         scrolled ? "shadow-[0_8px_30px_-12px_rgba(8,40,24,0.18)]" : ""
       }`}
       role="banner"
+      data-scrolled={scrolled}
     >
       <nav
         aria-label="Primary"
@@ -99,7 +101,8 @@ export default function Nav() {
 
         <ul className="hidden lg:flex items-center gap-1">
           {links.map((l) => {
-            const active = pathname === l.href;
+            const active =
+              pathname === l.href || pathname.startsWith(`${l.href}/`);
             return (
               <li key={l.href}>
                 <Link
@@ -116,10 +119,10 @@ export default function Nav() {
 
         <div className="flex items-center gap-2.5">
           <a
-            href="https://aimerge.live"
+            href={SCORE_URL}
             target="_blank"
             rel="noopener"
-            className="btn btn-primary !py-2 !px-4 !text-[13px] !min-h-0"
+            className="nav-cta btn btn-primary btn-sm"
           >
             Get Your Score
           </a>
@@ -155,7 +158,8 @@ export default function Nav() {
         <div className="mobile-tray-clip">
           <ul className="glass glass-strong border-x-0 border-b-0 rounded-b-[var(--radius-xl)] px-6 py-4 flex flex-col gap-1">
             {links.map((l) => {
-              const active = pathname === l.href;
+              const active =
+              pathname === l.href || pathname.startsWith(`${l.href}/`);
               return (
                 <li key={l.href}>
                   <Link
@@ -175,13 +179,13 @@ export default function Nav() {
             })}
             <li className="pt-4">
               <a
-                href="https://aimerge.live"
+                href={SCORE_URL}
                 target="_blank"
                 rel="noopener"
                 onClick={() => setOpen(false)}
                 className="btn btn-primary w-full"
               >
-                Get Your Unfair Advantage Score
+                {SCORE_CTA}
               </a>
             </li>
           </ul>

@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import Reveal from "../components/Reveal";
 import Backdrop from "../components/Backdrop";
 import GlassCard from "../components/GlassCard";
+import { SCORE_CTA, SCORE_URL } from "../lib/site";
 
 export const metadata = {
   title: "Process",
@@ -94,7 +95,7 @@ export default function ProcessPage() {
             </div>
 
             <Reveal as="div" delay={200} className="relative">
-              <GlassCard className="relative aspect-[4/3] w-full max-w-[560px] mx-auto p-2 sm:p-2.5">
+              <GlassCard className="media-frame media-soft relative aspect-[4/3] w-full max-w-[560px] mx-auto p-2 sm:p-2.5">
                 <div className="relative w-full h-full rounded-[20px] overflow-hidden">
                   <Image
                     src="/process/hero.jpg"
@@ -246,7 +247,7 @@ export default function ProcessPage() {
           <Backdrop tone="light" parallax />
           <div className="field-content container-tight">
             <GlassCard
-              className="text-center px-6 sm:px-12 py-14 lg:py-20"
+              className="cta-card text-center px-6 sm:px-12 py-14 lg:py-20"
               interactive={false}
             >
               <Reveal as="p" className="t-eyebrow mb-5">
@@ -268,12 +269,12 @@ export default function ProcessPage() {
                 className="flex flex-wrap items-center justify-center gap-3"
               >
                 <a
-                  href="https://aimerge.live"
+                  href={SCORE_URL}
                   target="_blank"
                   rel="noopener"
-                  className="btn btn-primary !px-7 !py-4 !text-[16px]"
+                  className="btn btn-primary btn-lg"
                 >
-                  Get your Unfair Advantage Score
+                  {SCORE_CTA}
                 </a>
                 <a
                   href="mailto:info@tetranoodle.com"

@@ -5,62 +5,15 @@ import Footer from "../components/Footer";
 import Reveal from "../components/Reveal";
 import Backdrop from "../components/Backdrop";
 import GlassCard from "../components/GlassCard";
+import { CASE_STUDIES } from "../lib/case-studies";
+import { SCORE_CTA, SCORE_URL } from "../lib/site";
 
 export const metadata = {
-  title: "Case Studies",
-  alternates: { canonical: "/case-studies" },
+  title: "Results",
+  description:
+    "Enterprise AI results from TetraNoodle: Wiivv, Desire2Learn, IBM, T-Mobile, Titan and more.",
+  alternates: { canonical: "/results" },
 };
-
-/* ────────────────────────────────────────────────────────────────
-   Data
-   ──────────────────────────────────────────────────────────────── */
-type CaseStudy = {
-  client: string;
-  logo?: { src: string; alt: string };
-  title: string;
-  outcome: string;
-};
-
-const CASE_STUDIES: CaseStudy[] = [
-  {
-    client: "Wiivv",
-    title: "A trailblazing journey in custom orthotics.",
-    outcome: "AI-driven custom-fit manufacturing at consumer scale.",
-  },
-  {
-    client: "Desire2Learn",
-    title: "Degree Compass: smarter course selection.",
-    outcome: "A recommendation engine that lifts student success.",
-  },
-  {
-    client: "MineHub",
-    title: "A blockchain odyssey for the supply chain.",
-    outcome: "Reinventing how the mining industry moves material and trust.",
-  },
-  {
-    client: "IBM",
-    logo: { src: "/logos/ibm.png", alt: "IBM" },
-    title: "Reimagining course enrollment with AI.",
-    outcome: "Machine learning applied to IBM’s learning strategy.",
-  },
-  {
-    client: "Pearson",
-    logo: { src: "/logos/pearson.png", alt: "Pearson" },
-    title: "Virtual AI employees at scale.",
-    outcome: "AI workers that extend the team without growing headcount.",
-  },
-  {
-    client: "T-Mobile",
-    logo: { src: "/logos/tmobile.png", alt: "T-Mobile" },
-    title: "Virtual AI employees in production.",
-    outcome: "Automation that handles volume people shouldn’t have to.",
-  },
-  {
-    client: "Titan",
-    title: "The AI workforce that paid for itself 5x over.",
-    outcome: "A workforce of agents returning 5x its cost.",
-  },
-];
 
 type Testimonial = {
   quote: string;
@@ -117,7 +70,7 @@ const TESTIMONIALS: Testimonial[] = [
 /* ────────────────────────────────────────────────────────────────
    Page composition
    ──────────────────────────────────────────────────────────────── */
-export default function CaseStudiesPage() {
+export default function ResultsPage() {
   return (
     <>
       <Nav />
@@ -141,7 +94,7 @@ function Hero() {
       <div className="field-content container-wide px-6 lg:px-12">
         <div className="max-w-[820px]">
           <Reveal as="p" className="t-eyebrow mb-5">
-            Case studies
+            Results
           </Reveal>
           <Reveal as="h1" delay={80} className="t-display balance mb-7">
             Real businesses,{" "}
@@ -186,7 +139,9 @@ function Stories() {
               as="article"
               key={c.client}
               delay={i * 60}
-              className="panel p-7 lg:p-8 flex flex-col"
+              className={`panel p-7 lg:p-8 flex flex-col ${
+                c.slug ? "relative group" : ""
+              }`}
             >
               <div className="h-8 flex items-center mb-6">
                 {c.logo ? (
@@ -210,12 +165,21 @@ function Stories() {
               </h3>
               <p className="t-body !text-[15px] flex-1">{c.outcome}</p>
 
-              <Link
-                href="#"
-                className="link-cta mt-6 pt-5 border-t border-[color:var(--color-hairline-soft)]"
-              >
-                Read the story
-              </Link>
+              {c.slug ? (
+                // Stretched link: the whole card is the hit target, while the
+                // accessible name stays the short, specific link text.
+                <Link
+                  href={`/results/${c.slug}`}
+                  className="link-cta mt-6 pt-5 border-t border-[color:var(--color-hairline-soft)] before:absolute before:inset-0 before:rounded-[inherit] before:content-['']"
+                  style={{ position: "static" }}
+                >
+                  Read the {c.client} story
+                </Link>
+              ) : (
+                <p className="t-caption mt-6 pt-5 border-t border-[color:var(--color-hairline-soft)]">
+                  Full story coming soon
+                </p>
+              )}
             </Reveal>
           ))}
         </div>
@@ -301,7 +265,7 @@ function CTA() {
     <section className="surface-parchment section relative overflow-hidden">
       <Backdrop tone="light" parallax />
       <div className="field-content container-tight">
-        <GlassCard className="text-center px-6 sm:px-12 py-14 lg:py-20" interactive={false}>
+        <GlassCard className="cta-card text-center px-6 sm:px-12 py-14 lg:py-20" interactive={false}>
           <Reveal as="p" className="t-eyebrow mb-5">
             What&rsquo;s next
           </Reveal>
@@ -315,12 +279,12 @@ function CTA() {
           </Reveal>
           <Reveal as="div" delay={240} className="flex flex-wrap items-center justify-center gap-3">
             <a
-              href="https://aimerge.live"
+              href={SCORE_URL}
               target="_blank"
               rel="noopener"
               className="btn btn-primary"
             >
-              Get your Unfair Advantage Score
+              {SCORE_CTA}
             </a>
             <a href="mailto:info@tetranoodle.com" className="btn btn-glass">
               Talk to us

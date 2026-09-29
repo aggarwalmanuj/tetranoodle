@@ -61,7 +61,7 @@ export default function AboutPage() {
             </div>
 
             <Reveal as="div" delay={200} className="relative">
-              <GlassCard className="relative aspect-[4/5] w-full max-w-[480px] mx-auto p-2 sm:p-2.5">
+              <GlassCard className="media-frame media-arch relative aspect-[4/5] w-full max-w-[480px] mx-auto p-2 sm:p-2.5">
                 <div className="relative w-full h-full rounded-[20px] overflow-hidden">
                   <Image
                     src="/people/manuj-keynote.jpg"
@@ -173,7 +173,7 @@ export default function AboutPage() {
             </Reveal>
 
             <Reveal as="div" delay={120} className="order-1 lg:order-2">
-              <GlassCard className="relative aspect-[4/5] w-full max-w-[480px] mx-auto p-2 sm:p-2.5">
+              <GlassCard className="media-frame media-leaf relative aspect-[4/5] w-full max-w-[480px] mx-auto p-2 sm:p-2.5">
                 <div className="relative w-full h-full rounded-[20px] overflow-hidden">
                   <Image
                     src="/people/manuj-stage.jpg"
@@ -224,7 +224,7 @@ export default function AboutPage() {
           <Backdrop tone="dark" parallax />
           <div className="field-content container-tight">
             <GlassCard
-              className="text-center px-6 sm:px-12 py-14 lg:py-20"
+              className="cta-card text-center px-6 sm:px-12 py-14 lg:py-20"
               interactive={false}
             >
               <Reveal as="p" className="t-eyebrow mb-5">
@@ -247,7 +247,7 @@ export default function AboutPage() {
               <Reveal as="div" delay={240} className="flex flex-col items-center gap-4">
                 <a
                   href="mailto:info@tetranoodle.com"
-                  className="btn btn-primary !px-7 !py-4 !text-[16px]"
+                  className="btn btn-primary btn-lg"
                 >
                   Let&rsquo;s talk
                 </a>

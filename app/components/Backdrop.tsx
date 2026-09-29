@@ -74,6 +74,14 @@ export default function Backdrop({
             className="blob blob-c"
             style={{ width: "30vw", height: "30vw", bottom: "-12vw", left: "20vw", opacity: 0.3 }}
           />
+          {/* Material 3 Expressive shapes — rendered only by the new UI
+              (m3.css), and only on the hero/CTA fields that opt into parallax. */}
+          {parallax && (
+            <>
+              <span className="m3-shape m3-shape-cookie" />
+              <span className="m3-shape m3-shape-flower" />
+            </>
+          )}
         </>
       ) : (
         <>

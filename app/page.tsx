@@ -6,6 +6,7 @@ import Backdrop from "./components/Backdrop";
 import GlassCard from "./components/GlassCard";
 import Partners from "./components/Partners";
 import Footer from "./components/Footer";
+import { SCORE_CTA, SCORE_URL } from "./lib/site";
 
 export const metadata = {
   alternates: { canonical: "/" },
@@ -106,7 +107,7 @@ function Hero() {
                         className="flex flex-wrap items-center gap-3"
                     >
                         <a href="#score" className="btn btn-primary">
-                            Get your Unfair Advantage Score
+                            {SCORE_CTA}
                         </a>
                         <a
                             href="/services"
@@ -118,7 +119,7 @@ function Hero() {
                 </div>
 
                 <Reveal as="div" delay={200} className="relative lg:-mt-12">
-                    <GlassCard className="relative aspect-[4/5] w-full max-w-[480px] mx-auto p-2 sm:p-2.5">
+                    <GlassCard className="media-frame media-arch relative aspect-[4/5] w-full max-w-[480px] mx-auto p-2 sm:p-2.5">
                         <div className="relative w-full h-full rounded-[20px] overflow-hidden">
                             <Image
                                 src={ASSETS.heroPhoto}
@@ -161,7 +162,7 @@ function CredibilityStrip() {
                     {[...items, ...items].map((t, i) => (
                         <span
                             key={i}
-                            className="font-mono text-[11px] tracking-[0.16em] uppercase text-[color:var(--color-body-muted)] inline-flex items-center gap-4 whitespace-nowrap"
+                            className="cred-chip font-mono text-[11px] tracking-[0.16em] uppercase text-[color:var(--color-body-muted)] inline-flex items-center gap-4 whitespace-nowrap"
                         >
                             <span
                                 aria-hidden
@@ -760,7 +761,7 @@ function Founder() {
                 </Reveal>
 
                 <Reveal as="div" delay={120} className="order-1 lg:order-2">
-                    <GlassCard className="relative aspect-[4/5] w-full max-w-[480px] mx-auto p-2 sm:p-2.5">
+                    <GlassCard className="media-frame media-leaf relative aspect-[4/5] w-full max-w-[480px] mx-auto p-2 sm:p-2.5">
                         <div className="relative w-full h-full rounded-[20px] overflow-hidden">
                             <Image
                                 src={ASSETS.founderPhoto}
@@ -840,7 +841,7 @@ function CTA() {
             <Backdrop tone="light" parallax />
             <div className="field-content container-tight">
                 <GlassCard
-                    className="text-center px-6 sm:px-12 py-14 lg:py-20"
+                    className="cta-card text-center px-6 sm:px-12 py-14 lg:py-20"
                     interactive={false}
                 >
                     <Reveal as="p" className="t-eyebrow mb-5">
@@ -872,12 +873,12 @@ function CTA() {
                         className="flex flex-col items-center gap-4"
                     >
                         <a
-                            href="https://aimerge.live"
+                            href={SCORE_URL}
                             target="_blank"
                             rel="noopener"
-                            className="btn btn-primary !px-7 !py-4 !text-[16px]"
+                            className="btn btn-primary btn-lg"
                         >
-                            Get your Unfair Advantage Score
+                            {SCORE_CTA}
                         </a>
                         <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-[color:var(--color-body-faint)]">
                             Free · Instant personalized report · No credit card
