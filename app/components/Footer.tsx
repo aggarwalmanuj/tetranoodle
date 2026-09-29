@@ -39,25 +39,16 @@ export default function Footer() {
         <div className="grid lg:grid-cols-[2fr_1fr_1fr_1fr] gap-12 lg:gap-16 mb-14">
           <div className="max-w-[360px]">
             <p className="text-[15px] font-semibold tracking-[-0.015em] flex items-center gap-2">
-              <span className="relative w-6 h-6">
-                <Image
-                  src="/icons/greenlogo.png"
-                  alt=""
-                  width={24}
-                  height={24}
-                  className="logo-emerald w-6 h-6"
-                />
-                <Image
-                  src="/icons/bluelogo.png"
-                  alt=""
-                  width={24}
-                  height={24}
-                  className="logo-indigo w-6 h-6"
-                />
-              </span>
+              <Image
+                src="/icons/bluelogo.png"
+                alt=""
+                width={24}
+                height={24}
+                className="w-6 h-6"
+              />
               TetraNoodle
             </p>
-            <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-[color:var(--color-accent)] mt-2 mb-4">
+            <p className="text-[13px] text-[color:var(--color-accent)] mt-2 mb-4 font-semibold">
               AI Merge · Root-cause intelligence
             </p>
             <p className="text-[14px] leading-[1.55] text-[color:var(--color-body-muted)]">
@@ -68,7 +59,7 @@ export default function Footer() {
           </div>
           {COLS.map((c) => (
             <div key={c.title}>
-              <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-[color:var(--color-body-faint)] mb-4">
+              <p className="text-[13px] text-[color:var(--color-body-faint)] mb-4 font-semibold">
                 {c.title}
               </p>
               <ul className="flex flex-col gap-3">

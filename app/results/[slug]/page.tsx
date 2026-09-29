@@ -4,8 +4,8 @@ import { notFound } from "next/navigation";
 import Nav from "../../components/Nav";
 import Footer from "../../components/Footer";
 import Reveal from "../../components/Reveal";
-import Backdrop from "../../components/Backdrop";
-import GlassCard from "../../components/GlassCard";
+import Shapes from "../../components/Shapes";
+import Surface from "../../components/Surface";
 import {
   DETAILED_STUDIES,
   getCaseStudy,
@@ -51,7 +51,7 @@ export default async function CaseStudyPage({
       <main id="main" className="flex-1">
         {/* ──────────────── HERO + STAT BAR ──────────────── */}
         <section className="surface-canvas relative pt-[104px] lg:pt-[132px] pb-20 lg:pb-28 overflow-hidden">
-          <Backdrop tone="light" parallax />
+          <Shapes />
           <div className="field-content container-wide px-6 lg:px-12">
             <Reveal as="div" className="mb-8">
               <Link href="/results" className="back-link">
@@ -106,7 +106,6 @@ export default async function CaseStudyPage({
 
         {/* ──────────────── GENESIS ──────────────── */}
         <section className="surface-parchment section relative overflow-hidden">
-          <Backdrop tone="light" />
           <div className="field-content container-wide">
             <SectionHead eyebrow="The genesis" title="Where it started." />
             <div className="grid md:grid-cols-2 gap-5 lg:gap-6">
@@ -118,7 +117,6 @@ export default async function CaseStudyPage({
 
         {/* ──────────────── CHALLENGE ──────────────── */}
         <section className="surface-canvas section relative overflow-hidden">
-          <Backdrop tone="light" />
           <div className="field-content container-wide">
             <SectionHead eyebrow="The challenge" title="What stood in the way." />
             <div className="grid md:grid-cols-2 gap-10 lg:gap-16 mb-12 lg:mb-16">
@@ -144,7 +142,6 @@ export default async function CaseStudyPage({
           data-on-dark
           className="surface-ink section relative overflow-hidden"
         >
-          <Backdrop tone="dark" />
           <div className="field-content container-wide">
             <SectionHead
               eyebrow="Our strategic intervention"
@@ -158,7 +155,7 @@ export default async function CaseStudyPage({
                   delay={i * 80}
                   className="panel p-7 lg:p-8 flex flex-col"
                 >
-                  <span className="step-no font-mono text-[32px] leading-none tracking-[0.02em] text-[color:var(--color-accent-sky)] tabular-nums mb-6">
+                  <span className="step-no text-[32px] leading-none text-[color:var(--color-accent-sky)] tabular-nums mb-6 font-semibold">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <h3 className="text-[19px] lg:text-[20px] font-semibold tracking-[-0.015em] leading-[1.25] mb-3 text-[color:var(--color-on-dark)]">
@@ -173,7 +170,6 @@ export default async function CaseStudyPage({
 
         {/* ──────────────── EXECUTION ──────────────── */}
         <section className="surface-parchment section relative overflow-hidden">
-          <Backdrop tone="light" />
           <div className="field-content container-wide">
             <SectionHead
               eyebrow="Execution & innovation"
@@ -189,7 +185,6 @@ export default async function CaseStudyPage({
 
         {/* ──────────────── RESULTS + STAT BOX ──────────────── */}
         <section className="surface-canvas section relative overflow-hidden">
-          <Backdrop tone="light" />
           <div className="field-content container-wide grid lg:grid-cols-[1.25fr_1fr] gap-12 lg:gap-20 items-start">
             <div>
               <SectionHead eyebrow="Results" title="What changed." />
@@ -236,7 +231,6 @@ export default async function CaseStudyPage({
 
         {/* ──────────────── FINANCIALS + CONCLUSION ──────────────── */}
         <section className="surface-parchment section relative overflow-hidden">
-          <Backdrop tone="light" />
           <div className="field-content container-wide">
             {d.financials && (
               <div className="grid md:grid-cols-2 gap-5 lg:gap-6 mb-16 lg:mb-24">
@@ -272,7 +266,6 @@ export default async function CaseStudyPage({
             data-on-dark
             className="surface-ink section relative overflow-hidden"
           >
-            <Backdrop tone="dark" />
             <div className="field-content container-wide">
               <SectionHead eyebrow="In their words" title="From the people who were there." />
               <div
@@ -300,7 +293,7 @@ export default async function CaseStudyPage({
                       <p className="text-[15px] font-semibold tracking-[-0.01em] text-[color:var(--color-on-dark)]">
                         {t.name}
                       </p>
-                      <p className="text-[11px] font-mono tracking-[0.1em] uppercase text-[color:var(--color-on-dark-faint)] mt-1">
+                      <p className="text-[13px] text-[color:var(--color-on-dark-faint)] mt-1 font-semibold">
                         {t.role}
                       </p>
                     </figcaption>
@@ -313,18 +306,17 @@ export default async function CaseStudyPage({
 
         {/* ──────────────── NEXT + CTA ──────────────── */}
         <section className="surface-canvas section relative overflow-hidden">
-          <Backdrop tone="light" parallax />
+          <Shapes />
           <div className="field-content container-tight">
-            <GlassCard
+            <Surface
               className="cta-card text-center px-6 sm:px-12 py-14 lg:py-20"
-              interactive={false}
             >
               <Reveal as="p" className="t-eyebrow mb-5">
                 What&rsquo;s next
               </Reveal>
               <Reveal as="h2" delay={80} className="t-display-md balance mb-7">
                 Your story could be{" "}
-                <span className="accent-text italic font-normal">next.</span>
+                <span className="accent-text">next.</span>
               </Reveal>
               <Reveal as="p" delay={160} className="t-lead pretty max-w-[52ch] mx-auto mb-10">
                 See where you stand, then build the operation that compounds
@@ -343,11 +335,11 @@ export default async function CaseStudyPage({
                 >
                   {SCORE_CTA}
                 </a>
-                <a href="mailto:info@tetranoodle.com" className="btn btn-glass">
+                <a href="mailto:info@tetranoodle.com" className="btn btn-tonal">
                   Talk to us
                 </a>
               </Reveal>
-            </GlassCard>
+            </Surface>
 
             <Reveal as="div" delay={120} className="mt-10 text-center">
               <Link href={`/results/${next.slug}`} className="link-cta">
@@ -388,7 +380,7 @@ function InfoCard({
 }) {
   return (
     <Reveal as="article" delay={delay} className="panel panel-pearl p-7 lg:p-8">
-      <h3 className="font-mono text-[11px] tracking-[0.16em] uppercase text-[color:var(--color-accent)] mb-4">
+      <h3 className="text-[13px] text-[color:var(--color-accent)] mb-4 font-semibold">
         {label}
       </h3>
       <p className="text-[16px] lg:text-[17px] leading-[1.6] text-[color:var(--color-body)] pretty">

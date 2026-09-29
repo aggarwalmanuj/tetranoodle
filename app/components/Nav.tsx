@@ -14,10 +14,10 @@ const links = [
 ];
 
 /**
- * Primary navigation: a floating glass bar.
- * Glass lets the green field show through and refract, reinforcing
- * depth without competing with content. A thin accent bar tracks
- * scroll progress as a quiet sense of place.
+ * Primary navigation: an M3 top app bar. Flat on the page surface at rest,
+ * it steps up to surface-container once content scrolls beneath it (the
+ * M3 "scrolled" state) instead of casting a shadow. A linear progress bar
+ * tracks scroll position as a quiet sense of place.
  */
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -34,7 +34,7 @@ export default function Nav() {
         const y = window.scrollY;
         const max = document.documentElement.scrollHeight - window.innerHeight;
         const ratio = max > 0 ? Math.min(Math.max(y / max, 0), 1) : 0;
-        // Write the bar directly to the DOM — no React re-render per frame.
+        // Write the bar directly to the DOM: no React re-render per frame.
         if (progressRef.current) {
           progressRef.current.style.width = `${ratio * 100}%`;
         }
@@ -58,9 +58,7 @@ export default function Nav() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 nav-glass transition-[box-shadow,background-color] duration-300 ${
-        scrolled ? "shadow-[0_8px_30px_-12px_rgba(8,40,24,0.18)]" : ""
-      }`}
+      className="app-bar fixed inset-x-0 top-0 z-50"
       role="banner"
       data-scrolled={scrolled}
     >
@@ -73,28 +71,18 @@ export default function Nav() {
           className="flex items-center gap-2.5 group rounded-md"
           aria-label="TetraNoodle home"
         >
-          <span className="relative w-7 h-7 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
-            <Image
-              src="/icons/greenlogo.png"
-              alt=""
-              width={28}
-              height={28}
-              priority
-              className="logo-emerald w-7 h-7"
-            />
-            <Image
-              src="/icons/bluelogo.png"
-              alt=""
-              width={28}
-              height={28}
-              priority
-              className="logo-indigo w-7 h-7"
-            />
-          </span>
+          <Image
+            src="/icons/bluelogo.png"
+            alt=""
+            width={28}
+            height={28}
+            priority
+            className="w-7 h-7 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3"
+          />
           <span className="text-[15px] font-semibold tracking-[-0.015em]">
             TetraNoodle
           </span>
-          <span className="hidden sm:inline text-[11px] font-mono tracking-[0.14em] text-[color:var(--color-body-faint)] uppercase">
+          <span className="hidden sm:inline text-[13px] text-[color:var(--color-body-faint)] font-semibold">
             AI Merge
           </span>
         </Link>
@@ -122,7 +110,7 @@ export default function Nav() {
             href={SCORE_URL}
             target="_blank"
             rel="noopener"
-            className="nav-cta btn btn-primary btn-sm"
+            className="btn btn-primary btn-sm"
           >
             Get Your Score
           </a>
@@ -132,7 +120,7 @@ export default function Nav() {
             aria-expanded={open}
             aria-controls="mobile-nav"
             onClick={() => setOpen((v) => !v)}
-            className="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-xl text-[color:var(--color-ink)] hover:bg-black/[0.04] transition-colors"
+            className="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-full text-[color:var(--color-ink)] hover:bg-[color:var(--color-accent)]/[0.08] transition-colors"
           >
             <span
               aria-hidden
@@ -148,7 +136,7 @@ export default function Nav() {
 
       <span ref={progressRef} aria-hidden className="scroll-progress" />
 
-      {/* Mobile tray — glass panel that slides open on a height spring. */}
+      {/* Mobile sheet: slides open on a height spring. */}
       <div
         id="mobile-nav"
         data-open={open}
@@ -156,10 +144,10 @@ export default function Nav() {
         className="mobile-tray lg:hidden"
       >
         <div className="mobile-tray-clip">
-          <ul className="glass glass-strong border-x-0 border-b-0 rounded-b-[var(--radius-xl)] px-6 py-4 flex flex-col gap-1">
+          <ul className="mobile-sheet px-6 py-4 flex flex-col gap-1">
             {links.map((l) => {
               const active =
-              pathname === l.href || pathname.startsWith(`${l.href}/`);
+                pathname === l.href || pathname.startsWith(`${l.href}/`);
               return (
                 <li key={l.href}>
                   <Link

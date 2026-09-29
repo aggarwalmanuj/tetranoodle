@@ -1,19 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Geist_Mono, Google_Sans_Flex } from "next/font/google";
+import { Google_Sans_Flex } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SITE_URL } from "@/app/lib/site";
-import { UI_BOOT_SCRIPT } from "@/app/lib/ui";
-import UiToggle from "@/app/components/UiToggle";
+import Ripple from "@/app/components/Ripple";
 import "./globals.css";
-import "./m3.css";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-// Material 3 Expressive's typeface — used only by the new UI.
+// Material 3 Expressive's typeface, with the optical-size and roundness axes.
 const googleSans = Google_Sans_Flex({
   variable: "--font-google-sans",
   subsets: ["latin"],
@@ -22,12 +14,6 @@ const googleSans = Google_Sans_Flex({
   // next/font has no metrics for this family yet, so no auto fallback.
   adjustFontFallback: false,
   fallback: ["system-ui", "Segoe UI", "Roboto", "sans-serif"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -75,7 +61,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#ffffff",
+  themeColor: "#fdf8ff",
 };
 
 export default function RootLayout({
@@ -84,14 +70,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      data-theme="indigo"
       data-scroll-behavior="smooth"
-      className={`${inter.variable} ${geistMono.variable} ${googleSans.variable}`}
-      suppressHydrationWarning
+      className={googleSans.variable}
     >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: UI_BOOT_SCRIPT }} />
-      </head>
       <body className="min-h-screen flex flex-col antialiased">
         <a
           href="#main"
@@ -100,7 +81,7 @@ export default function RootLayout({
           Skip to content
         </a>
         {children}
-        <UiToggle />
+        <Ripple />
         <Analytics />
       </body>
     </html>

@@ -5,7 +5,7 @@ import Reveal from "./Reveal";
  * Partner / credibility logo band.
  * Logos rest in a single quiet row, monochrome at rest so they read as
  * one calm group, lifting to full color on hover. Honest, minimal trust
- * signal — no card chrome competing with the marks.
+ * signal: no card chrome competing with the marks.
  */
 const PARTNERS = [
   { src: "/logos/ibm.png", alt: "IBM", w: 80, h: 32 },

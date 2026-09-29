@@ -2,8 +2,8 @@ import Image from "next/image";
 import Nav from "./components/Nav";
 import Reveal from "./components/Reveal";
 import Audiences from "./components/Audiences";
-import Backdrop from "./components/Backdrop";
-import GlassCard from "./components/GlassCard";
+import Shapes from "./components/Shapes";
+import Surface from "./components/Surface";
 import Partners from "./components/Partners";
 import Footer from "./components/Footer";
 import { SCORE_CTA, SCORE_URL } from "./lib/site";
@@ -13,7 +13,7 @@ export const metadata = {
 };
 
 /* ────────────────────────────────────────────────────────────────
-   Asset map — keep file paths centralized.
+   Asset map: keep file paths centralized.
    Manuj portraits are replaced by the brand's green office
    illustrations (Storyset). Industry/atmosphere photography stays.
    ──────────────────────────────────────────────────────────────── */
@@ -58,18 +58,17 @@ export default function Home() {
 function Hero() {
     return (
         <section className="surface-canvas relative pt-[104px] lg:pt-[132px] pb-20 lg:pb-32 overflow-hidden">
-            {/* Living emerald field for the glass to refract */}
-            <Backdrop tone="light" parallax />
+            <Shapes />
 
             <div className="field-content container-wide px-6 lg:px-12 grid lg:grid-cols-[1.15fr_1fr] gap-12 lg:gap-20 items-center">
                 <div className="max-w-[720px]">
                     <Reveal as="div" delay={0}>
-                        <span className="glass glass-strong inline-flex items-center gap-2.5 rounded-[var(--radius-pill)] pl-2.5 pr-4 py-1.5 mb-7 text-[12px]">
+                        <span className="surface-card inline-flex items-center gap-2.5 !rounded-[var(--radius-pill)] pl-2.5 pr-4 py-1.5 mb-7">
                             <span
                                 aria-hidden
                                 className="inline-block w-1.5 h-1.5 rounded-full bg-[color:var(--color-accent)]"
                             />
-                            <span className="font-mono tracking-[0.08em] uppercase text-[11px] text-[color:var(--color-body-muted)]">
+                            <span className="text-[13px] text-[color:var(--color-body-muted)] font-semibold">
                                 Peer-reviewed · Mensa Research Journal
                             </span>
                         </span>
@@ -82,7 +81,7 @@ function Hero() {
                     >
                         Your problems, solved.
                         <br />
-                        <span className="accent-text italic font-normal">
+                        <span className="accent-text">
                             With AI you can actually trust.
                         </span>
                     </Reveal>
@@ -111,7 +110,7 @@ function Hero() {
                         </a>
                         <a
                             href="/services"
-                            className="btn btn-glass text-[14px]"
+                            className="btn btn-tonal text-[14px]"
                         >
                             See what we build →
                         </a>
@@ -119,8 +118,8 @@ function Hero() {
                 </div>
 
                 <Reveal as="div" delay={200} className="relative lg:-mt-12">
-                    <GlassCard className="media-frame media-arch relative aspect-[4/5] w-full max-w-[480px] mx-auto p-2 sm:p-2.5">
-                        <div className="relative w-full h-full rounded-[20px] overflow-hidden">
+                    <Surface className="media-frame media-arch relative aspect-[4/5] w-full max-w-[480px] mx-auto">
+                        <div className="relative w-full h-full">
                             <Image
                                 src={ASSETS.heroPhoto}
                                 alt="Two founders standing together in a bright modern office, smiling at the camera."
@@ -130,7 +129,7 @@ function Hero() {
                                 className="object-cover object-center"
                             />
                         </div>
-                    </GlassCard>
+                    </Surface>
 
                     <p className="mt-6 t-caption text-center">
                         4 AI patents · 30 years in AI
@@ -162,7 +161,7 @@ function CredibilityStrip() {
                     {[...items, ...items].map((t, i) => (
                         <span
                             key={i}
-                            className="cred-chip font-mono text-[11px] tracking-[0.16em] uppercase text-[color:var(--color-body-muted)] inline-flex items-center gap-4 whitespace-nowrap"
+                            className="cred-chip"
                         >
                             <span
                                 aria-hidden
@@ -194,7 +193,6 @@ function Problem() {
             data-on-dark
             className="surface-ink section relative overflow-hidden"
         >
-            <Backdrop tone="dark" />
             <div className="field-content container-wide grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
                 <div>
                     <Reveal as="p" className="t-eyebrow mb-5">
@@ -206,7 +204,7 @@ function Problem() {
                         className="t-display-md balance mb-7"
                     >
                         You have tried{" "}
-                        <span className="italic font-normal accent-text">
+                        <span className="accent-text">
                             everything.
                         </span>
                         <br />
@@ -247,21 +245,21 @@ function Problem() {
 
                 <div className="lg:sticky lg:top-32">
                     <Reveal as="div" delay={120}>
-                        <GlassCard className="p-8 lg:p-10">
-                            <p className="font-mono text-[11px] tracking-[0.16em] uppercase text-[color:var(--color-accent-sky)] mb-5">
+                        <Surface className="p-8 lg:p-10">
+                            <p className="text-[13px] text-[color:var(--color-accent-sky)] mb-5 font-semibold">
                                 The root
                             </p>
                             <p className="text-[22px] sm:text-[26px] lg:text-[30px] leading-[1.3] tracking-[-0.018em] text-[color:var(--color-on-dark)] font-medium">
                                 Most AI tools treat the symptom: a faster reply,
                                 another agent on the pile.{" "}
-                                <span className="text-[color:var(--color-on-dark-muted)] italic font-normal">
+                                <span className="text-[color:var(--color-on-dark-muted)] font-normal">
                                     The real problem sits one layer down.
                                 </span>{" "}
                                 Your operation depending on you, your knowledge
                                 trapped in your head, your time eaten by the
                                 same tasks every week.
                             </p>
-                        </GlassCard>
+                        </Surface>
                     </Reveal>
 
                     <Reveal
@@ -313,7 +311,6 @@ function WhatItIs() {
             id="platform"
             className="surface-parchment section relative overflow-hidden"
         >
-            <Backdrop tone="light" />
             <div className="field-content container-wide">
                 <div className="max-w-[820px]">
                     <Reveal as="p" className="t-eyebrow mb-5">
@@ -324,7 +321,7 @@ function WhatItIs() {
                         delay={80}
                         className="t-display-md balance mb-7"
                     >
-                        Not another tool &mdash;{" "}
+                        Not another tool:{" "}
                         <span className="accent-text">
                             the certainty it gets solved.
                         </span>
@@ -353,7 +350,7 @@ function WhatItIs() {
                             delay={i * 80}
                             className="panel panel-pearl p-7 lg:p-8"
                         >
-                            <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-[color:var(--color-accent)] mb-4">
+                            <p className="text-[13px] text-[color:var(--color-accent)] mb-4 font-semibold">
                                 {c.label}
                             </p>
                             <h3 className="text-[20px] lg:text-[22px] font-semibold tracking-[-0.018em] leading-[1.18] mb-3">
@@ -386,7 +383,6 @@ function Offerings() {
     ];
     return (
         <section className="surface-canvas section relative overflow-hidden">
-            <Backdrop tone="light" />
             <div className="field-content container-wide">
                 <div className="max-w-[760px] mb-12 lg:mb-16">
                     <Reveal as="p" className="t-eyebrow mb-5">
@@ -406,7 +402,7 @@ function Offerings() {
                             delay={i * 100}
                             className="panel p-8 lg:p-10 flex flex-col"
                         >
-                            <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-[color:var(--color-accent)] mb-5">
+                            <p className="text-[13px] text-[color:var(--color-accent)] mb-5 font-semibold">
                                 {c.tag}
                             </p>
                             <h3 className="t-display-sm tracking-[-0.02em] mb-4 max-w-[18ch]">
@@ -425,7 +421,7 @@ function Offerings() {
                 <Reveal
                     as="p"
                     delay={160}
-                    className="t-body italic text-center max-w-[60ch] mx-auto mt-12"
+                    className="t-body text-center max-w-[60ch] mx-auto mt-12"
                 >
                     Automation gives you time back. The Vault gives you
                     intelligence that compounds.{" "}
@@ -446,7 +442,6 @@ function ForYou() {
             id="for-you"
             className="surface-parchment section relative overflow-hidden"
         >
-            <Backdrop tone="light" />
             <div className="field-content container-wide">
                 <div className="text-center max-w-[760px] mx-auto mb-12 lg:mb-16">
                     <Reveal as="p" className="t-eyebrow mb-5">
@@ -454,7 +449,7 @@ function ForYou() {
                     </Reveal>
                     <Reveal as="h2" delay={80} className="t-display-md balance">
                         One root cause.{" "}
-                        <span className="accent-text italic font-normal">
+                        <span className="accent-text">
                             Every domain it shows up in.
                         </span>
                     </Reveal>
@@ -495,7 +490,6 @@ function Platform() {
             data-on-dark
             className="surface-ink-2 section relative overflow-hidden"
         >
-            <Backdrop tone="dark" />
             <div className="field-content container-wide grid lg:grid-cols-[1fr_1.1fr] gap-12 lg:gap-24 items-start">
                 <div className="lg:sticky lg:top-32">
                     <Reveal as="p" className="t-eyebrow mb-5">
@@ -535,7 +529,7 @@ function Platform() {
                             delay={i * 80}
                             className="group border-t border-[color:var(--color-hairline-dark)] last:border-b py-7 grid grid-cols-[minmax(72px,auto)_1fr_24px] gap-5 items-start cursor-pointer"
                         >
-                            <span className="font-mono text-[11px] tracking-[0.16em] uppercase text-[color:var(--color-accent-sky)] pt-1">
+                            <span className="text-[13px] text-[color:var(--color-accent-sky)] pt-1 font-semibold">
                                 {p.tag}
                             </span>
                             <div>
@@ -558,7 +552,7 @@ function Platform() {
     );
 }
 
-/* ──────────────── INDUSTRIES — visual break ──────────────── */
+/* ──────────────── INDUSTRIES: visual break ──────────────── */
 function Industries() {
     const tiles = [
         {
@@ -584,7 +578,6 @@ function Industries() {
     ];
     return (
         <section className="surface-parchment section relative overflow-hidden">
-            <Backdrop tone="light" />
             <div className="field-content container-wide">
                 <div className="flex items-end justify-between flex-wrap gap-6 mb-12 lg:mb-16">
                     <div className="max-w-[640px]">
@@ -627,7 +620,7 @@ function Industries() {
                                 />
                             </div>
                             <div className="p-5 lg:p-6">
-                                <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-[color:var(--color-accent)] mb-2">
+                                <p className="text-[13px] text-[color:var(--color-accent)] mb-2 font-semibold">
                                     {t.label}
                                 </p>
                                 <p className="text-[15px] leading-[1.45] text-[color:var(--color-ink)] tracking-[-0.01em]">
@@ -666,7 +659,6 @@ function Proof() {
             id="proof"
             className="surface-canvas section relative overflow-hidden"
         >
-            <Backdrop tone="light" />
             <div className="field-content container-wide">
                 <div className="text-center max-w-[760px] mx-auto mb-12 lg:mb-16">
                     <Reveal as="p" className="t-eyebrow mb-5">
@@ -674,7 +666,7 @@ function Proof() {
                     </Reveal>
                     <Reveal as="h2" delay={80} className="t-display-md balance">
                         When the root shifts,{" "}
-                        <span className="accent-text italic font-normal">
+                        <span className="accent-text">
                             everything downstream changes.
                         </span>
                     </Reveal>
@@ -707,7 +699,7 @@ function Proof() {
                                 <p className="text-[14px] font-semibold tracking-[-0.01em]">
                                     {p.name}
                                 </p>
-                                <p className="text-[11px] font-mono tracking-[0.1em] uppercase text-[color:var(--color-body-faint)] mt-1">
+                                <p className="text-[13px] text-[color:var(--color-body-faint)] mt-1 font-semibold">
                                     {p.role}
                                 </p>
                             </figcaption>
@@ -726,13 +718,12 @@ function Founder() {
             id="founder"
             className="surface-parchment section relative overflow-hidden"
         >
-            <Backdrop tone="light" />
             <div className="field-content container-wide grid lg:grid-cols-[1fr_1.1fr] gap-12 lg:gap-20 items-center">
                 <Reveal as="div" className="order-2 lg:order-1">
                     <p className="t-eyebrow mb-5">The founder</p>
                     <h2 className="t-display-md balance mb-7">
                         Built by someone who has{" "}
-                        <span className="accent-text italic font-normal">
+                        <span className="accent-text">
                             been at the root for thirty years.
                         </span>
                     </h2>
@@ -754,15 +745,15 @@ function Founder() {
                         <a href="#score" className="btn btn-primary">
                             Work with Manuj
                         </a>
-                        <a href="#founder" className="btn btn-secondary">
+                        <a href="#founder" className="btn btn-outlined">
                             Read the paper
                         </a>
                     </div>
                 </Reveal>
 
                 <Reveal as="div" delay={120} className="order-1 lg:order-2">
-                    <GlassCard className="media-frame media-leaf relative aspect-[4/5] w-full max-w-[480px] mx-auto p-2 sm:p-2.5">
-                        <div className="relative w-full h-full rounded-[20px] overflow-hidden">
+                    <Surface className="media-frame media-leaf relative aspect-[4/5] w-full max-w-[480px] mx-auto">
+                        <div className="relative w-full h-full">
                             <Image
                                 src={ASSETS.founderPhoto}
                                 alt="Manuj Aggarwal, founder of TetraNoodle, speaking on stage."
@@ -771,7 +762,7 @@ function Founder() {
                                 className="object-cover object-center"
                             />
                         </div>
-                    </GlassCard>
+                    </Surface>
                 </Reveal>
             </div>
         </section>
@@ -811,20 +802,20 @@ function FieldVision() {
                 <Reveal as="p" delay={160} className="t-lead pretty mb-12">
                     We build the whole thing: the automation, the private vault,
                     and the{" "}
-                    <span className="accent-text italic">human layer</span> that
+                    <span className="accent-text">human layer</span> that
                     ties them together. The work compounds instead of decaying.
                 </Reveal>
 
                 <Reveal as="div" delay={240} className="flex justify-center">
-                    <GlassCard className="inline-block px-10 py-8">
+                    <Surface className="inline-block px-10 py-8">
                         <p className="text-[26px] sm:text-[32px] tracking-[-0.022em] font-medium accent-text mb-2">
                             Built on AI Merge
                         </p>
-                        <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-[color:var(--color-on-dark-faint)]">
+                        <p className="text-[13px] text-[color:var(--color-on-dark-faint)] font-semibold">
                             Peer-reviewed · Mensa Research Journal · Vancouver,
                             Canada
                         </p>
-                    </GlassCard>
+                    </Surface>
                 </Reveal>
             </div>
         </section>
@@ -838,11 +829,10 @@ function CTA() {
             id="score"
             className="surface-parchment section relative overflow-hidden"
         >
-            <Backdrop tone="light" parallax />
+            <Shapes />
             <div className="field-content container-tight">
-                <GlassCard
+                <Surface
                     className="cta-card text-center px-6 sm:px-12 py-14 lg:py-20"
-                    interactive={false}
                 >
                     <Reveal as="p" className="t-eyebrow mb-5">
                         Begin
@@ -855,7 +845,7 @@ function CTA() {
                         Where do you stand
                         <br />
                         in the{" "}
-                        <span className="accent-text italic font-normal">
+                        <span className="accent-text">
                             age of AI?
                         </span>
                     </Reveal>
@@ -880,11 +870,11 @@ function CTA() {
                         >
                             {SCORE_CTA}
                         </a>
-                        <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-[color:var(--color-body-faint)]">
+                        <p className="text-[13px] text-[color:var(--color-body-faint)] font-semibold">
                             Free · Instant personalized report · No credit card
                         </p>
                     </Reveal>
-                </GlassCard>
+                </Surface>
             </div>
         </section>
     );

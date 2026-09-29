@@ -10,7 +10,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
         disallow: ["/api/", "/_next/", "/admin/", "/*.json$"],
       },
-      // Explicitly welcome major search & AI crawlers — visibility in
+      // Explicitly welcome major search & AI crawlers: visibility in
       // AI-generated answers is directly aligned with an AI consulting brand.
       {
         userAgent: "Googlebot",

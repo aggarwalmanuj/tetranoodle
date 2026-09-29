@@ -3,8 +3,8 @@ import Link from "next/link";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import Reveal from "../components/Reveal";
-import Backdrop from "../components/Backdrop";
-import GlassCard from "../components/GlassCard";
+import Shapes from "../components/Shapes";
+import Surface from "../components/Surface";
 import CountUp from "../components/CountUp";
 
 export const metadata = {
@@ -32,16 +32,16 @@ export default function AboutPage() {
       <main id="main" className="flex-1">
         {/* ──────────────── HERO ──────────────── */}
         <section className="surface-canvas relative pt-[104px] lg:pt-[132px] pb-20 lg:pb-28 overflow-hidden">
-          <Backdrop tone="light" parallax />
+          <Shapes />
 
-          <div className="field-content container-wide grid lg:grid-cols-[1.15fr_1fr] gap-12 lg:gap-20 items-center">
+          <div className="field-content container-wide px-6 lg:px-12 grid lg:grid-cols-[1.15fr_1fr] gap-12 lg:gap-20 items-center">
             <div className="max-w-[680px]">
               <Reveal as="p" className="t-eyebrow mb-5">
                 About TetraNoodle
               </Reveal>
               <Reveal as="h1" delay={80} className="t-display balance mb-7">
                 AI-driven.{" "}
-                <span className="accent-text italic font-normal">Human-led.</span>
+                <span className="accent-text">Human-led.</span>
               </Reveal>
               <Reveal as="p" delay={160} className="t-lead pretty mb-10 max-w-[52ch]">
                 TetraNoodle builds automation and private AI vaults for operations
@@ -54,15 +54,15 @@ export default function AboutPage() {
                 <a href="mailto:info@tetranoodle.com" className="btn btn-primary">
                   Let&rsquo;s talk
                 </a>
-                <Link href="/" className="btn btn-glass text-[14px]">
+                <Link href="/" className="btn btn-tonal text-[14px]">
                   See the platform →
                 </Link>
               </Reveal>
             </div>
 
             <Reveal as="div" delay={200} className="relative">
-              <GlassCard className="media-frame media-arch relative aspect-[4/5] w-full max-w-[480px] mx-auto p-2 sm:p-2.5">
-                <div className="relative w-full h-full rounded-[20px] overflow-hidden">
+              <Surface className="media-frame media-arch relative aspect-[4/5] w-full max-w-[480px] mx-auto">
+                <div className="relative w-full h-full">
                   <Image
                     src="/people/manuj-keynote.jpg"
                     alt="Manuj Aggarwal speaking at an IMAGINE AI IMPACT keynote."
@@ -72,7 +72,7 @@ export default function AboutPage() {
                     className="object-cover object-[70%_center]"
                   />
                 </div>
-              </GlassCard>
+              </Surface>
 
               <p className="mt-6 t-caption text-center">
                 Built on the peer-reviewed AI Merge protocol
@@ -83,14 +83,13 @@ export default function AboutPage() {
 
         {/* ──────────────── MISSION ──────────────── */}
         <section className="surface-parchment section relative overflow-hidden">
-          <Backdrop tone="light" />
           <div className="field-content container-tight text-center">
             <Reveal as="p" className="t-eyebrow mb-5">
               Our mission
             </Reveal>
             <Reveal as="h2" delay={80} className="t-display-md balance mb-7">
               Help leaders realize their{" "}
-              <span className="accent-text italic font-normal">full potential</span>{" "}
+              <span className="accent-text">full potential</span>{" "}
               with AI they can trust.
             </Reveal>
             <Reveal as="p" delay={160} className="t-lead pretty max-w-[58ch] mx-auto">
@@ -103,16 +102,6 @@ export default function AboutPage() {
 
         {/* ──────────────── STATS ──────────────── */}
         <section className="surface-canvas section relative overflow-hidden">
-          <Backdrop tone="light" />
-          {/* Accent glow so the proof numbers feel like a highlight band */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(70vw 50vw at 50% 50%, rgb(var(--accent-rgb) / 0.07), transparent 70%)",
-            }}
-          />
           <div className="field-content container-wide">
             <div className="grid sm:grid-cols-3 gap-8 lg:gap-12 divide-y sm:divide-y-0 sm:divide-x divide-[color:var(--color-hairline)]">
               {STATS.map((s, i) => (
@@ -129,7 +118,7 @@ export default function AboutPage() {
                       suffix={s.suffix}
                     />
                   </p>
-                  <p className="font-mono text-[12px] tracking-[0.16em] uppercase text-[color:var(--color-body-muted)]">
+                  <p className="text-[14px] text-[color:var(--color-body-muted)] font-semibold">
                     {s.label}
                   </p>
                 </Reveal>
@@ -143,13 +132,12 @@ export default function AboutPage() {
           data-on-dark
           className="surface-ink section relative overflow-hidden"
         >
-          <Backdrop tone="dark" />
           <div className="field-content container-wide grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-20 items-center">
             <Reveal as="div" className="order-2 lg:order-1">
               <p className="t-eyebrow mb-5">The founder</p>
               <h2 className="t-display-md balance mb-7">
                 From $2 a day to the boardrooms of the{" "}
-                <span className="accent-text italic font-normal">
+                <span className="accent-text">
                   Fortune 500.
                 </span>
               </h2>
@@ -166,15 +154,15 @@ export default function AboutPage() {
               </p>
               <a
                 href="mailto:info@tetranoodle.com?subject=AI%20Merge%20research%20paper"
-                className="btn btn-secondary"
+                className="btn btn-outlined"
               >
                 Request the research
               </a>
             </Reveal>
 
             <Reveal as="div" delay={120} className="order-1 lg:order-2">
-              <GlassCard className="media-frame media-leaf relative aspect-[4/5] w-full max-w-[480px] mx-auto p-2 sm:p-2.5">
-                <div className="relative w-full h-full rounded-[20px] overflow-hidden">
+              <Surface className="media-frame media-leaf relative aspect-[4/5] w-full max-w-[480px] mx-auto">
+                <div className="relative w-full h-full">
                   <Image
                     src="/people/manuj-stage.jpg"
                     alt="Manuj Aggarwal speaking with a microphone against a purple backdrop."
@@ -183,7 +171,7 @@ export default function AboutPage() {
                     className="object-cover object-center"
                   />
                 </div>
-              </GlassCard>
+              </Surface>
             </Reveal>
           </div>
         </section>
@@ -191,7 +179,6 @@ export default function AboutPage() {
 
         {/* ──────────────── TRUSTED BY ──────────────── */}
         <section className="surface-parchment section relative overflow-hidden">
-          <Backdrop tone="light" />
           <div className="field-content container-wide text-center">
             <Reveal as="p" className="t-eyebrow mb-9">
               Trusted by teams at
@@ -221,18 +208,16 @@ export default function AboutPage() {
           data-on-dark
           className="surface-ink section relative overflow-hidden"
         >
-          <Backdrop tone="dark" parallax />
           <div className="field-content container-tight">
-            <GlassCard
+            <Surface
               className="cta-card text-center px-6 sm:px-12 py-14 lg:py-20"
-              interactive={false}
             >
               <Reveal as="p" className="t-eyebrow mb-5">
                 Begin
               </Reveal>
               <Reveal as="h2" delay={80} className="t-display balance mb-7">
                 Want to build something{" "}
-                <span className="accent-text italic font-normal">
+                <span className="accent-text">
                   that lasts?
                 </span>
               </Reveal>
@@ -251,11 +236,11 @@ export default function AboutPage() {
                 >
                   Let&rsquo;s talk
                 </a>
-                <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-[color:var(--color-on-dark-faint)]">
+                <p className="text-[13px] text-[color:var(--color-on-dark-faint)] font-semibold">
                   Vancouver, Canada · Replies within one business day
                 </p>
               </Reveal>
-            </GlassCard>
+            </Surface>
           </div>
         </section>
       </main>

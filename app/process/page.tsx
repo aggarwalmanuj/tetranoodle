@@ -3,8 +3,8 @@ import Link from "next/link";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import Reveal from "../components/Reveal";
-import Backdrop from "../components/Backdrop";
-import GlassCard from "../components/GlassCard";
+import Shapes from "../components/Shapes";
+import Surface from "../components/Surface";
 import { SCORE_CTA, SCORE_URL } from "../lib/site";
 
 export const metadata = {
@@ -71,7 +71,7 @@ export default function ProcessPage() {
       <main id="main" className="flex-1">
         {/* ──────────────── HERO ──────────────── */}
         <section className="surface-canvas relative pt-[104px] lg:pt-[132px] pb-20 lg:pb-28 overflow-hidden">
-          <Backdrop tone="light" parallax />
+          <Shapes />
 
           <div className="field-content container-wide px-6 lg:px-12 grid lg:grid-cols-[1fr_1.05fr] gap-12 lg:gap-16 items-center">
             <div className="max-w-[720px]">
@@ -80,7 +80,7 @@ export default function ProcessPage() {
               </Reveal>
               <Reveal as="h1" delay={80} className="t-display balance mb-7">
                 AI innovation,{" "}
-                <span className="accent-text italic font-normal">human-led.</span>
+                <span className="accent-text">human-led.</span>
               </Reveal>
               <Reveal as="p" delay={160} className="t-lead pretty max-w-[58ch]">
                 We start by truly listening: your goals, your team&rsquo;s
@@ -95,8 +95,8 @@ export default function ProcessPage() {
             </div>
 
             <Reveal as="div" delay={200} className="relative">
-              <GlassCard className="media-frame media-soft relative aspect-[4/3] w-full max-w-[560px] mx-auto p-2 sm:p-2.5">
-                <div className="relative w-full h-full rounded-[20px] overflow-hidden">
+              <Surface className="media-frame media-soft relative aspect-[4/3] w-full max-w-[560px] mx-auto">
+                <div className="relative w-full h-full">
                   <Image
                     src="/process/hero.jpg"
                     alt="A team working together at a whiteboard, planning a project."
@@ -106,7 +106,7 @@ export default function ProcessPage() {
                     className="object-cover object-center"
                   />
                 </div>
-              </GlassCard>
+              </Surface>
             </Reveal>
           </div>
         </section>
@@ -132,7 +132,7 @@ export default function ProcessPage() {
             </Reveal>
             <Reveal as="p" delay={80} className="t-display-sm balance font-medium">
               A precise fix at the exact source, and we{" "}
-              <span className="accent-text italic font-normal">
+              <span className="accent-text">
                 stand behind it
               </span>{" "}
               getting solved.
@@ -142,16 +142,6 @@ export default function ProcessPage() {
 
         {/* ──────────────── STEPS ──────────────── */}
         <section className="surface-parchment section relative overflow-hidden">
-          <Backdrop tone="light" />
-          {/* Soft accent glows so the long section doesn't read as flat white */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(60vw 40vw at 85% 18%, rgb(var(--accent-rgb) / 0.06), transparent 70%), radial-gradient(55vw 38vw at 10% 72%, rgb(var(--accent-bright-rgb) / 0.05), transparent 70%)",
-            }}
-          />
           <div className="field-content container-wide">
             <div className="max-w-[760px] mb-12 lg:mb-16">
               <Reveal as="p" className="t-eyebrow mb-5">
@@ -159,7 +149,7 @@ export default function ProcessPage() {
               </Reveal>
               <Reveal as="h2" delay={80} className="t-display-md balance">
                 Seven steps,{" "}
-                <span className="accent-text italic font-normal">
+                <span className="accent-text">
                   one outcome.
                 </span>
               </Reveal>
@@ -173,9 +163,9 @@ export default function ProcessPage() {
                   delay={i * 60}
                   className="group grid lg:grid-cols-2 gap-8 lg:gap-16 items-center"
                 >
-                  {/* Image — alternates side on desktop, gentle zoom on hover */}
+                  {/* Image: alternates side on desktop, gentle zoom on hover */}
                   <div
-                    className={`relative aspect-[4/3] rounded-[var(--radius-xl)] overflow-hidden elevation-product ${
+                    className={`relative aspect-[4/3] rounded-[var(--radius-xl)] overflow-hidden ${
                       i % 2 === 1 ? "lg:order-2" : ""
                     }`}
                   >
@@ -191,7 +181,7 @@ export default function ProcessPage() {
                   {/* Number + title + text */}
                   <div className={i % 2 === 1 ? "lg:order-1" : ""}>
                     <span className="flex items-center gap-4 mb-4">
-                      <span className="font-mono text-[40px] lg:text-[52px] leading-none tracking-[0.02em] text-[color:var(--color-accent)] tabular-nums">
+                      <span className="text-[40px] lg:text-[52px] leading-none text-[color:var(--color-accent)] tabular-nums font-semibold">
                         {s.no}
                       </span>
                       <span
@@ -231,7 +221,7 @@ export default function ProcessPage() {
             </Reveal>
             <Reveal as="h2" delay={80} className="t-display-md balance mb-7">
               A 90-day result guarantee. If you don&rsquo;t see the benefit,{" "}
-              <span className="accent-text italic font-normal">
+              <span className="accent-text">
                 you get your money back.
               </span>
             </Reveal>
@@ -244,18 +234,17 @@ export default function ProcessPage() {
 
         {/* ──────────────── CTA ──────────────── */}
         <section className="surface-canvas section relative overflow-hidden">
-          <Backdrop tone="light" parallax />
+          <Shapes />
           <div className="field-content container-tight">
-            <GlassCard
+            <Surface
               className="cta-card text-center px-6 sm:px-12 py-14 lg:py-20"
-              interactive={false}
             >
               <Reveal as="p" className="t-eyebrow mb-5">
                 Begin
               </Reveal>
               <Reveal as="h2" delay={80} className="t-display balance mb-7">
                 Let&rsquo;s map your{" "}
-                <span className="accent-text italic font-normal">
+                <span className="accent-text">
                   first win.
                 </span>
               </Reveal>
@@ -278,12 +267,12 @@ export default function ProcessPage() {
                 </a>
                 <a
                   href="mailto:info@tetranoodle.com"
-                  className="btn btn-glass transition-transform duration-[var(--dur-fast)] hover:-translate-y-[1px]"
+                  className="btn btn-tonal transition-transform duration-[var(--dur-fast)] hover:-translate-y-[1px]"
                 >
                   Talk to us
                 </a>
               </Reveal>
-            </GlassCard>
+            </Surface>
           </div>
         </section>
       </main>

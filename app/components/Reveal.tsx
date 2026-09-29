@@ -22,7 +22,7 @@ type RevealProps = {
 
 /**
  * Lightweight scroll-reveal. IntersectionObserver based.
- * Motion intent: confirm content has entered view — nothing decorative.
+ * Motion intent: confirm content has entered view: nothing decorative.
  * prefers-reduced-motion fallback lives in globals.css.
  */
 export default function Reveal({

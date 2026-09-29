@@ -2,7 +2,7 @@
 
 import { useState, useId, useRef, useEffect, KeyboardEvent } from "react";
 import Image from "next/image";
-import GlassCard from "./GlassCard";
+import Surface from "./Surface";
 
 type Audience = {
     id: string;
@@ -163,9 +163,7 @@ export default function Audiences() {
     const [active, setActive] = useState(0);
     const tablistId = useId();
     const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
-    const tablistRef = useRef<HTMLDivElement | null>(null);
-    const indicatorRef = useRef<HTMLSpanElement | null>(null);
-    // Only move focus on a *user-initiated* tab change, never on mount —
+    // Only move focus on a *user-initiated* tab change, never on mount:
     // auto-focusing on load would yank the viewport and trap screen readers.
     const userMoved = useRef(false);
 
@@ -173,27 +171,6 @@ export default function Audiences() {
     useEffect(() => {
         if (!userMoved.current) return;
         tabRefs.current[active]?.focus({ preventScroll: true });
-    }, [active]);
-
-    // Slide the active-tab indicator to the selected tab. Re-measured on
-    // resize so it stays glued through reflow / font-load / wrap changes.
-    useEffect(() => {
-        const move = () => {
-            const btn = tabRefs.current[active];
-            const bar = indicatorRef.current;
-            if (!btn || !bar) return;
-            bar.style.width = `${btn.offsetWidth}px`;
-            bar.style.transform = `translateX(${btn.offsetLeft}px)`;
-            bar.style.top = `${btn.offsetTop + btn.offsetHeight - 2}px`;
-        };
-        move();
-        window.addEventListener("resize", move, { passive: true });
-        // Re-run after web fonts settle (tab widths shift on font swap).
-        const t = setTimeout(move, 250);
-        return () => {
-            window.removeEventListener("resize", move);
-            clearTimeout(t);
-        };
     }, [active]);
 
     const select = (i: number) => {
@@ -222,14 +199,10 @@ export default function Audiences() {
     return (
         <div>
             <div
-                ref={tablistRef}
-                className="tabs-rail relative mb-12 lg:mb-16 border-b border-(--color-hairline-soft)"
-            >
-            <div
                 role="tablist"
                 aria-label="Choose your role"
                 id={tablistId}
-                className="flex flex-wrap gap-1 sm:gap-2"
+                className="flex flex-wrap justify-center gap-2 mb-12 lg:mb-16"
             >
                 {AUDIENCES.map((a, i) => (
                     <button
@@ -245,18 +218,11 @@ export default function Audiences() {
                         tabIndex={active === i ? 0 : -1}
                         onClick={() => select(i)}
                         onKeyDown={onKey}
-                        className={`relative px-3.5 sm:px-5 py-3 text-[13px] sm:text-[14px] tracking-[-0.01em] transition-colors duration-300 rounded-t-md ${
-                            active === i
-                                ? "text-(--color-ink)"
-                                : "text-(--color-body-muted) hover:text-(--color-ink)"
-                        }`}
+                        className="chip"
                     >
                         {a.tab}
                     </button>
                 ))}
-            </div>
-                {/* Single sliding underline — glides between tabs on a spring. */}
-                <span ref={indicatorRef} aria-hidden className="tab-indicator" />
             </div>
 
             <div
@@ -298,11 +264,10 @@ export default function Audiences() {
                     </a>
                 </div>
 
-                {/* Photo with the testimonial in a glass panel floating over it —
-            glass-over-image is the canonical liquid-glass use case. */}
+                {/* Photo with the testimonial on a solid card anchored to its foot. */}
                 <figure
                     data-on-dark
-                    className="reveal is-visible relative rounded-[var(--radius-xl)] overflow-hidden aspect-[4/5] sm:aspect-[5/6] elevation-product"
+                    className="reveal is-visible relative rounded-[var(--radius-xl)] overflow-hidden aspect-[4/5] sm:aspect-[5/6]"
                     style={{ transitionDelay: "120ms" }}
                 >
                     <Image
@@ -316,10 +281,8 @@ export default function Audiences() {
                         aria-hidden
                         className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
                     />
-                    {/* Wrapper owns the absolute placement; the glass card stays
-              position:relative (its specular layers anchor to it). */}
                     <div className="absolute inset-x-3 bottom-3 sm:inset-x-4 sm:bottom-4">
-                        <GlassCard interactive={false} className="p-5 sm:p-6">
+                        <Surface className="p-5 sm:p-6">
                             <blockquote className="text-[16px] sm:text-[18px] leading-[1.45] tracking-[-0.012em] text-[color:var(--color-on-dark)]">
                                 <span
                                     aria-hidden
@@ -339,11 +302,11 @@ export default function Audiences() {
                                 <p className="text-[13px] font-semibold tracking-[-0.01em] text-[color:var(--color-on-dark)]">
                                     {current.quote.name}
                                 </p>
-                                <p className="text-[11px] font-mono tracking-[0.08em] uppercase text-[color:var(--color-on-dark-faint)] mt-1">
+                                <p className="text-[13px] text-[color:var(--color-on-dark-faint)] mt-1 font-semibold">
                                     {current.quote.role}
                                 </p>
                             </figcaption>
-                        </GlassCard>
+                        </Surface>
                     </div>
                 </figure>
             </div>

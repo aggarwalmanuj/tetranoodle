@@ -3,8 +3,8 @@ import Link from "next/link";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import Reveal from "../components/Reveal";
-import Backdrop from "../components/Backdrop";
-import GlassCard from "../components/GlassCard";
+import Shapes from "../components/Shapes";
+import Surface from "../components/Surface";
 import { CASE_STUDIES } from "../lib/case-studies";
 import { SCORE_CTA, SCORE_URL } from "../lib/site";
 
@@ -89,7 +89,7 @@ export default function ResultsPage() {
 function Hero() {
   return (
     <section className="surface-canvas relative pt-[104px] lg:pt-[132px] pb-20 lg:pb-28 overflow-hidden">
-      <Backdrop tone="light" parallax />
+      <Shapes />
 
       <div className="field-content container-wide px-6 lg:px-12">
         <div className="max-w-[820px]">
@@ -98,7 +98,7 @@ function Hero() {
           </Reveal>
           <Reveal as="h1" delay={80} className="t-display balance mb-7">
             Real businesses,{" "}
-            <span className="accent-text italic font-normal">real outcomes.</span>
+            <span className="accent-text">real outcomes.</span>
           </Reveal>
           <Reveal as="p" delay={160} className="t-lead pretty mb-8 max-w-[56ch]">
             A look at what changes when AI is built around the operation instead
@@ -107,7 +107,7 @@ function Hero() {
           <Reveal
             as="p"
             delay={240}
-            className="font-mono text-[11px] tracking-[0.16em] uppercase text-[color:var(--color-body-muted)]"
+            className="text-[13px] text-[color:var(--color-body-muted)] font-semibold"
           >
             10M+ lives impacted · $500M+ value produced for clients
           </Reveal>
@@ -121,7 +121,6 @@ function Hero() {
 function Stories() {
   return (
     <section className="surface-parchment section relative overflow-hidden">
-      <Backdrop tone="light" />
       <div className="field-content container-wide">
         <div className="max-w-[640px] mb-12 lg:mb-16">
           <Reveal as="p" className="t-eyebrow mb-5">
@@ -129,7 +128,7 @@ function Stories() {
           </Reveal>
           <Reveal as="h2" delay={80} className="t-display-md balance">
             Operations rebuilt{" "}
-            <span className="accent-text italic font-normal">around the root.</span>
+            <span className="accent-text">around the root.</span>
           </Reveal>
         </div>
 
@@ -195,7 +194,6 @@ function Testimonials() {
       data-on-dark
       className="surface-ink section relative overflow-hidden"
     >
-      <Backdrop tone="dark" />
       <div className="field-content container-wide">
         <div className="text-center max-w-[760px] mx-auto mb-12 lg:mb-16">
           <Reveal as="p" className="t-eyebrow mb-5">
@@ -203,7 +201,7 @@ function Testimonials() {
           </Reveal>
           <Reveal as="h2" delay={80} className="t-display-md balance">
             Leaders who&rsquo;ve{" "}
-            <span className="accent-text italic font-normal">
+            <span className="accent-text">
               felt the difference.
             </span>
           </Reveal>
@@ -246,7 +244,7 @@ function Testimonials() {
                   <p className="text-[14px] font-semibold tracking-[-0.01em] text-[color:var(--color-on-dark)]">
                     {t.name}
                   </p>
-                  <p className="text-[11px] font-mono tracking-[0.1em] uppercase text-[color:var(--color-on-dark-faint)] mt-1">
+                  <p className="text-[13px] text-[color:var(--color-on-dark-faint)] mt-1 font-semibold">
                     {t.role}
                   </p>
                 </span>
@@ -263,15 +261,15 @@ function Testimonials() {
 function CTA() {
   return (
     <section className="surface-parchment section relative overflow-hidden">
-      <Backdrop tone="light" parallax />
+      <Shapes />
       <div className="field-content container-tight">
-        <GlassCard className="cta-card text-center px-6 sm:px-12 py-14 lg:py-20" interactive={false}>
+        <Surface className="cta-card text-center px-6 sm:px-12 py-14 lg:py-20">
           <Reveal as="p" className="t-eyebrow mb-5">
             What&rsquo;s next
           </Reveal>
           <Reveal as="h2" delay={80} className="t-display balance mb-7">
             Your story could be{" "}
-            <span className="accent-text italic font-normal">next.</span>
+            <span className="accent-text">next.</span>
           </Reveal>
           <Reveal as="p" delay={160} className="t-lead pretty max-w-[52ch] mx-auto mb-10">
             See where you stand, then build the operation that compounds from
@@ -286,11 +284,11 @@ function CTA() {
             >
               {SCORE_CTA}
             </a>
-            <a href="mailto:info@tetranoodle.com" className="btn btn-glass">
+            <a href="mailto:info@tetranoodle.com" className="btn btn-tonal">
               Talk to us
             </a>
           </Reveal>
-        </GlassCard>
+        </Surface>
       </div>
     </section>
   );

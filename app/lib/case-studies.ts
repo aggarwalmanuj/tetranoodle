@@ -1,5 +1,5 @@
 /* ────────────────────────────────────────────────────────────────
-   Results (formerly Case Studies) — single source of truth for the
+   Results (formerly Case Studies): single source of truth for the
    /results index cards and the long-form /results/[slug] pages.
    Long-form copy follows the template: stat bar → Introduction →
    Genesis → Challenge → Strategic Intervention → Execution →

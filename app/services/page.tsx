@@ -3,8 +3,8 @@ import Link from "next/link";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import Reveal from "../components/Reveal";
-import Backdrop from "../components/Backdrop";
-import GlassCard from "../components/GlassCard";
+import Shapes from "../components/Shapes";
+import Surface from "../components/Surface";
 import { SCORE_CTA, SCORE_URL } from "../lib/site";
 
 export const metadata = {
@@ -28,7 +28,7 @@ const offerings = [
     title: (
       <>
         Automation that{" "}
-        <span className="accent-text italic font-normal">earns its keep.</span>
+        <span className="accent-text">earns its keep.</span>
       </>
     ),
     body:
@@ -48,7 +48,7 @@ const offerings = [
     title: (
       <>
         A private AI vault that{" "}
-        <span className="accent-text italic font-normal">
+        <span className="accent-text">
           remembers everything.
         </span>
       </>
@@ -148,7 +148,7 @@ export default function ServicesPage() {
       <main id="main" className="flex-1">
         {/* ──────────────── HERO ──────────────── */}
         <section className="surface-canvas relative pt-[104px] lg:pt-[132px] pb-20 lg:pb-28 overflow-hidden">
-          <Backdrop tone="light" parallax />
+          <Shapes />
 
           <div className="field-content container-wide px-6 lg:px-12 grid lg:grid-cols-[1.15fr_1fr] gap-12 lg:gap-20 items-center">
             <div className="max-w-[720px]">
@@ -161,7 +161,7 @@ export default function ServicesPage() {
                 className="t-display balance mb-7 text-[clamp(32px,4.4vw,60px)]"
               >
                 Automation that frees your time. A{" "}
-                <span className="accent-text italic font-normal">
+                <span className="accent-text">
                   private AI vault
                 </span>{" "}
                 that holds your intelligence.
@@ -189,7 +189,7 @@ export default function ServicesPage() {
                 </a>
                 <a
                   href="mailto:info@tetranoodle.com"
-                  className="btn btn-glass text-[14px]"
+                  className="btn btn-tonal text-[14px]"
                 >
                   Talk to us
                 </a>
@@ -197,8 +197,8 @@ export default function ServicesPage() {
             </div>
 
             <Reveal as="div" delay={200} className="relative">
-              <GlassCard className="media-frame media-arch relative aspect-[4/5] w-full max-w-[460px] mx-auto p-2 sm:p-2.5">
-                <div className="relative w-full h-full rounded-[20px] overflow-hidden">
+              <Surface className="media-frame media-arch relative aspect-[4/5] w-full max-w-[460px] mx-auto">
+                <div className="relative w-full h-full">
                   <Image
                     src="/newpics/handshake.jpg"
                     alt="Two people shaking hands across a table in a bright modern office."
@@ -208,7 +208,7 @@ export default function ServicesPage() {
                     className="object-cover object-center"
                   />
                 </div>
-              </GlassCard>
+              </Surface>
             </Reveal>
           </div>
         </section>
@@ -218,7 +218,6 @@ export default function ServicesPage() {
           data-on-dark
           className="surface-ink section relative overflow-hidden"
         >
-          <Backdrop tone="dark" />
           <div className="field-content container-wide flex flex-col gap-16 lg:gap-24">
             {offerings.map((o, i) => (
               <Reveal
@@ -227,9 +226,9 @@ export default function ServicesPage() {
                 delay={i * 80}
                 className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center"
               >
-                {/* Image — alternates side on desktop */}
+                {/* Image: alternates side on desktop */}
                 <div
-                  className={`relative aspect-[4/3] rounded-[var(--radius-xl)] overflow-hidden elevation-product ${
+                  className={`relative aspect-[4/3] rounded-[var(--radius-xl)] overflow-hidden ${
                     i % 2 === 1 ? "lg:order-2" : ""
                   }`}
                 >
@@ -244,7 +243,7 @@ export default function ServicesPage() {
 
                 {/* Text */}
                 <div className={i % 2 === 1 ? "lg:order-1" : ""}>
-                  <p className="font-mono text-[11px] tracking-[0.18em] uppercase text-[color:var(--color-accent)] mb-4">
+                  <p className="text-[13px] text-[color:var(--color-accent)] mb-4 font-semibold">
                     {o.tag}
                   </p>
                   <h2 className="t-display-sm balance mb-5">{o.title}</h2>
@@ -252,7 +251,7 @@ export default function ServicesPage() {
                     {o.body}
                   </p>
 
-                  <p className="font-mono text-[11px] tracking-[0.16em] uppercase text-[color:var(--color-body-faint)] mb-4">
+                  <p className="text-[13px] text-[color:var(--color-body-faint)] mb-4 font-semibold">
                     What you get
                   </p>
                   <ul className="flex flex-col gap-3.5 mb-8">
@@ -276,11 +275,11 @@ export default function ServicesPage() {
             <Reveal
               as="p"
               delay={160}
-              className="t-lead pretty italic text-center max-w-[64ch] mx-auto"
+              className="t-lead pretty text-center max-w-[64ch] mx-auto"
             >
               Automation gives you time back. The Vault gives you intelligence
               that compounds.{" "}
-              <span className="accent-text not-italic font-normal">
+              <span className="accent-text">
                 Together they&rsquo;re a complete AI journey,
               </span>{" "}
               not a stack of disconnected tools.
@@ -290,11 +289,10 @@ export default function ServicesPage() {
 
         {/* ──────────────── CAPABILITIES ──────────────── */}
         <section className="surface-canvas section relative overflow-hidden">
-          <Backdrop tone="light" />
           <div className="field-content container-wide grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Photo */}
             <Reveal as="div" className="relative order-1">
-              <div className="relative aspect-[4/5] rounded-[var(--radius-xl)] overflow-hidden elevation-product">
+              <div className="relative aspect-[4/5] rounded-[var(--radius-xl)] overflow-hidden">
                 <Image
                   src="/newpics/businessteam.jpg"
                   alt="A team collaborating around a laptop in a bright office."
@@ -312,7 +310,7 @@ export default function ServicesPage() {
               </Reveal>
               <Reveal as="h2" delay={80} className="t-display-md balance mb-10">
                 However your{" "}
-                <span className="accent-text italic font-normal">vision</span>{" "}
+                <span className="accent-text">vision</span>{" "}
                 takes shape.
               </Reveal>
 
@@ -324,7 +322,7 @@ export default function ServicesPage() {
                     delay={i * 80}
                     className="border-t border-[color:var(--color-hairline-soft)] last:border-b py-6 grid grid-cols-[minmax(40px,auto)_1fr] gap-5 items-start"
                   >
-                    <span className="font-mono text-[13px] tracking-[0.12em] text-[color:var(--color-accent)] pt-1">
+                    <span className="text-[13px] text-[color:var(--color-accent)] pt-1 font-semibold">
                       {c.label}
                     </span>
                     <div>
@@ -347,7 +345,6 @@ export default function ServicesPage() {
           data-on-dark
           className="surface-ink section relative overflow-hidden"
         >
-          <Backdrop tone="dark" />
           <div className="field-content container-wide">
             <div className="max-w-[760px] mb-12 lg:mb-16">
               <Reveal as="p" className="t-eyebrow mb-5">
@@ -355,7 +352,7 @@ export default function ServicesPage() {
               </Reveal>
               <Reveal as="h2" delay={80} className="t-display-md balance">
                 Strategy, shipped, then{" "}
-                <span className="accent-text italic font-normal">
+                <span className="accent-text">
                   kept sharp.
                 </span>
               </Reveal>
@@ -369,7 +366,7 @@ export default function ServicesPage() {
                   delay={i * 80}
                   className="group border-t border-[color:var(--color-hairline-dark)] last:border-b py-7 grid grid-cols-[120px_1fr] gap-5 items-start"
                 >
-                  <span className="font-mono text-[11px] tracking-[0.16em] uppercase text-[color:var(--color-accent-sky)] pt-1">
+                  <span className="text-[13px] text-[color:var(--color-accent-sky)] pt-1 font-semibold">
                     {m.tag}
                   </span>
                   <p className="t-body !text-[16px] text-[color:var(--color-on-dark-muted)] max-w-[52ch]">
@@ -383,7 +380,6 @@ export default function ServicesPage() {
 
         {/* ──────────────── EDITIONS ──────────────── */}
         <section className="surface-parchment section relative overflow-hidden">
-          <Backdrop tone="light" />
           <div className="field-content container-wide">
             <div className="max-w-[760px] mb-12 lg:mb-16">
               <Reveal as="p" className="t-eyebrow mb-5">
@@ -391,7 +387,7 @@ export default function ServicesPage() {
               </Reveal>
               <Reveal as="h2" delay={80} className="t-display-md balance mb-6">
                 AI Merge,{" "}
-                <span className="accent-text italic font-normal">
+                <span className="accent-text">
                   configured for you.
                 </span>
               </Reveal>
@@ -437,11 +433,10 @@ export default function ServicesPage() {
 
         {/* ──────────────── CTA ──────────────── */}
         <section className="surface-canvas section relative overflow-hidden">
-          <Backdrop tone="light" parallax />
+          <Shapes />
           <div className="field-content container-wide">
-            <GlassCard
+            <Surface
               className="cta-card cta-split overflow-hidden grid lg:grid-cols-2 items-stretch"
-              interactive={false}
             >
               {/* Image */}
               <div className="relative min-h-[260px] lg:min-h-full order-1">
@@ -461,7 +456,7 @@ export default function ServicesPage() {
                 </Reveal>
                 <Reveal as="h2" delay={80} className="t-display-md balance mb-8">
                   Ready to put AI to{" "}
-                  <span className="accent-text italic font-normal">work?</span>
+                  <span className="accent-text">work?</span>
                 </Reveal>
                 <Reveal
                   as="div"
@@ -476,12 +471,12 @@ export default function ServicesPage() {
                   >
                     {SCORE_CTA}
                   </a>
-                  <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-[color:var(--color-body-faint)]">
+                  <p className="text-[13px] text-[color:var(--color-body-faint)] font-semibold">
                     Free · Instant personalized report · No credit card
                   </p>
                 </Reveal>
               </div>
-            </GlassCard>
+            </Surface>
           </div>
         </section>
       </main>
