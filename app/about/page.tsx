@@ -7,7 +7,10 @@ import Backdrop from "../components/Backdrop";
 import GlassCard from "../components/GlassCard";
 import CountUp from "../components/CountUp";
 
-export const metadata = { title: "About" };
+export const metadata = {
+  title: "About",
+  alternates: { canonical: "/about" },
+};
 
 const STATS = [
   { value: 10, prefix: "", suffix: "M+", label: "Lives impacted" },

@@ -7,6 +7,10 @@ import GlassCard from "./components/GlassCard";
 import Partners from "./components/Partners";
 import Footer from "./components/Footer";
 
+export const metadata = {
+  alternates: { canonical: "/" },
+};
+
 /* ────────────────────────────────────────────────────────────────
    Asset map — keep file paths centralized.
    Manuj portraits are replaced by the brand's green office

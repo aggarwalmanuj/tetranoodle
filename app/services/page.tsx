@@ -6,7 +6,10 @@ import Reveal from "../components/Reveal";
 import Backdrop from "../components/Backdrop";
 import GlassCard from "../components/GlassCard";
 
-export const metadata = { title: "Services" };
+export const metadata = {
+  title: "Services",
+  alternates: { canonical: "/services" },
+};
 
 const accentDash = (
   <span
