@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 type CountUpProps = {
   /** Final numeric value to count to. */
@@ -16,7 +16,11 @@ type CountUpProps = {
 
 /**
  * Counts a number up from 0 to `value` when it scrolls into view.
- * Respects prefers-reduced-motion (shows the final value immediately).
+ *
+ * The final value is what renders on the server, so crawlers, link
+ * previews and no-JS visitors read the real figure (not "0M+"). The
+ * client resets it to 0 and animates by writing the text node directly,
+ * without a React re-render per frame. Reduced motion keeps the final value.
  */
 export default function CountUp({
   value,
@@ -26,19 +30,21 @@ export default function CountUp({
   className = "",
 }: CountUpProps) {
   const ref = useRef<HTMLSpanElement | null>(null);
-  const [display, setDisplay] = useState(0);
 
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
-
-    const reduce =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce || typeof IntersectionObserver === "undefined") {
-      setDisplay(value);
+    if (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      typeof IntersectionObserver === "undefined"
+    ) {
       return;
     }
+
+    const write = (n: number) => {
+      node.textContent = `${prefix}${n.toLocaleString()}${suffix}`;
+    };
+    write(0);
 
     let raf = 0;
     let start = 0;
@@ -46,8 +52,7 @@ export default function CountUp({
       if (!start) start = now;
       const t = Math.min((now - start) / duration, 1);
       // easeOutCubic for a natural settle
-      const eased = 1 - Math.pow(1 - t, 3);
-      setDisplay(Math.round(eased * value));
+      write(Math.round((1 - Math.pow(1 - t, 3)) * value));
       if (t < 1) raf = requestAnimationFrame(run);
     };
 
@@ -67,13 +72,14 @@ export default function CountUp({
     return () => {
       io.disconnect();
       if (raf) cancelAnimationFrame(raf);
+      write(value);
     };
-  }, [value, duration]);
+  }, [value, prefix, suffix, duration]);
 
   return (
     <span ref={ref} className={className}>
       {prefix}
-      {display.toLocaleString()}
+      {value.toLocaleString()}
       {suffix}
     </span>
   );

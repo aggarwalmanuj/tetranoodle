@@ -49,7 +49,7 @@ export default function Footer() {
               TetraNoodle
             </p>
             <p className="text-[13px] text-[color:var(--color-accent)] mt-2 mb-4 font-semibold">
-              AI Merge · Root-cause intelligence
+              AI Merge · Private AI, built around you
             </p>
             <p className="text-[14px] leading-[1.55] text-[color:var(--color-body-muted)]">
               Automation and private AI vaults for operations that can&rsquo;t

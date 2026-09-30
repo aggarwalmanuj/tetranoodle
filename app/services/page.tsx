@@ -36,7 +36,6 @@ const offerings = [
     items: [
       "A walkthrough of your operation, bottlenecks named",
       "Custom agents and workflows built around your business",
-      "A 90-day result guarantee, money back if you don’t see the benefit",
       "Ongoing tuning as your operation evolves",
     ],
   },

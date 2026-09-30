@@ -79,10 +79,10 @@ function Hero() {
                         delay={80}
                         className="t-display balance mb-7 text-[clamp(32px,4.8vw,64px)]"
                     >
-                        Your problems, solved.
+                        Your own AI.
                         <br />
                         <span className="accent-text">
-                            With AI you can actually trust.
+                            Private, secure, actually yours.
                         </span>
                     </Reveal>
 
@@ -91,13 +91,15 @@ function Hero() {
                         delay={160}
                         className="t-lead pretty mb-10 max-w-[54ch]"
                     >
-                        You&rsquo;re not short on tools. You&rsquo;re short on
-                        the right ones: built around your operation, kept
-                        private, standing on more than a clever prompt.{" "}
+                        Not a generic model trained on everyone else&rsquo;s
+                        data. Not a tool you rent by the seat.{" "}
                         <span className="text-[color:var(--color-ink)]">
-                            We build automation that frees your time, and a
-                            private AI vault that holds your intelligence.
-                        </span>
+                            Your own AI: built around your operation or your
+                            life, held privately, that gets sharper the longer
+                            you use it.
+                        </span>{" "}
+                        For individuals. For teams inside organizations that
+                        can&rsquo;t run on commodity tools.
                     </Reveal>
 
                     <Reveal
@@ -203,7 +205,7 @@ function Problem() {
                         delay={80}
                         className="t-display-md balance mb-7"
                     >
-                        You have tried{" "}
+                        You&rsquo;ve tried{" "}
                         <span className="accent-text">
                             everything.
                         </span>
@@ -218,8 +220,7 @@ function Problem() {
                         New strategy, new hire, new tool. Six months later
                         you&rsquo;re back where you started.{" "}
                         <span className="text-[color:var(--color-on-dark)]">
-                            That is not a strategy problem. It is a root
-                            problem.
+                            That&rsquo;s not a strategy problem.
                         </span>
                     </Reveal>
 
@@ -247,17 +248,19 @@ function Problem() {
                     <Reveal as="div" delay={120}>
                         <Surface className="p-8 lg:p-10">
                             <p className="text-[13px] text-[color:var(--color-accent-sky)] mb-5 font-semibold">
-                                The root
+                                The real problem
                             </p>
                             <p className="text-[22px] sm:text-[26px] lg:text-[30px] leading-[1.3] tracking-[-0.018em] text-[color:var(--color-on-dark)] font-medium">
-                                Most AI tools treat the symptom: a faster reply,
-                                another agent on the pile.{" "}
+                                Most AI tools are the same intelligence everyone
+                                else is renting: generic, forgettable, and never
+                                actually yours.{" "}
                                 <span className="text-[color:var(--color-on-dark-muted)] font-normal">
-                                    The real problem sits one layer down.
-                                </span>{" "}
-                                Your operation depending on you, your knowledge
-                                trapped in your head, your time eaten by the
-                                same tasks every week.
+                                    What that leaves you with: your operation
+                                    still depending on you, your knowledge still
+                                    trapped in your head or scattered across
+                                    tools you don&rsquo;t control, your time
+                                    still eaten by the same tasks every week.
+                                </span>
                             </p>
                         </Surface>
                     </Reveal>
@@ -267,13 +270,14 @@ function Problem() {
                         delay={220}
                         className="t-body mt-8 max-w-[46ch]"
                     >
-                        We solve at that layer.{" "}
+                        We build the alternative:{" "}
                         <span className="text-[color:var(--color-on-dark)]">
-                            Automation that handles what doesn&rsquo;t need you,
-                            and a private vault that holds the intelligence your
-                            business runs on.
+                            agents that run what doesn&rsquo;t need you, and a
+                            private vault that holds the intelligence your
+                            business or your life runs on.
                         </span>{" "}
-                        Built around your operation. Kept entirely private.
+                        Yours. Not shared, not rented, not training anyone
+                        else&rsquo;s model.
                     </Reveal>
                 </div>
             </div>
@@ -284,6 +288,11 @@ function Problem() {
 /* ──────────────── WHAT IT IS ──────────────── */
 function WhatItIs() {
     const concepts = [
+        {
+            label: "Privacy",
+            name: "Your own AI vault",
+            desc: "Built around you. Yours alone. Nobody else's.",
+        },
         {
             label: "Certainty",
             name: "It gets solved",
@@ -298,11 +307,6 @@ function WhatItIs() {
             label: "Efficiency",
             name: "The closest thing to easy",
             desc: "The result, without the grind to get there.",
-        },
-        {
-            label: "Privacy",
-            name: "Your own AI vault",
-            desc: "Built around you. Yours alone. Nobody else's.",
         },
     ];
 
@@ -323,7 +327,7 @@ function WhatItIs() {
                     >
                         Not another tool:{" "}
                         <span className="accent-text">
-                            the certainty it gets solved.
+                            an AI that&rsquo;s actually yours.
                         </span>
                     </Reveal>
                     <Reveal
@@ -331,13 +335,14 @@ function WhatItIs() {
                         delay={160}
                         className="t-lead pretty max-w-[58ch] mb-4"
                     >
-                        People don&rsquo;t want AI. They want their time back
-                        and their business running without them.
+                        People don&rsquo;t want AI. They want their time back,
+                        and they want to stop handing their knowledge to
+                        someone else&rsquo;s model.
                     </Reveal>
                     <Reveal as="p" delay={220} className="t-body max-w-[58ch]">
-                        So we don&rsquo;t sell you AI. We give you the outcome,{" "}
+                        So we don&rsquo;t sell you AI.{" "}
                         <span className="text-[color:var(--color-ink)]">
-                            and we stand behind it getting solved.
+                            We give you your own, and we stand behind it.
                         </span>
                     </Reveal>
                 </div>
@@ -367,18 +372,18 @@ function WhatItIs() {
     );
 }
 
-/* ──────────────── OFFERINGS (Automation + Vault) ──────────────── */
+/* ──────────────── WHAT WE BUILD (one private AI: agents + vault) ──────────────── */
 function Offerings() {
     const cards = [
         {
-            tag: "Offering 01",
-            title: "Automation that earns its keep.",
-            body: "We find the work that doesn't need you and build it to run on its own. Outreach, scheduling, follow-up, reporting, the dozen small things eating your week.",
+            tag: "The agents",
+            title: "Agents that work on their own.",
+            body: "No imports, no exports, no clicking through a queue. Tell it what you need once, and it keeps going, checking in only when it genuinely doesn't know what to do next.",
         },
         {
-            tag: "Offering 02",
+            tag: "The vault",
             title: "A private AI vault that remembers everything.",
-            body: "Your decisions, patterns, and history, held in your own private AI environment. Yours alone. Nothing shared, nothing public. It compounds the longer it runs.",
+            body: "Your decisions, patterns, and history, held in your own private AI environment. Nothing shared, nothing public, nothing training anyone else's model. It compounds the longer it runs.",
         },
     ];
     return (
@@ -388,9 +393,21 @@ function Offerings() {
                     <Reveal as="p" className="t-eyebrow mb-5">
                         What we build
                     </Reveal>
-                    <Reveal as="h2" delay={80} className="t-display-md balance">
-                        Two offerings, one{" "}
-                        <span className="accent-text">protocol</span> underneath.
+                    <Reveal as="h2" delay={80} className="t-display-md balance mb-7">
+                        One private AI.{" "}
+                        <span className="accent-text">
+                            A control center, not a dashboard.
+                        </span>
+                    </Reveal>
+                    <Reveal as="p" delay={160} className="t-lead pretty max-w-[60ch]">
+                        Install it, and agents come with it: working on their
+                        own, not one more app you have to click through.{" "}
+                        <span className="text-[color:var(--color-ink)]">
+                            Outreach, follow-up, scheduling, reporting: the work
+                            that doesn&rsquo;t need you, running in the
+                            background, inside an environment that&rsquo;s
+                            yours alone.
+                        </span>
                     </Reveal>
                 </div>
 
@@ -423,11 +440,11 @@ function Offerings() {
                     delay={160}
                     className="t-body text-center max-w-[60ch] mx-auto mt-12"
                 >
-                    Automation gives you time back. The Vault gives you
-                    intelligence that compounds.{" "}
+                    The agents are your private AI at work. The Vault is its
+                    memory.{" "}
                     <span className="accent-text">
-                        Together they&rsquo;re a complete AI journey, not a
-                        stack of disconnected tools.
+                        Together they&rsquo;re one system, not a stack of tools
+                        you have to operate yourself.
                     </span>
                 </Reveal>
             </div>
@@ -448,9 +465,9 @@ function ForYou() {
                         Who it&rsquo;s for
                     </Reveal>
                     <Reveal as="h2" delay={80} className="t-display-md balance">
-                        One root cause.{" "}
+                        One private AI.{" "}
                         <span className="accent-text">
-                            Every domain it shows up in.
+                            Built for you, or built for your team.
                         </span>
                     </Reveal>
                 </div>
@@ -665,10 +682,8 @@ function Proof() {
                         Field evidence
                     </Reveal>
                     <Reveal as="h2" delay={80} className="t-display-md balance">
-                        When the root shifts,{" "}
-                        <span className="accent-text">
-                            everything downstream changes.
-                        </span>
+                        What happens when the AI is{" "}
+                        <span className="accent-text">actually yours.</span>
                     </Reveal>
                 </div>
 
@@ -842,20 +857,16 @@ function CTA() {
                         delay={80}
                         className="t-display balance mb-7"
                     >
-                        Where do you stand
-                        <br />
-                        in the{" "}
-                        <span className="accent-text">
-                            age of AI?
-                        </span>
+                        Is your intelligence{" "}
+                        <span className="accent-text">actually yours?</span>
                     </Reveal>
                     <Reveal
                         as="p"
                         delay={160}
                         className="t-lead pretty max-w-[52ch] mx-auto mb-10"
                     >
-                        See exactly where you stand, and the root patterns
-                        holding you back.
+                        See exactly where you stand, and what your own private
+                        AI could look like.
                     </Reveal>
                     <Reveal
                         as="div"

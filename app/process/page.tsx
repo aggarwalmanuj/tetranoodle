@@ -200,38 +200,6 @@ export default function ProcessPage() {
           </div>
         </section>
 
-        {/* ──────────────── GUARANTEE (dark) ──────────────── */}
-        <section
-          data-on-dark
-          className="surface-ink section relative overflow-hidden"
-        >
-          <div className="absolute inset-0 opacity-[0.22]" aria-hidden>
-            <Image
-              src="/process/guarantee.jpg"
-              alt=""
-              fill
-              sizes="100vw"
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-[color:var(--color-ink)] via-transparent to-[color:var(--color-ink)]" />
-          </div>
-          <div className="field-content relative container-tight text-center">
-            <Reveal as="p" className="t-eyebrow mb-6">
-              The guarantee
-            </Reveal>
-            <Reveal as="h2" delay={80} className="t-display-md balance mb-7">
-              A 90-day result guarantee. If you don&rsquo;t see the benefit,{" "}
-              <span className="accent-text">
-                you get your money back.
-              </span>
-            </Reveal>
-            <Reveal as="p" delay={160} className="t-lead pretty max-w-[52ch] mx-auto">
-              We can stand behind the outcome because the protocol is built to
-              fix the source, not the symptom.
-            </Reveal>
-          </div>
-        </section>
-
         {/* ──────────────── CTA ──────────────── */}
         <section className="surface-canvas section relative overflow-hidden">
           <Shapes />

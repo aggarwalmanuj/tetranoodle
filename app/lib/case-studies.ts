@@ -577,3 +577,65 @@ export const DETAILED_STUDIES = CASE_STUDIES.filter(
 export function getCaseStudy(slug: string) {
   return DETAILED_STUDIES.find((c) => c.slug === slug);
 }
+
+/* ────────────────────────────────────────────────────────────────
+   Track 01 · AI Merge Protocol: individual stories, told in the
+   participants' own words. The quotes are sourced; the Before/Now lines
+   were drafted from those quotes and must be confirmed by the content
+   team. They stay hidden until BEFORE_NOW_APPROVED is flipped to true.
+   ──────────────────────────────────────────────────────────────── */
+export const BEFORE_NOW_APPROVED = false;
+
+export type ProtocolStory = {
+  name: string;
+  role: string;
+  quote: string;
+  before: string;
+  now: string;
+  /** Real portrait; stories without one show initials. */
+  photo?: string;
+};
+
+export const PROTOCOL_STORIES: ProtocolStory[] = [
+  {
+    name: "Nick H.",
+    role: "Video producer",
+    quote: "The stress part of my brain that has gone silent",
+    before:
+      "Stress ran underneath every project. Even when the work was going well, the pressure never switched off.",
+    now: "Creative work without the constant background alarm.",
+  },
+  {
+    name: "Brent M.",
+    role: "Trader",
+    quote: "Totally calm during trading now. Fewer trades but higher quality",
+    before:
+      "Every market move felt like something to react to. Activity felt safer than stillness.",
+    now: "Fewer, better trades, made from calm instead of pressure.",
+  },
+  {
+    name: "Michelle J.",
+    role: "Business advisor",
+    quote: "40% less noise in my day",
+    before:
+      "Her days were full of noise that looked like work. Clarity had to be fought for.",
+    now: "Room in the day for the decisions that matter.",
+  },
+  {
+    name: "Kate O.",
+    role: "Protocol participant",
+    quote: "My body responds as if what it hears is already true",
+    before:
+      "New beliefs made sense in her head but never reached her body. The old story kept the final say.",
+    now: "New beliefs land physically, not just intellectually.",
+  },
+  {
+    name: "Dorota H.",
+    role: "Clinical counsellor",
+    photo: "/people/Dorota.png",
+    quote: "The transformation taking place gently",
+    before:
+      "She guided others through change but expected her own to be hard and forced. Growth meant effort.",
+    now: "Change that unfolds without a fight.",
+  },
+];

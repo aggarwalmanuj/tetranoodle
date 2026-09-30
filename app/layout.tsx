@@ -19,11 +19,11 @@ const googleSans = Google_Sans_Flex({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "TetraNoodle · Root-cause intelligence for the age of AI",
+    default: "TetraNoodle · Your own AI. Private, secure, actually yours.",
     template: "%s · TetraNoodle",
   },
   description:
-    "AI Merge finds the root pattern beneath every persistent problem, then builds the human capacity to change it for good.",
+    "Your own private AI, for individuals and organizations: agents that run the work that doesn’t need you, and a private vault that holds your intelligence.",
   applicationName: "TetraNoodle",
   authors: [{ name: "Manuj Aggarwal" }],
   creator: "TetraNoodle Technologies",
@@ -31,9 +31,9 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "TetraNoodle · Root-cause intelligence for the age of AI",
+    title: "TetraNoodle · Your own AI. Private, secure, actually yours.",
     description:
-      "AI Merge finds the pattern beneath the problem, then builds the human capacity to change it for good.",
+      "Your own private AI, for individuals and organizations: agents that run the work that doesn’t need you, and a private vault that holds your intelligence.",
     url: SITE_URL,
     siteName: "TetraNoodle",
     locale: "en_US",
@@ -41,9 +41,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "TetraNoodle · Root-cause intelligence for the age of AI",
+    title: "TetraNoodle · Your own AI. Private, secure, actually yours.",
     description:
-      "AI Merge finds the pattern beneath the problem, then builds the human capacity to change it for good.",
+      "Your own private AI, for individuals and organizations: agents that run the work that doesn’t need you, and a private vault that holds your intelligence.",
   },
   robots: {
     index: true,

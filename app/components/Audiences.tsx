@@ -17,47 +17,15 @@ type Audience = {
     quote: { text: string; name: string; role: string };
 };
 
+// Two audiences for one private AI: a person, or a leader and their org.
+// Communities keeps its existing copy until its rework copy arrives.
 const AUDIENCES: Audience[] = [
     {
-        id: "leaders",
-        image: "/testimonials/mark-nazemi.png",
-        imageAlt:
-            "Mark Nazemi, PhD, co-founder of Sensorium, in a suit, smiling at the camera.",
-        tab: "Business Leaders",
-        eyebrow: "For Business Leaders",
-        title: (
-            <>
-                Your business performs at the level of{" "}
-                <span className="accent-text">your nervous system.</span>
-            </>
-        ),
-        body: (
-            <>
-                The leader <em>is</em> the nervous system of the business. Run
-                on urgency, and every decision and every hire absorbs it. AI
-                Merge works at the root: you, regulated, clear, sovereign.
-            </>
-        ),
-        outcomes: [
-            "Stop being the bottleneck everything routes through",
-            "Decide from clarity instead of pressure",
-            "Build a team that holds what you've built without you",
-            "Break the pattern of recurring business problems",
-            "Stay above the AI poverty line as the world accelerates",
-        ],
-        href: "#score",
-        quote: {
-            text: "The business stress became background noise instead of foreground problem. Less performance. More being.",
-            name: "Mark Nazemi",
-            role: "PhD · Co-Founder, Sensorium",
-        },
-    },
-    {
         id: "individuals",
-        image: "/people/two.jpg",
+        image: "/people/Dorota.png",
         imageAlt:
-            "A confident professional standing in an office, arms crossed, looking at the camera.",
-        tab: "Ambitious Individuals",
+            "Dorota Hedzelek, PhD, registered clinical counsellor, smiling in a white top against a light wall.",
+        tab: "Individuals",
         eyebrow: "For Individuals",
         title: (
             <>
@@ -70,7 +38,8 @@ const AUDIENCES: Audience[] = [
                 You are stuck because some part of your system does not yet feel
                 safe enough to move. AI Merge finds the real pattern underneath
                 the pressure, so you can stop fighting symptoms and build from
-                the root.
+                the root, held in your own private AI, not a generic chat
+                window.
             </>
         ),
         outcomes: [
@@ -88,38 +57,41 @@ const AUDIENCES: Audience[] = [
         },
     },
     {
-        id: "enterprise",
-        image: "/people/three.jpg",
+        id: "organizations",
+        image: "/testimonials/mark-nazemi.png",
         imageAlt:
-            "A diverse team of professionals standing together, looking at the camera.",
-        tab: "Enterprise & Teams",
-        eyebrow: "For Enterprise & Teams",
+            "Mark Nazemi, PhD, co-founder of Sensorium, in a suit, smiling at the camera.",
+        tab: "Organizations",
+        eyebrow: "For Organizations",
         title: (
             <>
-                Your AI strategy needs an enterprise that can{" "}
-                <span className="accent-text">absorb it.</span>
+                Install a private AI instance.{" "}
+                <span className="accent-text">Your agents come with it.</span>
             </>
         ),
         body: (
             <>
-                AI adoption doesn&rsquo;t fail because people lack tools. It
-                fails when the human system underneath runs on overload and
-                fear. AI Merge builds the trusted human layer, so your AI
-                creates clarity instead of noise.
+                The leader is the nervous system of the business. Run on
+                urgency, and every decision and every hire absorbs it. AI
+                adoption doesn&rsquo;t fail because people lack tools; it fails
+                when that human system underneath runs on overload. Your own
+                private AI changes both: a vault where sensitive context stays
+                yours, and agents that run the work that doesn&rsquo;t need you,
+                not tools your team has to operate by hand.
             </>
         ),
         outcomes: [
+            "Stop being the bottleneck everything routes through",
             "Private AI vault: sensitive context stays yours",
-            "Clearer decisions under pressure across the organization",
-            "Teams that don't wait for the leader to decide everything",
+            "Decide from clarity instead of pressure, at every level",
             "AI adoption that compounds instead of fragments",
-            "Measurable coherence across leaders and teams",
+            "Stay above the AI poverty line as the world accelerates",
         ],
         href: "#score",
         quote: {
-            text: "Something released that I hadn't known was held. It's a tool to free yourself, and once you're free, the business follows.",
-            name: "Jill Carter",
-            role: "Founder · Modern Pursuit Matchmaking",
+            text: "The business stress became background noise instead of foreground problem. Less performance. More being.",
+            name: "Mark Nazemi",
+            role: "PhD · Co-Founder, Sensorium",
         },
     },
     {

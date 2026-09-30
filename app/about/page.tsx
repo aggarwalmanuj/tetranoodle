@@ -226,8 +226,8 @@ export default function AboutPage() {
                 delay={160}
                 className="t-lead pretty max-w-[52ch] mx-auto mb-10"
               >
-                Tell us where you&rsquo;re stuck. We&rsquo;ll show you the root
-                pattern and the system that changes it.
+                Tell us where you&rsquo;re stuck. We&rsquo;ll show you what your own
+                private AI could look like.
               </Reveal>
               <Reveal as="div" delay={240} className="flex flex-col items-center gap-4">
                 <a

@@ -5,13 +5,17 @@ import Footer from "../components/Footer";
 import Reveal from "../components/Reveal";
 import Shapes from "../components/Shapes";
 import Surface from "../components/Surface";
-import { CASE_STUDIES } from "../lib/case-studies";
+import {
+  BEFORE_NOW_APPROVED,
+  CASE_STUDIES,
+  PROTOCOL_STORIES,
+} from "../lib/case-studies";
 import { SCORE_CTA, SCORE_URL } from "../lib/site";
 
 export const metadata = {
   title: "Results",
   description:
-    "Enterprise AI results from TetraNoodle: Wiivv, Desire2Learn, IBM, T-Mobile, Titan and more.",
+    "Results from TetraNoodle: individual stories from the AI Merge Protocol, and enterprise AI work with Wiivv, Desire2Learn, IBM, T-Mobile, Titan and more.",
   alternates: { canonical: "/results" },
 };
 
@@ -76,6 +80,7 @@ export default function ResultsPage() {
       <Nav />
       <main id="main" className="flex-1">
         <Hero />
+        <ProtocolStories />
         <Stories />
         <Testimonials />
         <CTA />
@@ -102,7 +107,8 @@ function Hero() {
           </Reveal>
           <Reveal as="p" delay={160} className="t-lead pretty mb-8 max-w-[56ch]">
             A look at what changes when AI is built around the operation instead
-            of bolted on.
+            of bolted on: the same private AI, the same protocol, showing up
+            differently for a person and for a company.
           </Reveal>
           <Reveal
             as="p"
@@ -117,18 +123,120 @@ function Hero() {
   );
 }
 
-/* ──────────────── CASE STUDY GRID ──────────────── */
+/* ──────────────── TRACK 01 · AI MERGE PROTOCOL ──────────────── */
+function ProtocolStories() {
+  return (
+    <section
+      id="protocol"
+      className="surface-parchment section relative overflow-hidden"
+    >
+      <div className="field-content container-wide">
+        <div className="max-w-[720px] mb-12 lg:mb-16">
+          <Reveal as="p" className="t-eyebrow mb-5">
+            Track 01 · AI Merge Protocol
+          </Reveal>
+          <Reveal as="h2" delay={80} className="t-display-md balance">
+            When the belief shifts,{" "}
+            <span className="accent-text">in their own words.</span>
+          </Reveal>
+        </div>
+
+        {/* 2 feature cards over 3: a 6-column grid on desktop */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-5 lg:gap-6">
+          {PROTOCOL_STORIES.map((p, i) => (
+            <Reveal
+              as="figure"
+              key={p.name}
+              delay={i * 60}
+              className={`panel p-7 lg:p-8 flex flex-col ${
+                i < 2 ? "lg:col-span-3" : "lg:col-span-2"
+              }`}
+            >
+              {BEFORE_NOW_APPROVED && (
+                <p className="text-[15px] leading-[1.55] text-[color:var(--color-body-muted)] mb-6">
+                  <span className="block text-[13px] font-semibold text-[color:var(--color-accent)] mb-1">
+                    Before
+                  </span>
+                  {p.before}
+                </p>
+              )}
+              <blockquote
+                className={`${
+                  i < 2
+                    ? "text-[24px] lg:text-[28px]"
+                    : "text-[21px] lg:text-[22px]"
+                } leading-[1.3] tracking-[-0.015em] font-medium text-[color:var(--color-ink)] flex-1 mb-8`}
+              >
+                <span aria-hidden className="accent-text mr-0.5">
+                  &ldquo;
+                </span>
+                {p.quote}
+                <span aria-hidden className="accent-text ml-0.5">
+                  &rdquo;
+                </span>
+              </blockquote>
+              {BEFORE_NOW_APPROVED && (
+                <p className="text-[15px] leading-[1.55] text-[color:var(--color-body-muted)] mb-6">
+                  <span className="block text-[13px] font-semibold text-[color:var(--color-accent)] mb-1">
+                    Now
+                  </span>
+                  {p.now}
+                </p>
+              )}
+              <figcaption className="pt-5 border-t border-[color:var(--color-hairline-soft)] flex items-center gap-3.5">
+                {p.photo ? (
+                  <span className="relative w-11 h-11 rounded-full overflow-hidden shrink-0">
+                    <Image
+                      src={p.photo}
+                      alt=""
+                      fill
+                      sizes="44px"
+                      className="object-cover object-[center_30%]"
+                    />
+                  </span>
+                ) : (
+                  <span
+                    aria-hidden
+                    className="check-icon grid place-items-center w-11 h-11 rounded-full text-[14px] font-semibold shrink-0"
+                  >
+                    {p.name
+                      .split(" ")
+                      .map((w) => w[0])
+                      .join("")}
+                  </span>
+                )}
+                <span>
+                  <span className="block text-[15px] font-semibold">
+                    {p.name}
+                  </span>
+                  <span className="block text-[14px] text-[color:var(--color-body-muted)]">
+                    {p.role}
+                  </span>
+                </span>
+              </figcaption>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ──────────────── TRACK 02 · ENTERPRISE AI ──────────────── */
 function Stories() {
   return (
-    <section className="surface-parchment section relative overflow-hidden">
+    <section
+      id="enterprise"
+      className="surface-canvas section relative overflow-hidden"
+    >
       <div className="field-content container-wide">
         <div className="max-w-[640px] mb-12 lg:mb-16">
           <Reveal as="p" className="t-eyebrow mb-5">
-            The work
+            Track 02 · Enterprise AI
           </Reveal>
           <Reveal as="h2" delay={80} className="t-display-md balance">
-            Operations rebuilt{" "}
-            <span className="accent-text">around the root.</span>
+            Operations rebuilt around{" "}
+            <span className="accent-text">AI that&rsquo;s actually theirs.</span>
           </Reveal>
         </div>
 
@@ -176,7 +284,15 @@ function Stories() {
                 </Link>
               ) : (
                 <p className="t-caption mt-6 pt-5 border-t border-[color:var(--color-hairline-soft)]">
-                  Full story coming soon
+                  Full case study coming soon.{" "}
+                  <a
+                    href={`mailto:info@tetranoodle.com?subject=${encodeURIComponent(
+                      `${c.client} case study`
+                    )}`}
+                    className="link-cta !text-[14px] ml-1"
+                  >
+                    Talk to us
+                  </a>
                 </p>
               )}
             </Reveal>
