@@ -4,20 +4,20 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { SCORE_CTA, SCORE_URL } from "../lib/site";
+import { GOAL_CTA, GOAL_URL } from "../lib/site";
 
 const links = [
-  { href: "/services", label: "Services" },
-  { href: "/process", label: "Process" },
-  { href: "/results", label: "Results" },
+  { href: "/process", label: "How it works" },
+  { href: "/services", label: "What we do" },
+  { href: "/#editions", label: "Who we help" },
+  { href: "/case-studies", label: "Case Studies" },
   { href: "/about", label: "About" },
 ];
 
 /**
- * Primary navigation: an M3 top app bar. Flat on the page surface at rest,
- * it steps up to surface-container once content scrolls beneath it (the
- * M3 "scrolled" state) instead of casting a shadow. A linear progress bar
- * tracks scroll position as a quiet sense of place.
+ * Primary navigation. Transparent over the paper at rest; once content
+ * scrolls beneath it, it frosts and gains a hairline. A thin indigo bar
+ * tracks reading progress.
  */
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -51,52 +51,53 @@ export default function Nav() {
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
     };
   }, [open]);
+
+  const isActive = (href: string) =>
+    !href.includes("#") && (pathname === href || pathname.startsWith(`${href}/`));
 
   return (
     <header
       className="app-bar fixed inset-x-0 top-0 z-50"
-      role="banner"
-      data-scrolled={scrolled}
+      data-scrolled={scrolled || open}
     >
       <nav
         aria-label="Primary"
-        className="container-wide flex items-center justify-between px-6 lg:px-12 h-16"
+        className="container-wide flex items-center justify-between gap-6 px-5 sm:px-6 lg:px-8 h-[72px]"
       >
         <Link
           href="/"
-          className="flex items-center gap-2.5 group rounded-md"
+          className="flex items-center gap-2.5 group"
           aria-label="TetraNoodle home"
         >
           <Image
             src="/icons/bluelogo.png"
             alt=""
-            width={28}
-            height={28}
+            width={30}
+            height={30}
             priority
-            className="w-7 h-7 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3"
+            className="w-[30px] h-[30px] transition-transform duration-500 ease-[var(--ease-spring)] group-hover:rotate-[18deg]"
           />
-          <span className="text-[15px] font-semibold tracking-[-0.015em]">
+          <span className="text-[17px] font-semibold tracking-[-0.02em]">
             TetraNoodle
-          </span>
-          <span className="hidden sm:inline text-[13px] text-[color:var(--color-body-faint)] font-semibold">
-            AI Merge
           </span>
         </Link>
 
-        <ul className="hidden lg:flex items-center gap-1">
+        <ul className="hidden lg:flex items-center">
           {links.map((l) => {
-            const active =
-              pathname === l.href || pathname.startsWith(`${l.href}/`);
+            const active = isActive(l.href);
             return (
               <li key={l.href}>
                 <Link
                   href={l.href}
                   aria-current={active ? "page" : undefined}
-                  className={`nav-link block ${active ? "nav-link-active" : ""}`}
+                  className={`nav-link ${active ? "nav-link-active" : ""}`}
                 >
                   {l.label}
                 </Link>
@@ -105,14 +106,9 @@ export default function Nav() {
           })}
         </ul>
 
-        <div className="flex items-center gap-2.5">
-          <a
-            href={SCORE_URL}
-            target="_blank"
-            rel="noopener"
-            className="btn btn-primary btn-sm"
-          >
-            Get Your Score
+        <div className="flex items-center gap-2">
+          <a href={GOAL_URL} className="btn btn-primary btn-sm hidden sm:inline-flex">
+            {GOAL_CTA}
           </a>
           <button
             type="button"
@@ -120,7 +116,7 @@ export default function Nav() {
             aria-expanded={open}
             aria-controls="mobile-nav"
             onClick={() => setOpen((v) => !v)}
-            className="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-full text-[color:var(--color-ink)] hover:bg-[color:var(--color-accent)]/[0.08] transition-colors"
+            className="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-[var(--radius-sm)] border border-[color:var(--color-hairline)] bg-[color:var(--color-pearl)] text-[color:var(--color-ink)]"
           >
             <span
               aria-hidden
@@ -136,7 +132,6 @@ export default function Nav() {
 
       <span ref={progressRef} aria-hidden className="scroll-progress" />
 
-      {/* Mobile sheet: slides open on a height spring. */}
       <div
         id="mobile-nav"
         data-open={open}
@@ -144,36 +139,36 @@ export default function Nav() {
         className="mobile-tray lg:hidden"
       >
         <div className="mobile-tray-clip">
-          <ul className="mobile-sheet px-6 py-4 flex flex-col gap-1">
-            {links.map((l) => {
-              const active =
-                pathname === l.href || pathname.startsWith(`${l.href}/`);
+          <ul className="mobile-sheet px-5 sm:px-6 pt-2 pb-6 flex flex-col">
+            {links.map((l, i) => {
+              const active = isActive(l.href);
               return (
                 <li key={l.href}>
                   <Link
                     href={l.href}
                     onClick={() => setOpen(false)}
                     aria-current={active ? "page" : undefined}
-                    className={`block px-3 py-3.5 text-[16px] border-b border-[color:var(--color-hairline-soft)] transition-colors ${
+                    className={`flex items-baseline justify-between py-4 text-[22px] font-semibold tracking-[-0.02em] border-b border-[color:var(--color-hairline)] transition-colors ${
                       active
-                        ? "text-[color:var(--color-accent)] font-medium"
+                        ? "text-[color:var(--color-accent)]"
                         : "text-[color:var(--color-ink)] hover:text-[color:var(--color-accent)]"
                     }`}
                   >
                     {l.label}
+                    <span className="text-[12px] font-semibold text-[color:var(--color-body-faint)] tabular-nums">
+                      0{i + 1}
+                    </span>
                   </Link>
                 </li>
               );
             })}
-            <li className="pt-4">
+            <li className="pt-6">
               <a
-                href={SCORE_URL}
-                target="_blank"
-                rel="noopener"
+                href={GOAL_URL}
                 onClick={() => setOpen(false)}
                 className="btn btn-primary w-full"
               >
-                {SCORE_CTA}
+                {GOAL_CTA}
               </a>
             </li>
           </ul>

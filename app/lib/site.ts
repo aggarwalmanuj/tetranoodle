@@ -10,3 +10,14 @@ export const SITE_URL = "https://www.tetranoodle.com";
 export const SCORE_URL = "https://aimerge.live";
 export const SCORE_NAME = "Unfair Advantage Score";
 export const SCORE_CTA = `Get your ${SCORE_NAME}`;
+
+// The primary call to action across the site: tell us your goal. There is
+// no contact form yet, so it opens an email with the subject filled in.
+export const CONTACT_EMAIL = "info@tetranoodle.com";
+export const GOAL_URL = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+  "What we want to accomplish"
+)}`;
+export const GOAL_CTA = "Tell us your goal";
+
+// AI Merge Personal preview (external).
+export const PERSONAL_PREVIEW_URL = "https://www.aimerge.live/challenge/audience";

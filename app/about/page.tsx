@@ -3,7 +3,6 @@ import Link from "next/link";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import Reveal from "../components/Reveal";
-import Shapes from "../components/Shapes";
 import Surface from "../components/Surface";
 import CountUp from "../components/CountUp";
 
@@ -32,36 +31,33 @@ export default function AboutPage() {
       <main id="main" className="flex-1">
         {/* ──────────────── HERO ──────────────── */}
         <section className="surface-canvas relative pt-[104px] lg:pt-[132px] pb-20 lg:pb-28 overflow-hidden">
-          <Shapes />
 
           <div className="field-content container-wide px-6 lg:px-12 grid lg:grid-cols-[1.15fr_1fr] gap-12 lg:gap-20 items-center">
             <div className="max-w-[680px]">
-              <Reveal as="p" className="t-eyebrow mb-5">
+              <Reveal as="p" className="t-eyebrow mb-6">
                 About TetraNoodle
               </Reveal>
-              <Reveal as="h1" delay={80} className="t-display balance mb-7">
+              <Reveal as="h1" delay={60} className="t-display balance mb-8">
                 AI-driven.{" "}
                 <span className="accent-text">Human-led.</span>
               </Reveal>
               <Reveal as="p" delay={160} className="t-lead pretty mb-10 max-w-[52ch]">
-                TetraNoodle builds automation and private AI vaults for operations
-                that can&rsquo;t run on commodity tools.{" "}
-                <span className="text-[color:var(--color-ink)]">
-                  Founded in Vancouver in 2000.
-                </span>
+                TetraNoodle builds automation and private AI for people and
+                teams whose work can&rsquo;t run on off-the-shelf tools. We
+                started in Vancouver in 2000.
               </Reveal>
-              <Reveal as="div" delay={240} className="flex flex-wrap items-center gap-3">
+              <Reveal as="div" delay={240} className="flex flex-wrap items-center gap-x-6 gap-y-4">
                 <a href="mailto:info@tetranoodle.com" className="btn btn-primary">
                   Let&rsquo;s talk
                 </a>
-                <Link href="/" className="btn btn-tonal text-[14px]">
-                  See the platform →
+                <Link href="/case-studies" className="link-cta">
+                  Read our case studies
                 </Link>
               </Reveal>
             </div>
 
             <Reveal as="div" delay={200} className="relative">
-              <Surface className="media-frame media-arch relative aspect-[4/5] w-full max-w-[480px] mx-auto">
+              <Surface className="media-frame relative aspect-[4/5] w-full max-w-[480px] mx-auto">
                 <div className="relative w-full h-full">
                   <Image
                     src="/people/manuj-keynote.jpg"
@@ -74,8 +70,8 @@ export default function AboutPage() {
                 </div>
               </Surface>
 
-              <p className="mt-6 t-caption text-center">
-                Built on the peer-reviewed AI Merge protocol
+              <p className="mt-4 t-caption max-w-[480px] mx-auto">
+                Manuj Aggarwal speaking at IMAGINE AI IMPACT.
               </p>
             </Reveal>
           </div>
@@ -111,14 +107,14 @@ export default function AboutPage() {
                   delay={i * 80}
                   className="text-center pt-8 sm:pt-0 first:pt-0 sm:px-6"
                 >
-                  <p className="t-display accent-text mb-3 tabular-nums">
+                  <p className="t-display mb-3 tabular-nums">
                     <CountUp
                       value={s.value}
                       prefix={s.prefix}
                       suffix={s.suffix}
                     />
                   </p>
-                  <p className="text-[14px] text-[color:var(--color-body-muted)] font-semibold">
+                  <p className="text-[15px] text-[color:var(--color-body-muted)]">
                     {s.label}
                   </p>
                 </Reveal>
@@ -161,7 +157,7 @@ export default function AboutPage() {
             </Reveal>
 
             <Reveal as="div" delay={120} className="order-1 lg:order-2">
-              <Surface className="media-frame media-leaf relative aspect-[4/5] w-full max-w-[480px] mx-auto">
+              <Surface className="media-frame relative aspect-[4/5] w-full max-w-[480px] mx-auto">
                 <div className="relative w-full h-full">
                   <Image
                     src="/people/manuj-stage.jpg"
@@ -203,19 +199,13 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* ──────────────── CTA (dark) ──────────────── */}
-        <section
-          data-on-dark
-          className="surface-ink section relative overflow-hidden"
-        >
+        {/* ──────────────── CTA ──────────────── */}
+        <section className="surface-canvas section relative overflow-hidden">
           <div className="field-content container-tight">
             <Surface
               className="cta-card text-center px-6 sm:px-12 py-14 lg:py-20"
             >
-              <Reveal as="p" className="t-eyebrow mb-5">
-                Begin
-              </Reveal>
-              <Reveal as="h2" delay={80} className="t-display balance mb-7">
+              <Reveal as="h2" className="t-display balance mb-7">
                 Want to build something{" "}
                 <span className="accent-text">
                   that lasts?

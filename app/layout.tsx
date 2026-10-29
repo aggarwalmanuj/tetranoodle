@@ -5,12 +5,13 @@ import { SITE_URL } from "@/app/lib/site";
 import Ripple from "@/app/components/Ripple";
 import "./globals.css";
 
-// Material 3 Expressive's typeface, with the optical-size and roundness axes.
+// Google Sans Flex: one confident family for display and text, with the
+// optical-size axis so large headings tighten and small text opens up.
 const googleSans = Google_Sans_Flex({
   variable: "--font-google-sans",
   subsets: ["latin"],
   display: "swap",
-  axes: ["opsz", "ROND"],
+  axes: ["opsz"],
   // next/font has no metrics for this family yet, so no auto fallback.
   adjustFontFallback: false,
   fallback: ["system-ui", "Segoe UI", "Roboto", "sans-serif"],
@@ -19,11 +20,11 @@ const googleSans = Google_Sans_Flex({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "TetraNoodle · Your own AI. Private, secure, actually yours.",
+    default: "TetraNoodle · AI that knows your business and keeps it private",
     template: "%s · TetraNoodle",
   },
   description:
-    "Your own private AI, for individuals and organizations: agents that run the work that doesn’t need you, and a private vault that holds your intelligence.",
+    "A private AI built around your data and the tools you already use, with AI agents that take on the work you choose. You approve every step. Building software since 2000.",
   applicationName: "TetraNoodle",
   authors: [{ name: "Manuj Aggarwal" }],
   creator: "TetraNoodle Technologies",
@@ -31,9 +32,9 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "TetraNoodle · Your own AI. Private, secure, actually yours.",
+    title: "TetraNoodle · AI that knows your business and keeps it private",
     description:
-      "Your own private AI, for individuals and organizations: agents that run the work that doesn’t need you, and a private vault that holds your intelligence.",
+      "A private AI built around your data and the tools you already use, with AI agents that take on the work you choose. You approve every step. Building software since 2000.",
     url: SITE_URL,
     siteName: "TetraNoodle",
     locale: "en_US",
@@ -41,9 +42,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "TetraNoodle · Your own AI. Private, secure, actually yours.",
+    title: "TetraNoodle · AI that knows your business and keeps it private",
     description:
-      "Your own private AI, for individuals and organizations: agents that run the work that doesn’t need you, and a private vault that holds your intelligence.",
+      "A private AI built around your data and the tools you already use, with AI agents that take on the work you choose. You approve every step. Building software since 2000.",
   },
   robots: {
     index: true,
@@ -61,7 +62,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#fdf8ff",
+  themeColor: "#f7f6f2",
 };
 
 export default function RootLayout({

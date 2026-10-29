@@ -23,13 +23,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${SITE_URL}/results`,
+      url: `${SITE_URL}/case-studies`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.9,
     },
     ...DETAILED_STUDIES.map((c) => ({
-      url: `${SITE_URL}/results/${c.slug}`,
+      url: `${SITE_URL}/case-studies/${c.slug}`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.7,

@@ -3,7 +3,6 @@ import Link from "next/link";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import Reveal from "../components/Reveal";
-import Shapes from "../components/Shapes";
 import Surface from "../components/Surface";
 import { SCORE_CTA, SCORE_URL } from "../lib/site";
 
@@ -17,8 +16,8 @@ const STEPS = [
     no: "01",
     title: "Analysis & Deep Dive",
     desc: "We map your world: the bottlenecks, the patterns, the work that doesn’t need you.",
-    image: "/process/step-analysis.jpg",
-    imageAlt: "A person reviewing data and charts on a laptop.",
+    image: "/process/people-analysis.jpg",
+    imageAlt: "Two colleagues in conversation over coffee, one listening closely.",
   },
   {
     no: "02",
@@ -31,15 +30,15 @@ const STEPS = [
     no: "03",
     title: "Implementation",
     desc: "We build it: custom agents, workflows, and your private AI vault, tested and tuned.",
-    image: "/process/step-build.jpg",
-    imageAlt: "A developer building software on screen.",
+    image: "/process/people-build.jpg",
+    imageAlt: "A younger and an older colleague smiling as they work through something on a laptop together.",
   },
   {
     no: "04",
     title: "Optimization",
     desc: "We polish what we’ve built so it runs clean and reliable.",
-    image: "/process/step-optimize.jpg",
-    imageAlt: "Hands fine-tuning settings on a dashboard.",
+    image: "/process/people-optimize.jpg",
+    imageAlt: "Two women working side by side at a desk, refining a piece of work.",
   },
   {
     no: "05",
@@ -52,15 +51,15 @@ const STEPS = [
     no: "06",
     title: "Evaluation",
     desc: "We measure the impact and prove the wins against real numbers.",
-    image: "/process/step-measure.jpg",
-    imageAlt: "A business analytics dashboard showing results.",
+    image: "/process/people-measure.jpg",
+    imageAlt: "A woman at her desk reviewing printed results with a pen in hand.",
   },
   {
     no: "07",
     title: "Iteration & Growth",
     desc: "The system compounds: it gets sharper the longer it runs.",
-    image: "/process/step-growth.jpg",
-    imageAlt: "An upward growth chart representing compounding results.",
+    image: "/process/people-growth.jpg",
+    imageAlt: "A small team laughing together around a table.",
   },
 ];
 
@@ -71,7 +70,6 @@ export default function ProcessPage() {
       <main id="main" className="flex-1">
         {/* ──────────────── HERO ──────────────── */}
         <section className="surface-canvas relative pt-[104px] lg:pt-[132px] pb-20 lg:pb-28 overflow-hidden">
-          <Shapes />
 
           <div className="field-content container-wide px-6 lg:px-12 grid lg:grid-cols-[1fr_1.05fr] gap-12 lg:gap-16 items-center">
             <div className="max-w-[720px]">
@@ -174,19 +172,19 @@ export default function ProcessPage() {
                       alt={s.imageAlt}
                       fill
                       sizes="(min-width: 1024px) 50vw, 100vw"
-                      className="object-cover object-center transition-transform duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.05]"
+                      className="object-cover object-center"
                     />
                   </div>
 
                   {/* Number + title + text */}
                   <div className={i % 2 === 1 ? "lg:order-1" : ""}>
                     <span className="flex items-center gap-4 mb-4">
-                      <span className="text-[40px] lg:text-[52px] leading-none text-[color:var(--color-accent)] tabular-nums font-semibold">
+                      <span className="font-medium tracking-[-0.015em] text-[48px] lg:text-[64px] leading-none tabular-nums">
                         {s.no}
                       </span>
                       <span
                         aria-hidden
-                        className="h-px flex-1 max-w-[80px] bg-[color:var(--color-accent)]/30 origin-left scale-x-0 transition-transform duration-[700ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100"
+                        className="h-px flex-1 max-w-[80px] bg-[color:var(--color-hairline)]"
                       />
                     </span>
                     <h3 className="text-[24px] lg:text-[28px] font-semibold tracking-[-0.018em] leading-[1.18] mb-3">
@@ -202,15 +200,11 @@ export default function ProcessPage() {
 
         {/* ──────────────── CTA ──────────────── */}
         <section className="surface-canvas section relative overflow-hidden">
-          <Shapes />
           <div className="field-content container-tight">
             <Surface
               className="cta-card text-center px-6 sm:px-12 py-14 lg:py-20"
             >
-              <Reveal as="p" className="t-eyebrow mb-5">
-                Begin
-              </Reveal>
-              <Reveal as="h2" delay={80} className="t-display balance mb-7">
+              <Reveal as="h2" className="t-display balance mb-7">
                 Let&rsquo;s map your{" "}
                 <span className="accent-text">
                   first win.
@@ -235,7 +229,7 @@ export default function ProcessPage() {
                 </a>
                 <a
                   href="mailto:info@tetranoodle.com"
-                  className="btn btn-tonal transition-transform duration-[var(--dur-fast)] hover:-translate-y-[1px]"
+                  className="btn btn-tonal"
                 >
                   Talk to us
                 </a>

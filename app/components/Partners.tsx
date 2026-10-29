@@ -1,45 +1,53 @@
 import Image from "next/image";
+import Link from "next/link";
 import Reveal from "./Reveal";
 
 /**
- * Partner / credibility logo band.
- * Logos rest in a single quiet row, monochrome at rest so they read as
- * one calm group, lifting to full color on hover. Honest, minimal trust
- * signal: no card chrome competing with the marks.
+ * Credibility strip directly under the hero: one plain sentence, the four
+ * marks it names, and a way to meet the team. Logos sit in monochrome so
+ * they read as one calm group, lifting to colour on hover.
  */
 const PARTNERS = [
-  { src: "/logos/ibm.png", alt: "IBM", w: 80, h: 32 },
-  { src: "/logos/microsoft.png", alt: "Microsoft", w: 34, h: 34 },
-  { src: "/logos/pearson.png", alt: "Pearson", w: 32, h: 34 },
-  { src: "/logos/tmobile.png", alt: "T-Mobile", w: 34, h: 34 },
-  { src: "/logos/un.png", alt: "United Nations", w: 38, h: 34 },
+  { src: "/logos/microsoft.png", alt: "Microsoft", w: 26, h: 26, name: "Microsoft" },
+  { src: "/logos/ibm.png", alt: "IBM", w: 60, h: 24 },
+  { src: "/logos/pearson.png", alt: "Pearson", w: 24, h: 26, name: "Pearson" },
+  { src: "/logos/tmobile.png", alt: "T-Mobile", w: 26, h: 26, name: "T-Mobile" },
 ];
 
 export default function Partners() {
   return (
-    <section aria-label="Partners" className="surface-canvas py-14 lg:py-20 px-6 lg:px-12">
-      <div className="container-wide text-center">
-        <Reveal as="p" className="t-eyebrow mb-9">
-          Trusted by teams at
-        </Reveal>
-        <Reveal
-          as="div"
-          delay={80}
-          className="flex flex-wrap items-center justify-center gap-x-10 gap-y-8 sm:gap-x-16"
-        >
+    <section aria-label="Experience" className="px-5 sm:px-6 lg:px-8">
+      <Reveal
+        as="div"
+        className="container-wide border-y border-[color:var(--color-hairline)] py-7 lg:py-8 grid lg:grid-cols-[minmax(0,320px)_1fr_auto] items-center gap-x-12 gap-y-6"
+      >
+        <p className="text-[16px] font-semibold leading-[1.45] tracking-[-0.01em] balance">
+          Delivered projects with teams at Microsoft, IBM, Pearson and
+          T-Mobile.
+        </p>
+        <ul className="flex flex-wrap items-center gap-x-10 gap-y-5">
           {PARTNERS.map((p) => (
-            <Image
-              key={p.alt}
-              src={p.src}
-              alt={p.alt}
-              width={p.w}
-              height={p.h}
-              className="partner-logo h-7 sm:h-8 w-auto"
-              style={{ width: "auto" }}
-            />
+            <li key={p.alt} className="partner-logo flex items-center gap-2.5">
+              <Image
+                src={p.src}
+                alt={p.name ? "" : p.alt}
+                width={p.w}
+                height={p.h}
+                className="h-6 w-auto"
+                style={{ width: "auto" }}
+              />
+              {p.name && (
+                <span className="text-[16px] font-semibold tracking-[-0.02em]">
+                  {p.name}
+                </span>
+              )}
+            </li>
           ))}
-        </Reveal>
-      </div>
+        </ul>
+        <Link href="/about" className="link-cta justify-self-start">
+          Meet TetraNoodle
+        </Link>
+      </Reveal>
     </section>
   );
 }

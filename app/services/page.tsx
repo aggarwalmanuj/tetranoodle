@@ -3,7 +3,6 @@ import Link from "next/link";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import Reveal from "../components/Reveal";
-import Shapes from "../components/Shapes";
 import Surface from "../components/Surface";
 import { SCORE_CTA, SCORE_URL } from "../lib/site";
 
@@ -41,9 +40,9 @@ const offerings = [
   },
   {
     tag: "Offering 02",
-    image: "/services/vault.jpg",
+    image: "/services/vault-notes.jpg",
     imageAlt:
-      "A secure, private environment representing your own AI vault.",
+      "A woman writing in her notebook at a wooden desk, with books and a cup of tea beside her.",
     title: (
       <>
         A private AI vault that{" "}
@@ -100,43 +99,18 @@ const editions = [
   {
     name: "Individuals",
     desc: "A digital twin: your own private AI, built around your life and goals.",
-    icon: (
-      <>
-        <circle cx="12" cy="8" r="3.2" strokeWidth="1.6" />
-        <path d="M5.5 19a6.5 6.5 0 0 1 13 0" strokeWidth="1.6" strokeLinecap="round" />
-      </>
-    ),
   },
   {
     name: "Business Leaders",
     desc: "A team twin: shared intelligence that helps the whole team move in sync.",
-    icon: (
-      <>
-        <circle cx="8" cy="9" r="2.4" strokeWidth="1.6" />
-        <circle cx="16" cy="9" r="2.4" strokeWidth="1.6" />
-        <path d="M3.5 18a4.5 4.5 0 0 1 9 0m-1 0a4.5 4.5 0 0 1 9 0" strokeWidth="1.6" strokeLinecap="round" />
-      </>
-    ),
   },
   {
     name: "Enterprise",
     desc: "A private AI vault at organizational scale, with full data sovereignty.",
-    icon: (
-      <>
-        <path d="M4 20V6l8-3 8 3v14" strokeWidth="1.6" strokeLinejoin="round" />
-        <path d="M9 20v-4h6v4M8 9h.01M12 9h.01M16 9h.01M8 12.5h.01M12 12.5h.01M16 12.5h.01" strokeWidth="1.6" strokeLinecap="round" />
-      </>
-    ),
   },
   {
     name: "Communities",
     desc: "A private vault that holds collective knowledge and outlasts any single leader.",
-    icon: (
-      <>
-        <circle cx="12" cy="12" r="9" strokeWidth="1.6" />
-        <path d="M3 12h18M12 3c2.5 2.4 2.5 15.6 0 18M12 3c-2.5 2.4-2.5 15.6 0 18" strokeWidth="1.6" />
-      </>
-    ),
   },
 ];
 
@@ -147,7 +121,6 @@ export default function ServicesPage() {
       <main id="main" className="flex-1">
         {/* ──────────────── HERO ──────────────── */}
         <section className="surface-canvas relative pt-[104px] lg:pt-[132px] pb-20 lg:pb-28 overflow-hidden">
-          <Shapes />
 
           <div className="field-content container-wide px-6 lg:px-12 grid lg:grid-cols-[1.15fr_1fr] gap-12 lg:gap-20 items-center">
             <div className="max-w-[720px]">
@@ -176,7 +149,7 @@ export default function ServicesPage() {
               <Reveal
                 as="div"
                 delay={240}
-                className="flex flex-wrap items-center gap-3"
+                className="flex flex-wrap items-center gap-x-6 gap-y-4"
               >
                 <a
                   href={SCORE_URL}
@@ -186,17 +159,14 @@ export default function ServicesPage() {
                 >
                   {SCORE_CTA}
                 </a>
-                <a
-                  href="mailto:info@tetranoodle.com"
-                  className="btn btn-tonal text-[14px]"
-                >
-                  Talk to us
+                <a href="mailto:info@tetranoodle.com" className="link-cta">
+                  Talk to a person
                 </a>
               </Reveal>
             </div>
 
             <Reveal as="div" delay={200} className="relative">
-              <Surface className="media-frame media-arch relative aspect-[4/5] w-full max-w-[460px] mx-auto">
+              <Surface className="media-frame relative aspect-[4/5] w-full max-w-[460px] mx-auto">
                 <div className="relative w-full h-full">
                   <Image
                     src="/newpics/handshake.jpg"
@@ -396,43 +366,28 @@ export default function ServicesPage() {
               </Reveal>
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
+            <dl className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-10 border-t border-[color:var(--color-hairline)]">
               {editions.map((e, i) => (
                 <Reveal
-                  as="article"
+                  as="div"
                   key={e.name}
-                  delay={i * 80}
-                  className="panel panel-pearl p-7 lg:p-8"
+                  delay={i * 60}
+                  className="pt-6 pb-8 border-b lg:border-b-0 border-[color:var(--color-hairline)]"
                 >
-                  <span
-                    aria-hidden
-                    className="inline-flex items-center justify-center w-12 h-12 rounded-[var(--radius-lg)] bg-[color:var(--color-accent)]/10 text-[color:var(--color-accent)] mb-5"
-                  >
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                    >
-                      {e.icon}
-                    </svg>
-                  </span>
-                  <h3 className="text-[18px] lg:text-[19px] font-semibold tracking-[-0.018em] leading-[1.2] mb-3">
+                  <dt className="font-medium tracking-[-0.015em] text-[28px] leading-[1.15] mb-3">
                     {e.name}
-                  </h3>
-                  <p className="text-[16px] leading-[1.55] text-[color:var(--color-body-muted)]">
+                  </dt>
+                  <dd className="text-[16px] leading-[1.55] text-[color:var(--color-body-muted)]">
                     {e.desc}
-                  </p>
+                  </dd>
                 </Reveal>
               ))}
-            </div>
+            </dl>
           </div>
         </section>
 
         {/* ──────────────── CTA ──────────────── */}
         <section className="surface-canvas section relative overflow-hidden">
-          <Shapes />
           <div className="field-content container-wide">
             <Surface
               className="cta-card cta-split overflow-hidden grid lg:grid-cols-2 items-stretch"
@@ -450,10 +405,7 @@ export default function ServicesPage() {
 
               {/* Text + button */}
               <div className="order-2 px-6 sm:px-10 lg:px-14 py-14 lg:py-20">
-                <Reveal as="p" className="t-eyebrow mb-5">
-                  Begin
-                </Reveal>
-                <Reveal as="h2" delay={80} className="t-display-md balance mb-8">
+                <Reveal as="h2" className="t-display-md balance mb-8">
                   Ready to put AI to{" "}
                   <span className="accent-text">work?</span>
                 </Reveal>

@@ -1,9 +1,10 @@
 /* ────────────────────────────────────────────────────────────────
-   Results (formerly Case Studies): single source of truth for the
-   /results index cards and the long-form /results/[slug] pages.
-   Long-form copy follows the template: stat bar → Introduction →
-   Genesis → Challenge → Strategic Intervention → Execution →
-   Results → stat box → Financials → Conclusion → Testimonials.
+   Case Studies: single source of truth for the /case-studies index
+   cards and the long-form /case-studies/[slug] pages.
+   Long-form copy follows the template: header + stats → situation →
+   the human side / the AI (or data) side → how they worked together →
+   results → what TetraNoodle did (budget, timeline) → quotes.
+   None of these were AI Merge engagements; each page says so.
    ──────────────────────────────────────────────────────────────── */
 
 export type Stat = { value: string; label: string };
@@ -11,23 +12,22 @@ export type Block = { title: string; body: string };
 export type Quote = { quote: string; name: string; role: string };
 
 export type CaseStudyDetail = {
-  /** Brands shown in the top stat bar. */
-  partners: string[];
-  /** Top stat bar. Omitted when the source supplied no numbers. */
-  heroStats?: Stat[];
-  intro: string;
-  genesis: { ambition: string; target: string };
-  challenge: { blocks: Block[]; belief: string };
-  intervention: Block[];
-  execution: Block[];
+  /** Header stats. Descriptors stand in where no numbers exist. */
+  stats: Stat[];
+  /** Header summary under the title. */
+  summary: string;
+  situation: string[];
+  human: string[];
+  /** "The AI side", or "The data side" where AI was not the core. */
+  tech: { heading: string; body: string[] };
+  together: string[];
   results: Block[];
-  /** Stat box beside the results. Omitted → the pull-quote stands in. */
-  statBox?: Stat[];
-  /** Shown in place of missing stats (T-Mobile). */
-  pullQuote?: Quote;
-  financials?: { budget: string; timeline: string };
-  conclusion: string[];
-  testimonials: Quote[];
+  did: string[];
+  budget: string;
+  timeline: string;
+  quotes: Quote[];
+  /** The engagement label shown at the foot of the page. */
+  note: string;
 };
 
 export type CaseStudy = {
@@ -35,111 +35,150 @@ export type CaseStudy = {
   /** Present only for studies with a long-form page. */
   slug?: string;
   logo?: { src: string; alt: string };
+  /** Short engagement type shown as a tag. */
+  kind?: string;
   title: string;
   outcome: string;
   detail?: CaseStudyDetail;
 };
 
+const TECH_NOTE =
+  "Technology project. Delivered by TetraNoodle. This was a technology engagement, not an AI Merge engagement.";
+
 export const CASE_STUDIES: CaseStudy[] = [
   {
-    client: "Wiivv",
-    slug: "wiivv",
-    title: "A trailblazing journey in custom orthotics.",
-    outcome: "AI-driven custom-fit manufacturing at consumer scale.",
+    client: "Titan",
+    slug: "titan",
+    kind: "Technology project",
+    title: "Titan Environment: reports in 9 minutes, not 3 to 4 hours",
+    outcome:
+      "Software robots and AI took over the repeated report work. Its people made the calls.",
     detail: {
-      partners: ["Wiivv", "Dr. Scholl’s", "Bayer"],
-      heroStats: [
-        { value: "No. 1", label: "3D printed orthotic on the market" },
-        { value: "100,000", label: "Customers in 9 months" },
-        { value: "3", label: "Patents granted" },
+      summary:
+        "Titan is North America’s fastest-growing end-to-end geosynthetics supplier, fabricator and installer. Software robots and AI took over the repeated report work. Its people made the calls.",
+      stats: [
+        { value: "400-500%", label: "ROI on Phase 1" },
+        { value: "9 min", label: "New report time, down from 3-4 hours" },
+        { value: "12 weeks", label: "Phase 1 duration" },
       ],
-      intro:
-        "A visionary enterprise set to revolutionize the orthotic industry with bespoke solutions, built on a belief most of the industry hadn’t questioned: that “custom” and “at scale” couldn’t coexist.",
-      genesis: {
-        ambition:
-          "Wiivv, with a mission to disrupt the traditional orthotic market, identified a critical gap: the lack of personalized orthotic solutions catering to individual anatomical differences.",
-        target:
-          "A diverse demographic ranging from high-performance athletes to professionals like nurses and doctors who endure prolonged periods on their feet.",
-      },
-      challenge: {
-        blocks: [
-          {
-            title: "Orthotic industry’s status quo",
-            body: "The market was saturated with generic, one-size-fits-all orthotics, leading to discomfort and suboptimal support.",
-          },
-          {
-            title: "Technological barrier",
-            body: "Despite raising $5 million and generating a buzz with one of the most successful 3D printing Kickstarter campaigns, Wiivv faced a stumbling block: the urgency to fulfill burgeoning pre-orders due to technological limitations.",
-          },
+      situation: [
+        "After every site inspection, employees had to write a detailed report. Each one took 3 to 4 hours. Manual steps meant human error, which caused delays and unhappy customers. Training a new employee took several months.",
+        "Titan had grown steadily for 15+ years, and this was the bottleneck standing in the way of its next stage of growth.",
+      ],
+      human: [
+        "The people involved: field inspectors, report writers, new hires, and the clients waiting on the reports.",
+        "Every one of them had to trust that the technology was there to help, not replace them. Even with the executive team behind it, it would not have worked without buy-in from every person on the team. We studied how each employee worked and brought them into the process.",
+      ],
+      tech: {
+        heading: "The AI side",
+        body: [
+          "Software robots (RPA) took over the repeated steps employees were doing by hand.",
+          "The decisions employees make, in the office, with customers, in the field and when entering data, were encoded into AI. It helps them make the right call.",
+          "AI-assisted reports replaced hours of manual writing.",
         ],
-        belief:
-          "The belief underneath the barrier: that scaling custom manufacturing meant choosing between speed and precision. It doesn’t have to.",
       },
-      intervention: [
-        {
-          title: "Kickstarter Success",
-          body: "Garnered 5,000 pre-orders, setting the stage for a groundbreaking market entry.",
-        },
-        {
-          title: "Technological Innovations",
-          body: "Hired a brilliant team of engineers. Overhauled the cloud infrastructure. Refined the AI models driving the fit engine.",
-        },
-        {
-          title: "Our Comprehensive Overhaul",
-          body: "Seamlessly integrated the assembly line operations with the technological advancements for a smooth, scalable pipeline from scan to shipped product.",
-        },
-      ],
-      execution: [
-        {
-          title: "Precision-driven mobile app",
-          body: "Developed a cutting-edge app enabling users to scan their feet with remarkable precision, creating highly accurate 3D models.",
-        },
-        {
-          title: "Custom orthotic fabrication",
-          body: "Advanced 3D printing technology transformed these scans into tailor-made orthotics with 0.2mm accuracy.",
-        },
-        {
-          title: "Intellectual leap",
-          body: "Filed for pioneering patents, including one for integrating electronic sensors to analyze foot movement and gait, offering users deeper health insights.",
-        },
+      together: [
+        "A parallel AI-driven system ran alongside the old one, instead of replacing it overnight. Titan’s institutional knowledge was kept, and accuracy and efficiency were added.",
+        "The robots do the repeated work. The AI helps with the call. Employees stay the ones who decide.",
       ],
       results: [
         {
-          title: "Pre-Order Triumph",
-          body: "Effortlessly delivered the initial pre-orders, overcoming the initial technology hurdle.",
+          title: "Reports in minutes",
+          body: "Reports that took 3 to 4 hours now take about 9 minutes, with higher accuracy.",
         },
         {
-          title: "Continual Product Evolution",
-          body: "Launched new product versions, constantly pushing the boundaries of orthotic customization.",
+          title: "Faster onboarding",
+          body: "New employees are productive within a week instead of several months.",
         },
         {
-          title: "Scientific Endorsement",
-          body: "Empirical studies validated the effectiveness of these custom orthotics in pain mitigation and performance enhancement.",
+          title: "Strong return",
+          body: "400-500% ROI on the Phase 1 investment.",
         },
         {
-          title: "Expansive Customer Acquisition",
-          body: "Captivated a significant customer base, marking a major milestone in customer reach.",
-        },
-        {
-          title: "Strategic Alliance",
-          body: "Attracted Bayer, a global powerhouse, leading to a lucrative licensing agreement and rebranding under the prestigious Dr. Scholl’s label.",
+          title: "New revenue",
+          body: "The new speed made a rush report delivery service possible, a revenue stream that did not exist before.",
         },
       ],
-      statBox: [
-        { value: "5,000", label: "Pre-orders within a 9-month window" },
-        { value: "~$60M", label: "Valuation achieved in 2 years" },
-        { value: "100,000", label: "Customers in 12 months" },
+      did: [
+        "Mapped every action employees were taking and turned it into streamlined, automated processes (RPA).",
+        "Encoded employee decisions into AI to support the right call.",
+        "Worked with each employee on buy-in.",
       ],
-      financials: {
-        budget: "$2.5 million invested in this transformative project.",
-        timeline:
-          "An intense 15-month period of technological development, team expansion, and strategic innovations.",
+      budget: "~$50K (Phase 1)",
+      timeline:
+        "12 weeks (Phase 1). Phase 2, a full legacy system overhaul, is underway.",
+      quotes: [],
+      note: TECH_NOTE,
+    },
+  },
+  {
+    client: "Wiivv",
+    slug: "wiivv",
+    kind: "Technology project",
+    title: "Wiivv: custom orthotics, made at scale",
+    outcome:
+      "A phone foot scan became a custom 3D printed orthotic, later licensed to Bayer under Dr. Scholl’s.",
+    detail: {
+      summary:
+        "Wiivv turned a phone foot scan into a custom 3D printed orthotic. AI models drive the fit. People run the pipeline from scan to shipped product. The company went on to license its product to Bayer under the Dr. Scholl’s brand.",
+      stats: [
+        { value: "No. 1", label: "3D printed orthotic on the market" },
+        { value: "100,000", label: "Customers" },
+        { value: "3", label: "Patents granted" },
+      ],
+      situation: [
+        "The orthotic market was full of generic, one-size-fits-all products, which meant discomfort and poor support. Wiivv set out to offer orthotics matched to each person’s anatomy.",
+        "It raised $5 million and ran one of the most successful 3D printing Kickstarter campaigns, with 5,000 pre-orders. Then technology limits made it hard to fulfill them fast enough.",
+      ],
+      human: [
+        "The people involved: customers from high-performance athletes to nurses and doctors who spend long hours on their feet, plus the engineers and assembly line team who had to deliver for them.",
+        "The company needed a strong team behind the product, not only a good idea.",
+      ],
+      tech: {
+        heading: "The AI side",
+        body: [
+          "A mobile app lets users scan their feet and creates a highly accurate 3D model.",
+          "AI models drive the fit engine.",
+          "3D printing turns each scan into a custom orthotic with 0.2mm accuracy.",
+          "Wiivv also filed patents, including one for electronic sensors that analyze foot movement and gait.",
+        ],
       },
-      conclusion: [
-        "Wiivv’s journey stands as proof of what changes when a company stops operating from an inherited belief about what’s possible and starts building from what’s actually true about its own capability. Their belief ceiling lifted, from “custom or scale, pick one” to both, at once, and everything downstream changed: the product, the partnerships, the company’s place in its own industry.",
-        "Our collaboration didn’t just resolve a technological challenge. It cleared the belief that was constraining the solution, then built the capacity to act from the new one, culminating in a prestigious partnership with a global industry titan.",
+      together: [
+        "Scan, fit, print and ship became one pipeline. Engineers refined the AI models, and the assembly line operations were integrated with the technology.",
+        "The technology made each product custom. The team made it possible to deliver at volume.",
       ],
-      testimonials: [
+      results: [
+        {
+          title: "Pre-orders delivered",
+          body: "Delivered the initial pre-orders and got past the technology hurdle.",
+        },
+        {
+          title: "Product kept improving",
+          body: "Launched new product versions that pushed orthotic customization further.",
+        },
+        {
+          title: "Backed by studies",
+          body: "Empirical studies validated the orthotics for pain reduction and performance.",
+        },
+        {
+          title: "Customer growth",
+          body: "Won a significant customer base, about 100,000 customers.",
+        },
+        {
+          title: "Bayer partnership",
+          body: "Attracted Bayer, leading to a licensing agreement and rebranding under the Dr. Scholl’s label. Valuation reached about $60M in 2 years.",
+        },
+      ],
+      did: [
+        "Quickly hired a strong engineering team.",
+        "Overhauled the cloud infrastructure.",
+        "Refined the AI models behind the fit engine.",
+        "Integrated the assembly line with the technology for a smooth, scalable pipeline from scan to shipped product.",
+      ],
+      budget: "$2.5 million",
+      timeline:
+        "15 months of technology development, team growth and product work.",
+      quotes: [
         {
           quote:
             "High integrity, incredible resourcefulness, and battle-tested experience are three qualities that TetraNoodle brings to any project or team.",
@@ -153,105 +192,69 @@ export const CASE_STUDIES: CaseStudy[] = [
           role: "Cofounder, Wiivv",
         },
       ],
+      note: TECH_NOTE,
     },
   },
   {
     client: "Desire2Learn",
     slug: "desire2learn",
-    title: "Degree Compass: smarter course selection.",
-    outcome: "A recommendation engine that lifts student success.",
+    kind: "Technology project",
+    title: "Desire2Learn: helping students pick the courses they finish",
+    outcome:
+      "An AI course recommender serving millions. Students using it take 20% more courses toward their degree.",
     detail: {
-      partners: [
-        "Desire2Learn",
-        "Austin Peay State University",
-        "Bill & Melinda Gates Foundation",
-      ],
-      heroStats: [
+      summary:
+        "D2L turned the Degree Compass idea into an AI system that serves millions of students. Students using it take 20% more courses toward their degree.",
+      stats: [
+        { value: "20%", label: "More courses taken toward a degree" },
         { value: "100,000+", label: "Customers, millions of users" },
-        { value: "20%", label: "More courses completed toward a degree" },
         { value: "1 year", label: "From idea to deployed system" },
       ],
-      intro:
-        "A global leader in educational technology, built on a belief most of higher ed hadn’t questioned: that dropout was a motivation problem, not a data problem.",
-      genesis: {
-        ambition:
-          "It is estimated that school drop-out costs the US economy about $459B in lost revenue. D2L set out to address this directly (30% of students drop out in universities) by helping institutions meet their graduation goals.",
-        target:
-          "University students at risk of dropping out, and the higher-education institutions responsible for their outcomes.",
-      },
-      challenge: {
-        blocks: [
-          {
-            title: "Ed-tech’s status quo",
-            body: "Course selection was largely blind: students picked courses without much sense of which ones actually fit their aptitude or interests, and dropout stayed high as a result.",
-          },
-          {
-            title: "Turning an idea into a product",
-            body: "D2L had already partnered with Austin Peay State University on patented technology called Degree Compass. What they didn’t have was a way to turn that idea into a real product that could scale and serve millions of students globally.",
-          },
-        ],
-        belief:
-          "The belief underneath the barrier: that dropout was something to manage after the fact, not something a better first course choice could prevent.",
-      },
-      intervention: [
-        {
-          title: "Data Partnership",
-          body: "Built on D2L’s existing partnership with Austin Peay State University and the patented Degree Compass technology.",
-        },
-        {
-          title: "AI Model Build",
-          body: "Within 6 months, developed an AI-based system that helps students pick suitable courses based on their aptitude and interests.",
-        },
-        {
-          title: "Scaled Rollout",
-          body: "Deployed the system to serve millions of students globally, not just the original pilot population.",
-        },
+      situation: [
+        "School dropout is estimated to cost the US economy about $459B in lost revenue, and 30% of university students drop out. Course selection was largely blind: students picked courses without much sense of which ones fit their aptitude or interests.",
+        "D2L, a global leader in educational technology, had partnered with Austin Peay State University on a patented technology called Degree Compass. What it did not have was a way to turn that idea into a product that could scale to millions of students.",
       ],
-      execution: [
-        {
-          title: "Aptitude matching engine",
-          body: "AI evaluates each student’s aptitude and interests to recommend courses they’re more likely to complete.",
-        },
-        {
-          title: "Predictive course selection",
-          body: "Recommendations are built to increase the odds of a student finishing their degree, not just filling a schedule.",
-        },
-        {
-          title: "National recognition",
-          body: "The program’s success drew mentions from President Barack Obama and the Bill & Melinda Gates Foundation.",
-        },
+      human: [
+        "The people involved: university students at risk of dropping out, and the institutions responsible for their outcomes.",
+        "The goal was to help students make a better first choice, so institutions are not left managing dropout after the fact.",
+      ],
+      tech: {
+        heading: "The AI side",
+        body: [
+          "An AI-based system evaluates each student’s aptitude and interests and recommends courses they are more likely to complete.",
+          "Recommendations are built to increase the odds of a student finishing their degree, not just filling a schedule.",
+        ],
+      },
+      together: [
+        "The system recommends. Students and institutions still make the choices.",
+        "It was built on data from the Austin Peay partnership, then rolled out well beyond the original pilot group.",
       ],
       results: [
         {
-          title: "Course Load Increase",
+          title: "More courses completed",
           body: "Students using Degree Compass take 20% more courses toward their degree.",
         },
         {
-          title: "Dropout Decline",
+          title: "Dropout down",
           body: "Dropout rates declined dramatically within the first year of use.",
         },
         {
-          title: "National Spotlight",
-          body: "Recognized publicly by President Obama and the Bill & Melinda Gates Foundation.",
+          title: "National attention",
+          body: "Publicly recognized by President Barack Obama and the Bill & Melinda Gates Foundation.",
         },
         {
-          title: "Scale Achieved",
+          title: "Scale",
           body: "Now supporting a platform with 100,000+ customers and millions of users.",
         },
       ],
-      statBox: [
-        { value: "20%", label: "Increase in enrollments" },
-        { value: "1 year", label: "Project duration" },
-        { value: "~$1M+", label: "Invested" },
+      did: [
+        "Built on D2L’s partnership with Austin Peay State University and the patented Degree Compass technology.",
+        "Developed the AI-based course selection system within 6 months.",
+        "Deployed it to serve millions of students globally.",
       ],
-      financials: {
-        budget: "~$1M+",
-        timeline: "1 year, from initial analysis to deployment.",
-      },
-      conclusion: [
-        "Desire2Learn’s story is what happens when an institution stops treating dropout as something to react to and starts treating it as something a better first match can prevent. The belief shifted, from “we manage dropout” to “we can predict and prevent it,” and the results followed: more courses completed, fewer students lost, and recognition reaching the White House and the Gates Foundation.",
-      ],
-      testimonials: [
+      budget: "~$1M+",
+      timeline: "1 year, from initial analysis to deployment.",
+      quotes: [
         {
           quote:
             "TetraNoodle brought a very pragmatic, collaborative attitude to the work.",
@@ -265,101 +268,67 @@ export const CASE_STUDIES: CaseStudy[] = [
           role: "Senior Project Manager, Coast Capital Savings",
         },
       ],
+      note: TECH_NOTE,
     },
-  },
-  {
-    client: "MineHub",
-    title: "A blockchain odyssey for the supply chain.",
-    outcome: "Reinventing how the mining industry moves material and trust.",
   },
   {
     client: "IBM",
     slug: "ibm",
     logo: { src: "/logos/ibm.png", alt: "IBM" },
-    title: "Reimagining course enrollment with AI.",
+    kind: "Data-led project",
+    title: "IBM: a 10x jump in enrollments, led by people and data",
     outcome:
-      "A sentiment-led event that lifted monthly enrollments 10x in six weeks.",
+      "Audience data and sentiment analysis shaped a live event. Monthly enrollments rose 10x in 6 weeks.",
     detail: {
-      partners: ["IBM", "Terence Lewis Professional Training Institute"],
-      heroStats: [
+      summary:
+        "During the pandemic, enrollments in IBM’s technical education programs were falling. Audience data and sentiment analysis shaped a live event, The Human Code. Monthly enrollments rose 10x in 6 weeks.",
+      stats: [
         { value: "10x", label: "Increase in monthly enrollments" },
-        { value: "100M+", label: "Fan reach through the campaign’s celebrity partner" },
+        { value: "100M+", label: "Fan reach through the event’s celebrity partner" },
         { value: "6 weeks", label: "Project duration" },
       ],
-      intro:
-        "A name synonymous with technical education, challenged during the pandemic by a belief most of the industry had quietly accepted: that when the world shuts down, demand for learning shrinks with it.",
-      genesis: {
-        ambition:
-          "IBM offers world-class technical education to young professionals. At the height of the global pandemic and lockdowns, enrollments were declining, and IBM needed solutions fast.",
-        target:
-          "Young professionals globally, particularly millennials: an audience that wouldn’t respond to a conventional enrollment push during a period of isolation and fatigue.",
-      },
-      challenge: {
-        blocks: [
-          {
-            title: "Ed-tech’s status quo during COVID",
-            body: "Enrollments were declining industry-wide. Isolation was reducing engagement everywhere, not just at IBM.",
-          },
-          {
-            title: "Finding something that could cut through",
-            body: "IBM needed a solution fast: one built on real audience insight, not guesswork, and compelling enough to break through pandemic-era fatigue.",
-          },
-        ],
-        belief:
-          "The belief underneath the barrier: that technical education had to look and sound technical to be taken seriously.",
-      },
-      intervention: [
-        {
-          title: "Data-Driven Research",
-          body: "Analyzed IBM’s consumer data, then executed an in-depth market research project, collating and analyzing the data and audience’s sentiment.",
-        },
-        {
-          title: "Immersive Event Design",
-          body: "Based on that analysis, helped IBM create an immersive event called The Human Code.",
-        },
-        {
-          title: "Celebrity & Creative Activation",
-          body: "Brought in Bollywood celebrity Terence Lewis (100 million fans globally), a world-renowned painter, a gifted poet, and a famous musician.",
-        },
+      situation: [
+        "IBM offers world-class technical education to young professionals. At the height of the pandemic and lockdowns, enrollments were declining across ed-tech, and IBM needed a solution fast.",
+        "The audience, mainly millennials, was tired and isolated, and a conventional enrollment push would not have cut through.",
       ],
-      execution: [
-        {
-          title: "Sentiment-led strategy",
-          body: "Audience data and sentiment analysis shaped the event concept from the ground up, rather than guessing at what would land.",
-        },
-        {
-          title: "Art meets computer science",
-          body: "Merged celebrity artists with computer science, combining disciplines that hadn’t shared a stage before.",
-        },
-        {
-          title: "Global celebrity reach",
-          body: "Terence Lewis’s 100-million-fan following carried the message well past IBM’s usual audience.",
-        },
+      human: [
+        "The people involved: young professionals around the world, and the artists brought in to reach them: Bollywood celebrity Terence Lewis (100 million fans globally), a world-renowned painter, a gifted poet and a famous musician.",
+        "The event put people and creativity first, with technology as one half of the story.",
+      ],
+      tech: {
+        heading: "The data side",
+        body: [
+          "We analyzed IBM’s consumer data, then ran an in-depth market research project to collect and analyze the audience’s sentiment.",
+          "That analysis shaped the event concept from the start, instead of guesswork.",
+          "AI was not the core of this project. The work was people-led and data-driven.",
+        ],
+      },
+      together: [
+        "Data decided what would land. People made it happen.",
+        "The result was an immersive event, The Human Code, that merged celebrity artists with computer science, two disciplines that had not shared a stage before.",
       ],
       results: [
         {
-          title: "Viral Reach",
-          body: "The event was a huge success, and it went viral.",
+          title: "Went viral",
+          body: "The event was a huge success and went viral.",
         },
         {
-          title: "Enrollment Surge",
-          body: "IBM ended up with a 10x increase in the number of monthly enrollments in their programs.",
+          title: "10x enrollments",
+          body: "IBM ended up with a 10x increase in monthly enrollments in its programs.",
         },
         {
-          title: "Brand Awareness",
+          title: "New awareness",
           body: "New brand awareness built specifically among millennials.",
         },
       ],
-      statBox: [
-        { value: "10x", label: "Enrollments in 6 weeks" },
-        { value: "6 weeks", label: "Project duration" },
-        { value: "~$50K", label: "Invested" },
+      did: [
+        "Analyzed IBM’s consumer data and ran the market research.",
+        "Helped IBM design the immersive event, The Human Code.",
+        "Brought in the celebrity and creative partners.",
       ],
-      financials: { budget: "~$50K", timeline: "6 weeks" },
-      conclusion: [
-        "IBM’s belief ceiling wasn’t about their content; it was about the format. The assumption that technical education has to look technical to be credible was the actual barrier, not the pandemic. Once that belief lifted, the event carried itself: a 10x jump in enrollments in six weeks, and a brand conversation with millennials that IBM hadn’t had before.",
-      ],
-      testimonials: [
+      budget: "~$50K",
+      timeline: "6 weeks",
+      quotes: [
         {
           quote: "TetraNoodle blew us away. Kudos!",
           name: "Melissa Sassi",
@@ -372,96 +341,65 @@ export const CASE_STUDIES: CaseStudy[] = [
           role: "Award-winning Bollywood choreographer",
         },
       ],
+      note: "Data-led project. Delivered by TetraNoodle. People-led and data-driven. This was not an AI Merge engagement.",
     },
-  },
-  {
-    client: "Pearson",
-    logo: { src: "/logos/pearson.png", alt: "Pearson" },
-    title: "Virtual AI employees at scale.",
-    outcome: "AI workers that extend the team without growing headcount.",
   },
   {
     client: "T-Mobile",
     slug: "tmobile",
     logo: { src: "/logos/tmobile.png", alt: "T-Mobile" },
-    title: "AI as a leadership co-pilot.",
+    kind: "AI workshop",
+    title: "T-Mobile: leaders using AI as a co-pilot",
     outcome:
-      "A Leadership Summit workshop on humanized, AI-driven communication.",
+      "A Leadership Summit workshop on using AI for storytelling and communication, with leaders’ own judgment in charge.",
     detail: {
-      partners: ["T-Mobile"],
-      intro:
-        "Brought into a Leadership Summit workshop built on a belief worth naming: that AI is a technical tool, not a leadership one.",
-      genesis: {
-        ambition:
-          "T-Mobile’s leadership wanted to unlock the transformative potential of AI to enhance empathy, storytelling, and effective communication across their leadership team.",
-        target: "T-Mobile senior leaders and Leadership Summit attendees.",
-      },
-      challenge: {
-        blocks: [
-          {
-            title: "Leadership’s status quo",
-            body: "Leadership communication and storytelling hadn’t caught up to what AI made newly possible for connecting with people.",
-          },
-          {
-            title: "Making it practical, not theoretical",
-            body: "Leaders needed tools they could actually use, not a lecture on AI, and needed it to land within the scope of a single summit.",
-          },
-        ],
-        belief:
-          "The belief underneath the barrier: that AI belonged to the technical team, not to leadership.",
-      },
-      intervention: [
-        {
-          title: "Humanization Framework",
-          body: "Explored the art of humanization (how AI tools can connect individuals on a deeper level) using the hero’s journey framework to help leaders craft compelling narratives.",
-        },
-        {
-          title: "Socratic Questioning",
-          body: "Used as a tool for self-empowerment and insightful leadership.",
-        },
-        {
-          title: "AI-Driven Communication",
-          body: "Embraced neural network and mirroring principles to supercharge the art of effective dialogue.",
-        },
+      summary:
+        "At a Leadership Summit workshop, T-Mobile’s senior leaders learned to use AI for storytelling and communication, with their own judgment in charge.",
+      stats: [
+        { value: "Senior leaders", label: "Audience" },
+        { value: "Leadership Summit", label: "Format: workshop" },
+        { value: "AI as co-pilot", label: "How leaders left using it" },
       ],
-      execution: [
-        {
-          title: "Narrative crafting tools",
-          body: "Content writing tools and generative AI solutions, including Plato Ninja and Midjourney, for building compelling narratives.",
-        },
-        {
-          title: "Strategic communication prompts",
-          body: "Prompts built specifically for leadership-level communication, not generic use.",
-        },
-        {
-          title: "Team empowerment",
-          body: "Leaders equipped to foster stronger connections and drive success within their teams and beyond.",
-        },
+      situation: [
+        "T-Mobile’s leadership wanted to use AI to improve empathy, storytelling and communication across the leadership team.",
+        "Leaders needed tools they could use right away, not a lecture on AI, and the work had to land within a single summit.",
+      ],
+      human: [
+        "The people involved: T-Mobile senior leaders attending the Leadership Summit.",
+        "We worked on humanization, how AI tools can help people connect on a deeper level, using the hero’s journey to build compelling narratives. Socratic questioning gave leaders a way to think for themselves, not hand their thinking over.",
+      ],
+      tech: {
+        heading: "The AI side",
+        body: [
+          "Content writing tools and generative AI, including Plato Ninja and Midjourney, for building narratives.",
+          "Prompts written for leadership-level communication, not generic use.",
+          "Neural network and mirroring principles to make dialogue more effective.",
+        ],
+      },
+      together: [
+        "Leaders stayed the captain of their own ship. AI was their co-pilot, not a replacement for their judgment.",
       ],
       results: [
         {
-          title: "Deeper Connection",
+          title: "Deeper connection",
           body: "Leaders left with tools for genuine, humanized communication.",
         },
         {
-          title: "Leadership Confidence",
-          body: "Equipped to act as “captain of their own ship,” using AI as a co-pilot rather than a replacement for judgment.",
+          title: "Leadership confidence",
+          body: "Leaders were equipped to use AI as a co-pilot and stay in charge of their message.",
         },
         {
-          title: "Org-Wide Ripple",
-          body: "Tools and frameworks designed to extend beyond the summit into day-to-day team leadership.",
+          title: "Built to carry on",
+          body: "Tools and frameworks designed to continue into day-to-day team leadership after the summit.",
         },
       ],
-      pullQuote: {
-        quote:
-          "We are now using AI as our co-pilot to drive productive and maximize our influence as leaders.",
-        name: "Edwige A. Robinson",
-        role: "Senior VP, T-Mobile",
-      },
-      conclusion: [
-        "For T-Mobile’s leadership, the belief ceiling wasn’t about capability; it was about ownership. AI stopped being “the technical team’s tool” and became something leaders could pick up themselves, to communicate, connect, and lead differently.",
+      did: [
+        "Designed and ran the workshop.",
+        "Built the humanization framework, the questioning approach and the leadership prompts.",
       ],
-      testimonials: [
+      budget: "Not stated",
+      timeline: "Not stated",
+      quotes: [
         {
           quote:
             "It was a tremendous privilege to have Manuj Aggarwal. AI is the future and he equipped us with not only knowledge, but also with powerful tools so that we can be the captain of our ship. We are now using AI as our co-pilot to drive productive and maximize our influence as leaders. Thank you and bravo to you and your team.",
@@ -469,103 +407,19 @@ export const CASE_STUDIES: CaseStudy[] = [
           role: "Senior VP, T-Mobile",
         },
       ],
+      note: "AI workshop. Delivered by TetraNoodle for T-Mobile’s Leadership Summit. This was a workshop, not an AI Merge engagement.",
     },
   },
   {
-    client: "Titan",
-    slug: "titan",
-    title: "The AI workforce that paid for itself 5x over.",
-    outcome: "Reports cut from 3–4 hours to 9 minutes, with 400–500% ROI.",
-    detail: {
-      partners: ["Titan Environment"],
-      heroStats: [
-        { value: "400–500%", label: "ROI on Phase 1 investment" },
-        { value: "9 min", label: "New report turnaround (down from 3–4 hours)" },
-        { value: "12 weeks", label: "Phase 1 duration" },
-      ],
-      intro:
-        "North America’s fastest-growing end-to-end geosynthetics supplier, fabricator, and installer, built for 15+ years on a belief that was quietly capping its growth: that scale meant more headcount, not smarter systems.",
-      genesis: {
-        ambition:
-          "For over 15 years, Titan has grown consistently as a global geosynthetics solutions leader operating from Canada and the United States. The ambition: keep growing without the technology holding the company back.",
-        target:
-          "Titan’s field inspectors, report writers, new hires, and the clients waiting on the reports they produce.",
-      },
-      challenge: {
-        blocks: [
-          {
-            title: "Titan’s status quo",
-            body: "After every site inspection, employees had to submit a detailed report of the findings, each one taking 3 to 4 hours to produce. Manual steps meant human error, which caused delays and customer dissatisfaction. Training a new employee on the process took several months.",
-          },
-          {
-            title: "A bottleneck on growth",
-            body: "Titan had been growing for 15+ years, but the technology hadn’t kept up, and this bottleneck was standing directly in the way of the next stage of growth.",
-          },
-        ],
-        belief:
-          "The belief underneath the barrier: that speed and accuracy were a trade-off, and that the only way to grow throughput was to grow headcount.",
-      },
-      intervention: [
-        {
-          title: "Body: Process Mapping & Automation",
-          body: "Every action employees were taking was understood and converted into streamlined, automated processes using software robots (RPA).",
-        },
-        {
-          title: "Mind: Decision Encoding",
-          body: "Every decision employees were making (in the office, with the customer, in the field, entering data) was encoded into AI, so it could help employees make the right call.",
-        },
-        {
-          title: "Soul: Employee Buy-In",
-          body: "We dug into the behaviors and workflows of each employee and brought them into confidence that this technology was here to help, not replace them. Even with sponsorship from the executive team, this would not have worked without buy-in from every person on the team.",
-        },
-      ],
-      execution: [
-        {
-          title: "Parallel AI system",
-          body: "Rather than ripping out the legacy system all at once, a parallel AI-driven system ran alongside it, preserving institutional knowledge while adding accuracy and efficiency.",
-        },
-        {
-          title: "Automated reporting",
-          body: "RPA-driven, AI-assisted report generation replaced hours of manual work.",
-        },
-        {
-          title: "New revenue stream",
-          body: "The new speed made a rush report delivery service possible: a revenue stream that didn’t exist before.",
-        },
-      ],
-      results: [
-        {
-          title: "Report Time Collapsed",
-          body: "Reports that took 3–4 hours now take about 9 minutes, with higher accuracy.",
-        },
-        {
-          title: "Training Time Collapsed",
-          body: "New employees productive within a week instead of several months.",
-        },
-        {
-          title: "Strong ROI",
-          body: "400–500% return on the Phase 1 investment.",
-        },
-        {
-          title: "New Revenue",
-          body: "Rush report delivery launched as a new service offering.",
-        },
-      ],
-      statBox: [
-        { value: "400–500%", label: "ROI" },
-        { value: "9 min", label: "New report time (from 3–4 hours)" },
-        { value: "12 weeks", label: "Phase 1 duration" },
-      ],
-      financials: {
-        budget: "~$50K (Phase 1)",
-        timeline:
-          "12 weeks (Phase 1). Phase 2, a full legacy system overhaul, is underway.",
-      },
-      conclusion: [
-        "Titan’s ceiling wasn’t the market, and it wasn’t the team. It was a belief that had never been tested: that the only way to grow throughput was to grow headcount. Once that belief moved, a 3–4 hour report became a 9-minute one, a months-long onboarding became a week, and Titan found a new revenue stream it didn’t have before, without adding people.",
-      ],
-      testimonials: [],
-    },
+    client: "MineHub",
+    title: "A blockchain odyssey for the supply chain.",
+    outcome: "Reinventing how the mining industry moves material and trust.",
+  },
+  {
+    client: "Pearson",
+    logo: { src: "/logos/pearson.png", alt: "Pearson" },
+    title: "Virtual AI employees at scale.",
+    outcome: "AI workers that extend the team without growing headcount.",
   },
 ];
 

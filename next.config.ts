@@ -1,14 +1,21 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // "Case Studies" was renamed "Results" — keep old links and search
-  // results working.
+  images: {
+    // Next 16 defaults to q75, which softens portraits and fine detail.
+    // The loader snaps every <Image> to the closest allowed value, so this
+    // one entry makes all photography encode at 90.
+    qualities: [90],
+    formats: ["image/avif", "image/webp"],
+  },
+  // "Results" was renamed back to "Case Studies": keep the old /results
+  // links and search results working.
   async redirects() {
     return [
-      { source: "/case-studies", destination: "/results", permanent: true },
+      { source: "/results", destination: "/case-studies", permanent: true },
       {
-        source: "/case-studies/:slug",
-        destination: "/results/:slug",
+        source: "/results/:slug",
+        destination: "/case-studies/:slug",
         permanent: true,
       },
     ];
